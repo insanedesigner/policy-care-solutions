@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policy Care Solutions | Star Health Insurance Advisor Sudeep S</title>
+    <meta name="description" content="Authorized Star Health Insurance Agency run by Sudeep S (Advisor Code: BA0000954420). Get instant health insurance quotes for Individual & Family coverage with 14,000+ cashless network hospitals across India.">
+    <meta name="keywords" content="Star Health Insurance, Policy Care Solutions, Sudeep S, BA0000954420, Family Health Insurance, Cashless Hospitalization, Health Insurance Quote">
+    <meta name="author" content="Sudeep S - Policy Care Solutions">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Policy Care Solutions | Star Health Insurance">
+    <meta property="og:description" content="Get instant WhatsApp health insurance quotes for your family. Authorized Star Health Advisor Sudeep S (BA0000954420).">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0f172a',
+                        },
+                        star: {
+                            gold: '#f59e0b',
+                            darkGold: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased pb-24 lg:pb-0">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo & Partner Badge -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-sky-600 via-teal-600 to-sky-800 flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-sky-600/20 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl font-extrabold text-slate-900 font-heading tracking-tight">Policy Care</span>
+                        <span class="text-xs bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-md border border-amber-200/80 flex items-center gap-1">
+                            <i class="fa-solid fa-star text-amber-500 text-[10px]"></i> Star Health Partner
+                        </span>
+                    </div>
+                    <span class="text-xs text-slate-500 font-medium block">Advisor: <strong class="text-slate-800">Sudeep S</strong> (Code: <code class="bg-slate-100 px-1 py-0.5 rounded text-sky-700 font-mono">BA0000954420</code>)</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-8 font-medium text-sm text-slate-600">
+                <a href="#calculator" class="hover:text-sky-600 transition-colors">Get Quote</a>
+                <a href="#policies" class="hover:text-sky-600 transition-colors">Star Policies</a>
+                <a href="#benefits" class="hover:text-sky-600 transition-colors">Why Choose Us</a>
+                <a href="#instagram" class="hover:text-sky-600 transition-colors flex items-center gap-1">
+                    <i class="fa-brands fa-instagram text-rose-500 text-base"></i> Instagram Feed
+                </a>
+            </nav>
+
+            <!-- Quick Call Header CTA -->
+            <div class="hidden sm:flex items-center gap-3">
+                <a href="tel:+919048360880" class="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors border border-slate-200">
+                    <i class="fa-solid fa-phone text-sky-600"></i> +91 9048360880
+                </a>
+                <a href="https://wa.me/919048360880" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs transition-colors shadow-md shadow-emerald-500/20">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp Us
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2.5 text-slate-700 hover:text-sky-600 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-3">
+            <a href="#calculator" class="block py-2 text-sm font-semibold text-slate-700 hover:text-sky-600" onclick="toggleMobileMenu()">Calculate Health Quote</a>
+            <a href="#policies" class="block py-2 text-sm font-semibold text-slate-700 hover:text-sky-600" onclick="toggleMobileMenu()">Star Health Policies</a>
+            <a href="#benefits" class="block py-2 text-sm font-semibold text-slate-700 hover:text-sky-600" onclick="toggleMobileMenu()">Why Choose Us</a>
+            <a href="#instagram" class="block py-2 text-sm font-semibold text-slate-700 hover:text-sky-600 flex items-center gap-2" onclick="toggleMobileMenu()">
+                <i class="fa-brands fa-instagram text-rose-500"></i> @policycaresolutions
+            </a>
+            <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+                <a href="tel:+919048360880" class="w-full text-center py-2.5 rounded-xl bg-slate-100 font-bold text-slate-800 text-xs">
+                    <i class="fa-solid fa-phone text-sky-600 mr-2"></i> Call +91 9048360880
+                </a>
+                <a href="https://wa.me/919048360880" target="_blank" class="w-full text-center py-2.5 rounded-xl bg-emerald-500 text-white font-bold text-xs">
+                    <i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp +91 9048360880
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-slate-900 text-white overflow-hidden py-16 lg:py-24 hero-gradient">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-sky-300 text-xs font-semibold">
+                        <i class="fa-solid fa-award text-amber-400"></i> Official Star Health Advisor Code: BA0000954420
+                    </div>
+
+                    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                        Protect What Matters Most With <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-teal-300 to-amber-300">Star Health Insurance</span>
+                    </h1>
+
+                    <p class="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Personalized health insurance guidance by <strong>Sudeep S</strong> at <strong>Policy Care Solutions</strong>. Cashless hospitalization across 14,000+ hospitals in India with 24/7 dedicated claim support.
+                    </p>
+
+                    <!-- Trust Stats Counter Grid -->
+                    <div class="grid grid-cols-3 gap-3 pt-4 max-w-lg mx-auto lg:mx-0">
+                        <div class="p-3 rounded-2xl bg-white/5 border border-white/10 text-center">
+                            <span class="block text-xl sm:text-2xl font-black text-amber-400">14,000+</span>
+                            <span class="text-[11px] text-slate-400 font-medium">Cashless Hospitals</span>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-white/5 border border-white/10 text-center">
+                            <span class="block text-xl sm:text-2xl font-black text-sky-400">99%+</span>
+                            <span class="text-[11px] text-slate-400 font-medium">Claim Settlement</span>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-white/5 border border-white/10 text-center">
+                            <span class="block text-xl sm:text-2xl font-black text-teal-300">₹75,000</span>
+                            <span class="text-[11px] text-slate-400 font-medium">Sec 80D Tax Saved</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#calculator" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-sky-500 to-teal-500 hover:from-sky-600 hover:to-teal-600 text-white font-extrabold text-sm shadow-xl shadow-sky-500/25 transition-all text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-calculator text-base"></i> Calculate Health Quote
+                        </a>
+                        <a href="https://wa.me/919048360880" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-sm shadow-xl shadow-emerald-500/25 transition-all text-center flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Direct WhatsApp (+91 9048360880)
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Card / Visual Badge -->
+                <div class="lg:col-span-5">
+                    <div class="glass-card p-6 rounded-3xl border border-white/20 shadow-2xl relative bg-white/95 text-slate-800">
+                        <div class="absolute -top-4 -right-4 bg-gradient-to-tr from-amber-500 to-amber-600 text-white font-bold px-3 py-1 rounded-full text-xs shadow-lg flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check"></i> Verified Partner
+                        </div>
+                        <div class="flex items-center gap-4 pb-4 border-b border-slate-100">
+                            <div class="w-16 h-16 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center text-3xl font-black shrink-0">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-lg text-slate-900">Sudeep S</h3>
+                                <p class="text-xs text-sky-600 font-semibold">Senior Star Health Advisor</p>
+                                <p class="text-xs text-slate-500 font-mono mt-0.5">Code: BA0000954420</p>
+                            </div>
+                        </div>
+
+                        <div class="py-4 space-y-3">
+                            <div class="flex items-center justify-between text-xs p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                <span class="text-slate-600 flex items-center gap-2"><i class="fa-solid fa-hospital-user text-sky-600"></i> Direct Claim Support</span>
+                                <span class="font-bold text-emerald-600">24/7 Assisted</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                <span class="text-slate-600 flex items-center gap-2"><i class="fa-solid fa-heart-pulse text-rose-500"></i> In-House Settlement</span>
+                                <span class="font-bold text-slate-800">No TPA Delays</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                <span class="text-slate-600 flex items-center gap-2"><i class="fa-solid fa-truck-medical text-amber-500"></i> Emergency Ambulance</span>
+                                <span class="font-bold text-slate-800">Covered</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 text-center">
+                            <a href="#calculator" class="block w-full py-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs transition-colors">
+                                Get Customized Policy Plan <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Quote Calculator Form Section -->
+    <section id="calculator" class="py-16 bg-gradient-to-b from-slate-50 via-sky-50/30 to-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-sky-100 text-sky-700 uppercase tracking-wider">Instant Quote Generator</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 mt-2 font-heading">Calculate Your Health Policy Quote</h2>
+                <p class="text-sm text-slate-600 mt-1">Select coverage type, enter Date of Birth to view age, choose your Indian state/district, and submit directly to Sudeep S on WhatsApp.</p>
+            </div>
+
+            <!-- Form Card -->
+            <div class="glass-card p-6 sm:p-10 rounded-3xl border border-slate-200/90 shadow-xl bg-white relative">
+                
+                <form id="insurance-quote-form" class="space-y-8">
+                    
+                    <!-- STEP 1: Coverage Type Selector (Individual vs Family) -->
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-3">1. Select Plan Type</label>
+                        <div class="grid grid-cols-2 gap-4 p-1.5 bg-slate-100 rounded-2xl">
+                            <button type="button" id="btn-individual" class="radio-pill radio-pill-active py-3 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all">
+                                <i class="fa-solid fa-user text-sm"></i> Individual Plan
+                            </button>
+                            <button type="button" id="btn-family" class="radio-pill py-3 px-4 rounded-xl font-bold text-xs sm:text-sm text-slate-700 flex items-center justify-center gap-2 transition-all bg-slate-100">
+                                <i class="fa-solid fa-users text-sm"></i> Family Floater Plan
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Applicant & Age Details -->
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-3">2. Insured Persons Details & Age</label>
+                        
+                        <!-- Main Applicant Full Name -->
+                        <div class="mb-4">
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Primary Applicant Full Name <span class="text-rose-500">*</span></label>
+                            <input type="text" id="user-name" class="w-full px-4 py-3 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-50/50" placeholder="e.g. Sudeep Sharma" required />
+                        </div>
+
+                        <!-- INDIVIDUAL MODE DOB SECTION -->
+                        <div id="individual-section" class="p-5 rounded-2xl bg-sky-50/60 border border-sky-100 space-y-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Applicant Date of Birth <span class="text-rose-500">*</span></label>
+                                <input type="date" id="ind-dob" class="w-full px-4 py-3 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white" required />
+                            </div>
+                            <!-- Age Display Badge -->
+                            <div id="ind-age-display" class="min-h-[2rem] flex items-center"></div>
+                        </div>
+
+                        <!-- FAMILY MODE MEMBERS SECTION -->
+                        <div id="family-section" class="hidden p-5 rounded-2xl bg-sky-50/60 border border-sky-100 space-y-4">
+                            
+                            <!-- Primary Self DOB inside family -->
+                            <div class="glass-card p-4 rounded-xl border border-slate-200 bg-white/80">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-bold text-sky-700 uppercase tracking-wider"><i class="fa-solid fa-user-tie mr-1 text-sky-600"></i> Primary Member (Self)</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-700 mb-1">Relationship</label>
+                                        <input type="text" id="primary-relation" value="Self (Primary)" readonly class="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 bg-slate-100 text-slate-600 font-medium" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-700 mb-1">Date of Birth <span class="text-rose-500">*</span></label>
+                                        <input type="date" id="primary-dob" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white" />
+                                        <div id="primary-age-display" class="mt-1 min-h-[1.25rem]"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Additional Family Members Container -->
+                            <div id="family-members-container" class="space-y-3">
+                                <!-- Dynamic member rows appended via JS -->
+                            </div>
+
+                            <button type="button" id="add-member-btn" class="w-full py-2.5 px-4 rounded-xl border-2 border-dashed border-sky-300 hover:border-sky-500 bg-white hover:bg-sky-50 text-sky-700 font-bold text-xs flex items-center justify-center gap-2 transition-colors">
+                                <i class="fa-solid fa-plus-circle text-sm"></i> Add Family Member (Spouse, Children, Parents)
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- STEP 3: Location Details (State, District, City, Pincode) -->
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-3">3. Location Details (India)</label>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- State Select -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">State / Union Territory <span class="text-rose-500">*</span></label>
+                                <select id="user-state" class="w-full px-4 py-3 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white" required>
+                                    <option value="">-- Select State --</option>
+                                </select>
+                            </div>
+
+                            <!-- District Select -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">District <span class="text-rose-500">*</span></label>
+                                <select id="user-district" class="w-full px-4 py-3 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white" disabled required>
+                                    <option value="">-- First Select State --</option>
+                                </select>
+                            </div>
+
+                            <!-- City Input -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">City / Town Name <span class="text-rose-500">*</span></label>
+                                <input type="text" id="user-city" class="w-full px-4 py-3 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-50/50" placeholder="e.g. Kochi / Chennai / Bengaluru" required />
+                            </div>
+
+                            <!-- Pincode Input -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Pincode (6 digits) <span class="text-rose-500">*</span></label>
+                                <input type="text" id="user-pincode" maxlength="6" pattern="\d{6}" class="w-full px-4 py-3 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-50/50 font-mono" placeholder="e.g. 682001" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Contact Info (Phone & Optional Email) -->
+                    <div>
+                        <label class="block text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-3">4. Contact Information</label>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Valid Mobile Number -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Mobile Phone Number <span class="text-rose-500">*</span></label>
+                                <div class="relative">
+                                    <span class="absolute left-3.5 top-3.5 text-xs font-bold text-slate-500">+91</span>
+                                    <input type="tel" id="user-phone" maxlength="10" pattern="[6-9]\d{9}" class="w-full pl-12 pr-4 py-3 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-50/50 font-mono" placeholder="9048360880" required />
+                                </div>
+                                <span class="text-[11px] text-slate-400 mt-1 block">Enter 10-digit Indian mobile number</span>
+                            </div>
+
+                            <!-- Email ID (Not Mandatory) -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Email ID <span class="text-slate-400 font-normal">(Optional)</span></label>
+                                <input type="email" id="user-email" class="w-full px-4 py-3 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-50/50" placeholder="name@example.com (Optional)" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUBMIT BUTTON -->
+                    <div class="pt-4">
+                        <button type="submit" class="w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black text-base shadow-xl shadow-emerald-500/25 transition-all flex items-center justify-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i> Submit & Send WhatsApp Quote (+91 9048360880)
+                        </button>
+                        <p class="text-center text-xs text-slate-400 mt-2.5">
+                            <i class="fa-solid fa-lock text-emerald-500"></i> Your details are private. Generates a pre-filled WhatsApp message directly to Advisor Sudeep S.
+                        </p>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modal for Form Summary Preview & WhatsApp Trigger -->
+    <div id="quote-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 animate-fadeIn relative">
+            <button onclick="closeQuoteModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-4">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center text-2xl mb-2">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 font-heading">Quote Form Summary</h3>
+                <p class="text-xs text-slate-500">Ready to send to Advisor Sudeep S (+91 9048360880)</p>
+            </div>
+
+            <!-- Dynamic Content -->
+            <div id="modal-summary-content" class="mb-6"></div>
+
+            <div class="flex gap-3">
+                <button onclick="closeQuoteModal()" class="w-1/3 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs">
+                    Edit Details
+                </button>
+                <a id="modal-wa-btn" href="#" target="_blank" class="w-2/3 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs text-center flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Open WhatsApp Now
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Star Health Policies Showcase Section -->
+    <section id="policies" class="py-16 bg-white border-t border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-amber-100 text-amber-800 uppercase tracking-wider">Star Health Portfolio</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 mt-2 font-heading">Popular Star Health Policies</h2>
+                <p class="text-sm text-slate-600 mt-1">Explore top-rated health insurance plans tailored for individuals, young adults, growing families, and senior citizens.</p>
+            </div>
+
+            <!-- Filter Category Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10">
+                <button onclick="renderPolicies('all')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors">All Policies</button>
+                <button onclick="renderPolicies('Family')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors">Family Floater</button>
+                <button onclick="renderPolicies('Youth')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors">Young Adults</button>
+                <button onclick="renderPolicies('Senior')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors">Senior Citizens</button>
+                <button onclick="renderPolicies('Women')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors">Women Care</button>
+            </div>
+
+            <!-- Policy Cards Grid -->
+            <div id="policies-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically populated from JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Why Choose Us & Key Benefits -->
+    <section id="benefits" class="py-16 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 uppercase tracking-wider">Why Policy Care Solutions</span>
+                <h2 class="text-3xl font-extrabold text-white mt-2 font-heading">Your Trusted Health Insurance Partner</h2>
+                <p class="text-sm text-slate-300 mt-1">Why thousands of families trust Sudeep S for Star Health protection and claim assistance.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-sky-500/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-hospital"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-white mb-2">14,000+ Cashless Network</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Direct cashless treatment at top hospitals across Kerala, Tamil Nadu, Karnataka, and all India.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-white mb-2">Personal Claim Guidance</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Direct support from Sudeep S during emergencies. Zero third-party agency hassle.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-percent"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-white mb-2">Section 80D Tax Benefit</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Save up to ₹75,000 in income tax per year on premiums paid for family and senior parents.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-white mb-2">Restoration & OPD Cover</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">100% automatic sum insured restoration upon exhaustion plus outpatient diagnostic covers.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Instagram Feed Section (@policycaresolutions) -->
+    <section id="instagram" class="py-16 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-rose-100 text-rose-700 uppercase tracking-wider flex items-center gap-1.5 w-fit">
+                        <i class="fa-brands fa-instagram text-rose-600"></i> Instagram Updates
+                    </span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2 font-heading">Follow @policycaresolutions</h2>
+                    <p class="text-sm text-slate-600 mt-1">Latest health tips, policy awareness reels, and client stories from our official Instagram handle.</p>
+                </div>
+
+                <a href="https://www.instagram.com/policycaresolutions" target="_blank" class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 text-white font-extrabold text-xs shadow-lg flex items-center gap-2 hover:opacity-95 transition-opacity w-fit">
+                    <i class="fa-brands fa-instagram text-base"></i> Follow on Instagram
+                </a>
+            </div>
+
+            <!-- Instagram Feed Posts Grid -->
+            <div id="instagram-posts-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Dynamically rendered from JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                
+                <div class="md:col-span-2 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-sky-600 flex items-center justify-center text-white text-xl font-bold">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white font-heading">Policy Care Solutions</h4>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed max-w-md">
+                        Authorized Star Health Insurance agency providing end-to-end policy selection, instant quotes, and 24/7 dedicated claim assistance across India.
+                    </p>
+                    <p class="text-xs text-slate-300 font-mono">
+                        Advisor: <strong>Sudeep S</strong> | Code: <span class="text-sky-400">BA0000954420</span>
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="text-xs font-bold text-white uppercase tracking-wider mb-3">Quick Navigation</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#calculator" class="hover:text-white transition-colors">Calculate Health Quote</a></li>
+                        <li><a href="#policies" class="hover:text-white transition-colors">Star Health Policies</a></li>
+                        <li><a href="#benefits" class="hover:text-white transition-colors">Why Choose Us</a></li>
+                        <li><a href="https://www.instagram.com/policycaresolutions" target="_blank" class="hover:text-white transition-colors flex items-center gap-1"><i class="fa-brands fa-instagram text-rose-500"></i> Instagram Profile</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-xs font-bold text-white uppercase tracking-wider mb-3">Contact Advisor</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="tel:+919048360880" class="hover:text-white transition-colors flex items-center gap-2"><i class="fa-solid fa-phone text-sky-400"></i> +91 9048360880</a></li>
+                        <li><a href="https://wa.me/919048360880" target="_blank" class="hover:text-white transition-colors flex items-center gap-2"><i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp +91 9048360880</a></li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amber-400"></i> Kerala & Pan-India Service</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center text-[11px] text-slate-500 gap-4">
+                <p>© 2026 Policy Care Solutions. All rights reserved. Star Health Partner Sudeep S (Code: BA0000954420).</p>
+                <div class="flex items-center gap-3">
+                    <span class="bg-slate-900 border border-slate-800 px-2.5 py-1 rounded text-slate-400">GitHub & Vercel Ready</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- STICKY BOTTOM ACTION BAR FOR MOBILE -->
+    <div id="sticky-bar" class="fixed bottom-0 left-0 right-0 z-50 p-3 bg-white/95 border-t border-slate-200/90 lg:hidden sticky-bottom-bar flex items-center gap-3">
+        <a href="tel:+919048360880" class="w-1/2 py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs text-center flex items-center justify-center gap-2 shadow-md">
+            <i class="fa-solid fa-phone text-sky-400"></i> Call Now
+        </a>
+        <a href="https://wa.me/919048360880" target="_blank" class="w-1/2 py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs text-center flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 pulse-whatsapp">
+            <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
+        </a>
+    </div>
+
+    <!-- JavaScript Data & Logic -->
+    <script src="js/indiaLocationData.js"></script>
+    <script src="js/policiesData.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', toggleMobileMenu);
+    </script>
+</body>
+</html>
