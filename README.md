@@ -1,6 +1,6 @@
 # Policy Care Solutions - Health Insurance Website
 
-Official website for **Policy Care Solutions**, an authorized **Star Health Insurance** agency run by **Sudeep S** (Advisor Code: `BA0000954420`).
+Official website for **Policy Care Solutions**, an authorized **Star Health & Care Health Insurance** agency run by **Sudeep S** (Star Health Code: `BA0000954420`).
 
 ---
 
@@ -10,13 +10,14 @@ Official website for **Policy Care Solutions**, an authorized **Star Health Insu
    - **Individual & Family Floater Modes**: Switch easily between Individual and Family coverage.
    - **Real-Time Age Calculation**: Enter Date of Birth (DOB) to dynamically calculate and display Age (Years & Months).
    - **Dynamic Family Member Manager**: Add/remove multiple family members (Spouse, Children, Father, Mother, Parents-in-law) with individual DOB and age calculations.
-   - **Dependent Indian State & District Dropdown**: Select from all Indian States & Union Territories (e.g. Kerala, Tamil Nadu, Karnataka, Maharashtra, etc.) to automatically populate districts (e.g., Ernakulam, Thiruvananthapuram, Calicut, Thrissur, etc.).
+   - **Dependent Indian State & District Dropdown**: Select from all Indian States & Union Territories to automatically populate districts.
    - **Pincode & 10-Digit Mobile Validation**: Input 6-digit Pincode and 10-digit mobile number.
    - **Instant WhatsApp Link Generator**: Form submission automatically formats a detailed message directed to Sudeep S at `+919048360880` (`https://wa.me/919048360880`).
 
-2. **Star Health Policy Showcase**:
-   - Detailed policy highlights for **Star Comprehensive**, **Young Star**, **Senior Citizens Red Carpet**, **Family Health Optima**, **Women Care**, and **Critical Illness Multispeciality** plans.
-   - Category filtering, sum insured ranges, and 0 co-pay callouts.
+2. **Star Health & Care Health Policy Showcase**:
+   - Filter by **Insurer** (*All Insurers*, *Star Health*, *Care Health*) and **Category** (*Family Floater*, *Young Adults*, *Senior Citizens*, *Pre-Existing Cover*, *Women Care*).
+   - Top-rated plans including **Star Comprehensive**, **Young Star**, **Senior Citizens Red Carpet**, **Care Supreme**, **Care Advantage**, **Care Freedom**, and **Care Senior**.
+   - Detailed policy highlights, sum insured ranges, entry age boundaries, and instant WhatsApp inquiry links.
 
 3. **Instagram Feed Integration**:
    - Live section showcasing `@policycaresolutions` ([https://www.instagram.com/policycaresolutions](https://www.instagram.com/policycaresolutions)) with health tips, tax savings cards, and direct follow button.

@@ -323,8 +323,8 @@ function handleFormSubmit(e) {
     // Construct WhatsApp formatted string
     const whatsappMessage = `🏥 *Health Insurance Quote Request*
 ----------------------------------------
-👤 *Advisor*: Sudeep S (Code: BA0000954420)
-🏢 *Agency*: Policy Care Solutions
+👤 *Advisor*: Sudeep S
+🏢 *Agency*: Policy Care Solutions (Star Health & Care Health)
 
 📋 *Coverage Type*: ${formCoverageType.toUpperCase()}
 👨‍👩‍👧 *Persons Covered*:
@@ -340,7 +340,7 @@ ${membersSummaryText.trim()}
 • Phone: +91 ${phone}
 • Email: ${email || 'Not Provided'}
 
-Kindly provide best Star Health policy options and premium quote details!`;
+Kindly provide best Star Health & Care Health policy options and premium quote details!`;
 
     const encodedMessage = encodeURIComponent(whatsappMessage);
     const targetWhatsAppNum = "919048360880";
@@ -384,7 +384,7 @@ function showQuoteModal(data) {
         <div class="space-y-3 text-sm">
             <div class="bg-sky-50 border border-sky-200 p-3 rounded-xl text-sky-900 text-xs">
                 <p class="font-bold"><i class="fa-solid fa-circle-check text-sky-600 mr-1"></i> Form Validated Successfully!</p>
-                <p class="mt-1 text-slate-600">Your custom WhatsApp quote message has been prepared for Sudeep S (Advisor Code: BA0000954420).</p>
+                <p class="mt-1 text-slate-600">Your custom WhatsApp quote message has been prepared for Advisor Sudeep S.</p>
             </div>
 
             <div>
@@ -423,34 +423,108 @@ window.closeQuoteModal = function() {
     }
 }
 
-// Render Star Health Policies
-function renderPolicies(filterCategory = 'all') {
-    const container = document.getElementById('policies-grid');
-    if (!container || !window.starPolicies) return;
+// Global Filter States
+let currentProviderFilter = 'all';
+let currentCategoryFilter = 'all';
 
-    const filtered = filterCategory === 'all' 
-        ? window.starPolicies 
-        : window.starPolicies.filter(p => p.category.toLowerCase().includes(filterCategory.toLowerCase()) || filterCategory === 'all');
+window.setProviderFilter = function(provider) {
+    currentProviderFilter = provider;
+    
+    // Update provider button active states
+    ['all', 'star', 'care'].forEach(p => {
+        const btn = document.getElementById(`prov-btn-${p}`);
+        if (btn) {
+            btn.className = "px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-700 hover:bg-slate-200";
+        }
+    });
+
+    let activeBtnId = 'prov-btn-all';
+    if (provider === 'Star Health') activeBtnId = 'prov-btn-star';
+    if (provider === 'Care Health') activeBtnId = 'prov-btn-care';
+
+    const activeBtn = document.getElementById(activeBtnId);
+    if (activeBtn) {
+        activeBtn.className = "px-5 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white shadow-sm transition-all flex items-center gap-1.5";
+    }
+
+    renderPolicies();
+};
+
+window.setCategoryFilter = function(category) {
+    currentCategoryFilter = category;
+
+    const catButtons = document.querySelectorAll('#category-filter-buttons .cat-pill');
+    catButtons.forEach(btn => {
+        btn.classList.remove('bg-slate-800', 'text-white');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+    });
+
+    if (window.event && window.event.currentTarget) {
+        window.event.currentTarget.classList.remove('bg-slate-100', 'text-slate-700');
+        window.event.currentTarget.classList.add('bg-slate-800', 'text-white');
+    }
+
+    renderPolicies();
+};
+
+// Render Health Policies (Star Health & Care Health)
+function renderPolicies(legacyFilter = null) {
+    const container = document.getElementById('policies-grid');
+    const policiesList = window.healthPolicies || window.starPolicies;
+    if (!container || !policiesList) return;
+
+    if (legacyFilter && legacyFilter !== 'all') {
+        currentCategoryFilter = legacyFilter;
+    }
+
+    let filtered = policiesList;
+
+    // Filter by Provider
+    if (currentProviderFilter !== 'all') {
+        filtered = filtered.filter(p => p.provider === currentProviderFilter);
+    }
+
+    // Filter by Category
+    if (currentCategoryFilter !== 'all') {
+        filtered = filtered.filter(p => 
+            p.category.toLowerCase().includes(currentCategoryFilter.toLowerCase()) || 
+            (p.badge && p.badge.toLowerCase().includes(currentCategoryFilter.toLowerCase()))
+        );
+    }
+
+    if (filtered.length === 0) {
+        container.innerHTML = `
+            <div class="col-span-full py-12 text-center bg-slate-50 rounded-2xl border border-slate-200">
+                <i class="fa-solid fa-folder-open text-4xl text-slate-400 mb-3"></i>
+                <p class="text-sm font-bold text-slate-700">No policies found matching your selection.</p>
+                <p class="text-xs text-slate-500 mt-1">Try switching insurer or category filters.</p>
+            </div>
+        `;
+        return;
+    }
 
     container.innerHTML = filtered.map(policy => {
+        const isStar = policy.provider === 'Star Health';
+        const providerBadge = isStar 
+            ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200/80 flex items-center gap-1"><i class="fa-solid fa-star text-amber-500 text-[10px]"></i> Star Health</span>`
+            : `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-900 border border-teal-200/80 flex items-center gap-1"><i class="fa-solid fa-shield-halved text-teal-600 text-[10px]"></i> Care Health</span>`;
+
         const highlightsHtml = policy.keyHighlights.map(h => `
             <li class="flex items-start text-xs text-slate-600 gap-2">
-                <i class="fa-solid fa-shield-halved text-sky-500 mt-0.5 shrink-0"></i>
+                <i class="fa-solid fa-shield-halved ${isStar ? 'text-sky-500' : 'text-teal-500'} mt-0.5 shrink-0"></i>
                 <span>${h}</span>
             </li>
         `).join('');
 
-        const quickMsg = encodeURIComponent(`Hello Sudeep S, I am interested in knowing more about the *${policy.title}* Star Health policy for my family.`);
+        const quickMsg = encodeURIComponent(`Hello Sudeep S, I am interested in knowing more about the *${policy.title}* (${policy.provider}) policy for my family.`);
 
         return `
             <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-28 h-28 bg-sky-500/10 rounded-full blur-2xl group-hover:bg-sky-500/20 transition-all"></div>
+                <div class="absolute top-0 right-0 w-28 h-28 ${isStar ? 'bg-sky-500/10' : 'bg-teal-500/10'} rounded-full blur-2xl group-hover:bg-sky-500/20 transition-all"></div>
                 <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold px-3 py-1 rounded-full bg-sky-100 text-sky-700 border border-sky-200">
-                            ${policy.badge}
-                        </span>
-                        <span class="text-xs font-medium text-slate-500">${policy.category}</span>
+                    <div class="flex items-center justify-between mb-3">
+                        ${providerBadge}
+                        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">${policy.badge}</span>
                     </div>
 
                     <h3 class="text-xl font-bold text-slate-900 mb-2">${policy.title}</h3>
@@ -459,7 +533,7 @@ function renderPolicies(filterCategory = 'all') {
                     <div class="grid grid-cols-2 gap-2 p-3 bg-slate-50 rounded-xl mb-4 text-xs border border-slate-100">
                         <div>
                             <span class="text-slate-400 block text-[10px] uppercase font-bold">Sum Insured</span>
-                            <span class="font-bold text-sky-700">${policy.sumInsured}</span>
+                            <span class="font-bold ${isStar ? 'text-sky-700' : 'text-teal-700'}">${policy.sumInsured}</span>
                         </div>
                         <div>
                             <span class="text-slate-400 block text-[10px] uppercase font-bold">Entry Age</span>
@@ -494,7 +568,7 @@ function renderInstagramFeed() {
         {
             id: 1,
             tag: "Tax Savings",
-            title: "Save up to ₹75,000 in Income Tax under Section 80D with Star Health Insurance!",
+            title: "Save up to ₹75,000 in Income Tax under Section 80D with Star & Care Health Insurance!",
             imageGradient: "from-blue-600 to-indigo-900",
             icon: "fa-calculator",
             likes: "428",
@@ -504,7 +578,7 @@ function renderInstagramFeed() {
         {
             id: 2,
             tag: "Cashless Network",
-            title: "Over 14,000+ Cashless Hospitals across India. Direct claim approval with zero hassle.",
+            title: "Over 22,000+ Cashless Hospitals across India. Direct claim approval with zero hassle.",
             imageGradient: "from-teal-500 to-emerald-800",
             icon: "fa-hospital-user",
             likes: "592",
@@ -513,18 +587,18 @@ function renderInstagramFeed() {
         },
         {
             id: 3,
-            tag: "Family Coverage",
-            title: "Why Young Couples need Health Insurance early: Lock in low premiums forever!",
-            imageGradient: "from-sky-500 to-blue-800",
-            icon: "fa-heart-circle-check",
-            likes: "731",
-            comments: "61",
-            date: "1 week ago"
+            tag: "Care Supreme",
+            title: "Why Care Supreme is trending: Unlimited Automatic Recharge & 500% NCB Bonus!",
+            imageGradient: "from-teal-600 to-cyan-900",
+            icon: "fa-shield-halved",
+            likes: "815",
+            comments: "74",
+            date: "5 days ago"
         },
         {
             id: 4,
             tag: "Senior Citizens",
-            title: "No pre-insurance medical test required for Senior Citizens up to age 75 with Red Carpet plan.",
+            title: "No pre-insurance medical test required for Senior Citizens up to age 65 with top health plans.",
             imageGradient: "from-violet-600 to-purple-900",
             icon: "fa-user-shield",
             likes: "614",
@@ -587,3 +661,4 @@ function initSmoothScrolling() {
         });
     });
 }
+
