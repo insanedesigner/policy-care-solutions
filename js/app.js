@@ -548,7 +548,7 @@ window.runAiPolicyMatcher = function() {
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs mb-4">
                 <div><span class="text-slate-400 block text-[10px] uppercase font-bold">Sum Insured</span><span class="font-extrabold text-teal-300 text-sm">${matchedPolicy.sumInsured}</span></div>
                 <div><span class="text-slate-400 block text-[10px] uppercase font-bold">Entry Age</span><span class="font-bold text-white">${matchedPolicy.entryAge}</span></div>
-                <div class="col-span-2 sm:col-span-1"><span class="text-slate-400 block text-[10px] uppercase font-bold">Local Hospitals</span><span class="font-bold text-sky-300">Valluvanad & PK Das</span></div>
+                <div class="col-span-2 sm:col-span-1"><span class="text-slate-400 block text-[10px] uppercase font-bold">Network Hospitals</span><span class="font-bold text-sky-300">22,000+ Cashless</span></div>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-3 pt-2">

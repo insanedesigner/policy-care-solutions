@@ -6,16 +6,17 @@ Official website for **Policy Care Solutions**, an authorized **Star Health, Car
 
 ## 🌟 Key Features
 
-1. **Official 1200x630 Open Graph (OG), Favicon & WhatsApp Share Banner**:
-   - **Exact 1200 x 630 Pixels Standard OG Image (`images/og-share.png`)**: Built using official Open Graph 1200x630 specifications featuring the official Policy Care Solutions logo, tagline *"Your Protection, Our Priority"*, *"Serving India"*, and branded contact pill `Call / WhatsApp: +91 9048360880`.
-   - **Clean OG & Twitter Meta Tags**: Configured `og:title`, `og:description`, `og:image`, `og:image:width="1200"`, `og:image:height="630"`, `og:url`, `og:site_name`, `twitter:card`, and Apple Touch Favicon tags across all pages (`index.html` & `/getquote`).
+1. **Main Page Key Policy Highlights Grid**:
+   - **Hero Highlights Section**: Added prominent feature badges for **0% GST Benefits** (Tax Saving under Sec 80D), **Easy EMI Facility** (Flexible Monthly/Quarterly Plans), **Better Comprehensive Coverage** (Zero Co-Pay & Unlimited Restoration), and **24/7 Personalized Assistance** (Licensed Advisor Team).
 
 2. **100% Full-Screen Campaign Chat Landing Page (`https://www.policycaresolutions.com/getquote`)**:
-   - **First-Visit Language Selection Popup Modal**: Prominently features 🇬🇧 **English** and 🇮🇳 **മലയാളം** as primary large buttons, with small compact buttons for regional languages below (🇮🇳 **தமிழ்**, 🇮🇳 **తెలుగు**, 🇮🇳 **हिंदी**, 🇮🇳 **ಕನ್ನಡ**).
-   - **6 Regional Languages Supported**: Added **Telugu (`తెలుగు`)** alongside Malayalam, Tamil, Hindi, Kannada, and English.
-   - **English-Only WhatsApp Output Guarantee**: Regardless of chat language, the final compiled WhatsApp lead payload sent to `+919048360880` is generated in **ENGLISH ONLY**.
-   - **Location Personalization**: Contextually references client location (e.g. Ottapalam, Palakkad, Shornur, Perinthalmanna) and highlights local network hospital tie-ups (Valluvanad, PK Das, KIMS Al Shifa, Crest Hospital).
-   - **Country Code Dropdown for NRIs & Local Clients**: `+91 (India)`, `+971 (UAE)`, `+966 (Saudi Arabia)`, `+965 (Kuwait)`, `+968 (Oman)`, `+974 (Qatar)`, `+973 (Bahrain)`, `+1 (USA)`, `+44 (UK)`, `+65 (Singapore)`.
+   - **Separated Pincode & Location Steps**: Pincode (Step 7A) and Town/City Location (Step 7B) are collected in 2 separate conversational prompts for a smoother user flow.
+   - **Direct WhatsApp Lead CTA Button**: The final quote review step features a prominent **"Get Official Quote on WhatsApp"** button that transfers the user directly into WhatsApp with their pre-filled English lead payload.
+   - **Generic Hospital Network Terminology**: Replaced all specific hospital names project-wide with general terms (*"22,000+ top network hospitals in India & Kerala"*) for easy long-term maintenance.
+   - **First-Visit Language Selection Popup Modal**: Features **English** (`EN`) and **മലയാളം** (`ML`) as primary large cards, with small compact buttons for regional languages below (**தமிழ்**, **తెలుగు**, **हिंदी**, **കನ್ನಡ**).
+   - **Uncluttered Mobile Footer**: Configured responsive single-line stacked footer (`flex-col sm:flex-row gap-1`) preventing text breakage on mobile screens.
+   - **6 Regional Languages Supported**: Conversational support for **Telugu (`తెలుగు`)**, Malayalam, Tamil, Hindi, Kannada, and English.
+   - **English-Only WhatsApp Output Guarantee**: Final compiled WhatsApp lead payload sent to `+919048360880` is generated in **ENGLISH ONLY**.
 
 3. **Light & Dark Theme Switcher Fix (Light Mode Default)**:
    - **Light Theme Default**: Clean, elegant white & light slate palette across all pages.
