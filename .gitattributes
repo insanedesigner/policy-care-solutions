@@ -1,2 +1,11 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Set default behavior for Git line endings on Windows
+* text=auto eol=crlf
+
+*.html text eol=crlf
+*.css text eol=crlf
+*.js text eol=crlf
+*.json text eol=crlf
+*.md text eol=crlf
+*.png binary
+*.jpg binary
+*.ico binary

@@ -22,12 +22,12 @@ Official website for **Policy Care Solutions**, an authorized **Star Health, Car
    - **Light Theme Default**: Clean, elegant white & light slate palette across all pages.
    - **Theme Switcher Fix**: Global CSS rules and Tailwind `dark:` variants ensure 1-click theme switching transforms all cards, backgrounds, and headers on `index.html` and `/getquote`.
 
-4. **Campaign Banner Replacement for AI Policy Matcher**:
-   - Replaced AI Policy Matcher section with a high-converting **Interactive Quote Assistant Campaign Card** directing visitors directly to `/getquote`.
+4. **Official Instagram Live Feed Embed**:
+   - Integrated official Instagram live embed code (`https://www.instagram.com/embed.js`) inside `#instagram` section showing live feed updates for `@policycaresolutions`.
 
-5. **Expanded Header "More" Dropdown Menu (`w-64 sm:w-72`)**:
-   - Primary Header Links: `Get Quote` (`/getquote`), `Health Policies`, `Our Team`.
-   - **Expanded More Dropdown**: Houses `Motor Insurance`, `Local Network`, `Why Choose Us`, **Facebook Page**, **Google Maps Location**, and **Instagram Page**.
+5. **Upgraded Campaign Assistant Section & CTA Button**:
+   - Replaced text-box flags (`GB`, `IN`) with sleek language badges (`EN`, `ML`, `TA`, `TE`, `HI`, `KN`).
+   - Upgraded Campaign Assistant CTA button to an ultra-premium, glowing gradient rounded pill with hover lift effect.
 
 ---
 
