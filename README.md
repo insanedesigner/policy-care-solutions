@@ -7,12 +7,12 @@ Official website for **Policy Care Solutions**, an authorized **Star Health, Car
 ## 🌟 Key Features
 
 1. **Official 1200x630 Open Graph (OG), Favicon & WhatsApp Share Banner**:
-   - **Exact 1200 x 630 Pixels Standard OG Image (`images/og-share.png`)**: Built using official Open Graph 1200x630 specifications (1.91:1 ratio) featuring the official Policy Care Solutions logo, tagline *"Your Protection, Our Priority"*, and *"Serving India"*. Fits WhatsApp link preview aspect ratio perfectly without cropping.
+   - **Exact 1200 x 630 Pixels Standard OG Image (`images/og-share.png`)**: Built using official Open Graph 1200x630 specifications featuring the official Policy Care Solutions logo, tagline *"Your Protection, Our Priority"*, *"Serving India"*, and branded contact pill `Call / WhatsApp: +91 9048360880`.
    - **Clean OG & Twitter Meta Tags**: Configured `og:title`, `og:description`, `og:image`, `og:image:width="1200"`, `og:image:height="630"`, `og:url`, `og:site_name`, `twitter:card`, and Apple Touch Favicon tags across all pages (`index.html` & `/getquote`).
 
 2. **100% Full-Screen Campaign Chat Landing Page (`https://www.policycaresolutions.com/getquote`)**:
-   - **First-Visit Language Selection Popup Modal**: Asks visitors to choose their language instantly (🇬🇧 **English**, 🇮🇳 **മലയാളം**, 🇮🇳 **தமிழ்**, 🇮🇳 **हिंदी**, 🇮🇳 **ಕನ್ನಡ**).
-   - **5 Regional Languages Supported**: All chat prompts, options, and helper messages speak natively in the selected language.
+   - **First-Visit Language Selection Popup Modal**: Prominently features 🇬🇧 **English** and 🇮🇳 **മലയാളം** as primary large buttons, with small compact buttons for regional languages below (🇮🇳 **தமிழ்**, 🇮🇳 **తెలుగు**, 🇮🇳 **हिंदी**, 🇮🇳 **ಕನ್ನಡ**).
+   - **6 Regional Languages Supported**: Added **Telugu (`తెలుగు`)** alongside Malayalam, Tamil, Hindi, Kannada, and English.
    - **English-Only WhatsApp Output Guarantee**: Regardless of chat language, the final compiled WhatsApp lead payload sent to `+919048360880` is generated in **ENGLISH ONLY**.
    - **Location Personalization**: Contextually references client location (e.g. Ottapalam, Palakkad, Shornur, Perinthalmanna) and highlights local network hospital tie-ups (Valluvanad, PK Das, KIMS Al Shifa, Crest Hospital).
    - **Country Code Dropdown for NRIs & Local Clients**: `+91 (India)`, `+971 (UAE)`, `+966 (Saudi Arabia)`, `+965 (Kuwait)`, `+968 (Oman)`, `+974 (Qatar)`, `+973 (Bahrain)`, `+1 (USA)`, `+44 (UK)`, `+65 (Singapore)`.

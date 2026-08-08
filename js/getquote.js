@@ -140,6 +140,38 @@ const i18n = {
         father: "தந்தை",
         mother: "தாய்"
     },
+    te: {
+        welcomeMsg: "నమస్కారం! <strong>పాలసీ కేర్ సొల్యూషన్స్ (Policy Care Solutions)</strong> కి స్వాగతం. మీ కుటుంబానికి సరిపోయే ఇన్సూరెన్స్ ప్లాన్ ఎంచుకోవడానికి నేను సహాయం చేస్తాను!",
+        askName: "చాలా సంతోషం! ముందుగా మీ <strong>పూర్తి పేరు</strong> తెలుసుకోవచ్చా?",
+        namePlaceholder: "మీ పేరును ఇక్కడ ఎంటర్ చేయండి...",
+        askPhone: "మిమ్మల్ని కలవడం సంతోషంగా ఉంది, <strong>{name}</strong>! మీ <strong>మొబైల్ నంబర్</strong> ఏమిటి?",
+        phonePlaceholder: "మొబైల్ నంబర్...",
+        askEmail: "ధన్యవాదాలు, <strong>{name}</strong>! మీ <strong>ఇమెయిల్ ఐడీ</strong> ఏమిటి? (ఇది ఐచ్ఛికం)",
+        emailPlaceholder: "name@example.com",
+        skipEmailBtn: "ఇమెయిల్ ఇప్పుడు వద్దు",
+        askCoverage: "అద్భుతం <strong>{name}</strong>! మీరు ఇన్సూరెన్స్ <strong>కేవలం మీ కోసమా (Individual)</strong> లేదా <strong>కుటుంబం కోసమా (Family Floater)</strong>?",
+        covIndividual: "వ్యక్తిగత పాలసీ (నాకు మాత్రమే)",
+        covFamily: "ఫ్యామిలీ ఫ్లోటర్ (నేను, భాగస్వామి, పిల్లలు, తల్లిదండ్రులు)",
+        askMembers: "కుటుంబ సభ్యుల వయస్సు లేదా పుట్టిన తేదీని ఎంచుకోండి:",
+        addMemberBtn: "+ సభ్యులను జోడించండి",
+        askLocation: "చివరగా, మీ <strong>పిన్‌కోడ్ లేదా నగరం</strong> (ఉదా: ఒట్టాపాలెం, పాలక్కాడ్) ఏమిటి?",
+        pincodePlaceholder: "6 అంకెల పిన్‌కోడ్...",
+        cityPlaceholder: "నగరం పేరు...",
+        locationPersonalization: "చాలా బాగుంది, <strong>{name}</strong>! <strong>{location}</strong> లో ఉన్నవారికి నెట్‌వర్క్ ఆసుపత్రులలో నేరుగా క్యాష్‌లెస్ సౌకర్యాన్ని అందిస్తున్నాము.",
+        reviewMsg: "అన్నీ సిద్ధంగా ఉన్నాయి, <strong>{name}</strong>! <strong>{location}</strong> పాలసీ వివరాలు సిద్ధంగా ఉన్నాయి. వాట్సాప్‌లో మా ప్రతినిధితో మాట్లాడటానికి కింద క్లిక్ చేయండి:",
+        submitWaBtn: "వాట్సాప్‌లో వివరాలు పంపండి (+91 9048360880)",
+        nextBtn: "కొనసాగించండి",
+        backBtn: "వెనుకకు",
+        verifiedTitle: "వివరాలు సిద్ధంగా ఉన్నాయి",
+        modeAge: "వయస్సు (సంవత్సరాలు)",
+        modeDob: "పుట్టిన తేదీ",
+        self: "నేను",
+        spouse: "భాగస్వామి",
+        child1: "మొదటి బిడ్డ",
+        child2: "రెండవ బిడ్డ",
+        father: "తండ్రి",
+        mother: "తల్లి"
+    },
     hi: {
         welcomeMsg: "नमस्ते! <strong>पॉलिसी केयर सॉल्यूशंस</strong> (ओट्टापालम और पालक्काड) में आपका स्वागत है। मैं आपकी स्वास्थ्य सुरक्षा के लिए सही पॉलिसी चुनने में सहायता करूँगा!",
         askName: "बहुत बढ़िया! सबसे पहले, क्या मैं आपका <strong>पूरा नाम</strong> जान सकता हूँ?",
@@ -272,6 +304,7 @@ function updateLangBadge() {
     if (badge) {
         if (quoteState.lang === 'ml') badge.innerText = 'മലയാളം';
         else if (quoteState.lang === 'ta') badge.innerText = 'தமிழ்';
+        else if (quoteState.lang === 'te') badge.innerText = 'తెలుగు';
         else if (quoteState.lang === 'hi') badge.innerText = 'हिंदी';
         else if (quoteState.lang === 'kn') badge.innerText = 'ಕನ್ನಡ';
         else badge.innerText = 'English';
