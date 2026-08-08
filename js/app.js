@@ -46,7 +46,34 @@ function calculateAge(dobString) {
 
 // Global Form State
 let formCoverageType = 'individual'; // 'individual' or 'family'
+let indAgeMode = 'dob'; // 'dob' or 'age'
 let familyMembersCount = 0;
+
+// Dual Age Mode Switcher for Individual Applicant
+window.toggleIndAgeMode = function(mode) {
+    indAgeMode = mode;
+    const dobContainer = document.getElementById('ind-dob-container');
+    const directAgeContainer = document.getElementById('ind-direct-age-container');
+    const dobBtn = document.getElementById('ind-mode-dob-btn');
+    const ageBtn = document.getElementById('ind-mode-age-btn');
+    const indAgeDisplay = document.getElementById('ind-age-display');
+
+    if (!dobContainer || !directAgeContainer || !dobBtn || !ageBtn) return;
+
+    if (mode === 'dob') {
+        dobContainer.classList.remove('hidden');
+        directAgeContainer.classList.add('hidden');
+        dobBtn.className = "px-3 py-1.5 rounded-lg font-bold bg-sky-600 text-white transition-all";
+        ageBtn.className = "px-3 py-1.5 rounded-lg font-bold text-slate-600 hover:text-slate-900 transition-all";
+        indAgeDisplay.innerHTML = '';
+    } else {
+        directAgeContainer.classList.remove('hidden');
+        dobContainer.classList.add('hidden');
+        ageBtn.className = "px-3 py-1.5 rounded-lg font-bold bg-sky-600 text-white transition-all";
+        dobBtn.className = "px-3 py-1.5 rounded-lg font-bold text-slate-600 hover:text-slate-900 transition-all";
+        indAgeDisplay.innerHTML = '';
+    }
+};
 
 function initForm() {
     const individualBtn = document.getElementById('btn-individual');
@@ -54,6 +81,7 @@ function initForm() {
     const individualSection = document.getElementById('individual-section');
     const familySection = document.getElementById('family-section');
     const indDobInput = document.getElementById('ind-dob');
+    const indDirectAgeInput = document.getElementById('ind-direct-age');
     const indAgeDisplay = document.getElementById('ind-age-display');
     const primaryDobInput = document.getElementById('primary-dob');
     const primaryAgeDisplay = document.getElementById('primary-age-display');
@@ -92,12 +120,24 @@ function initForm() {
     // DOB Change listeners for Individual Mode
     if (indDobInput) {
         indDobInput.addEventListener('change', () => {
-            const ageObj = calculateAge(indDobInput.value);
-            if (ageObj && !ageObj.error) {
-                indAgeDisplay.innerHTML = `<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold age-badge"><i class="fa-solid fa-cake-candles mr-2 text-sky-600"></i> Calculated Age: ${ageObj.text}</span>`;
-            } else if (ageObj && ageObj.error) {
-                indAgeDisplay.innerHTML = `<span class="text-xs text-rose-500 font-medium">Please enter a valid past Date of Birth</span>`;
-            } else {
+            if (indAgeMode === 'dob') {
+                const ageObj = calculateAge(indDobInput.value);
+                if (ageObj && !ageObj.error) {
+                    indAgeDisplay.innerHTML = `<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold age-badge"><i class="fa-solid fa-cake-candles mr-1.5 text-sky-600"></i> Calculated Age: ${ageObj.text}</span>`;
+                } else if (ageObj && ageObj.error) {
+                    indAgeDisplay.innerHTML = `<span class="text-xs text-rose-500 font-medium">Please enter a valid past Date of Birth</span>`;
+                } else {
+                    indAgeDisplay.innerHTML = '';
+                }
+            }
+        });
+    }
+
+    if (indDirectAgeInput) {
+        indDirectAgeInput.addEventListener('input', () => {
+            if (indAgeMode === 'age' && indDirectAgeInput.value) {
+                indAgeDisplay.innerHTML = `<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold age-badge"><i class="fa-solid fa-user-check mr-1.5 text-sky-600"></i> Direct Age Specified: ${indDirectAgeInput.value} Years</span>`;
+            } else if (indAgeMode === 'age') {
                 indAgeDisplay.innerHTML = '';
             }
         });
@@ -130,7 +170,7 @@ function initForm() {
     }
 }
 
-// Add a dynamic family member row
+// Add a dynamic family member row with dual DOB or Direct Age input
 function addFamilyMemberRow(defaultRelation = 'Child') {
     const container = document.getElementById('family-members-container');
     if (!container) return;
@@ -142,7 +182,7 @@ function addFamilyMemberRow(defaultRelation = 'Child') {
     row.id = rowId;
     row.className = "glass-card p-4 rounded-xl border border-slate-200 relative mb-3 bg-white/80 transition-all";
     row.innerHTML = `
-        <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
             <span class="text-xs font-bold text-sky-700 uppercase tracking-wider flex items-center">
                 <i class="fa-solid fa-user-plus mr-1.5 text-sky-500"></i> Family Member #${container.children.length + 1}
             </span>
@@ -169,8 +209,21 @@ function addFamilyMemberRow(defaultRelation = 'Child') {
                 </select>
             </div>
             <div>
-                <label class="block text-xs font-medium text-slate-700 mb-1">Date of Birth</label>
-                <input type="date" class="member-dob w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500" required />
+                <div class="flex items-center justify-between mb-1">
+                    <label class="block text-xs font-medium text-slate-700">Age / DOB</label>
+                    <button type="button" class="member-mode-toggle text-[10px] text-sky-600 font-bold hover:underline">Switch to Age in Years</button>
+                </div>
+                
+                <!-- DOB Input Container -->
+                <div class="member-dob-box">
+                    <input type="date" class="member-dob w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                </div>
+                
+                <!-- Direct Age Input Container -->
+                <div class="member-age-box hidden">
+                    <input type="number" min="1" max="100" placeholder="e.g. 32" class="member-direct-age w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 font-bold" />
+                </div>
+
                 <div class="member-age-display mt-1 min-h-[1.25rem]"></div>
             </div>
         </div>
@@ -178,14 +231,46 @@ function addFamilyMemberRow(defaultRelation = 'Child') {
 
     container.appendChild(row);
 
-    // Attach DOB listener for this row
+    // Dynamic dual mode toggle for this row
+    let memberMode = 'dob';
+    const toggleBtn = row.querySelector('.member-mode-toggle');
+    const dobBox = row.querySelector('.member-dob-box');
+    const ageBox = row.querySelector('.member-age-box');
     const dobInput = row.querySelector('.member-dob');
+    const directAgeInput = row.querySelector('.member-direct-age');
     const ageDisplay = row.querySelector('.member-age-display');
-    dobInput.addEventListener('change', () => {
-        const ageObj = calculateAge(dobInput.value);
-        if (ageObj && !ageObj.error) {
-            ageDisplay.innerHTML = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold age-badge"><i class="fa-solid fa-cake-candles mr-1 text-sky-600"></i> Age: ${ageObj.text}</span>`;
+
+    toggleBtn.addEventListener('click', () => {
+        if (memberMode === 'dob') {
+            memberMode = 'age';
+            dobBox.classList.add('hidden');
+            ageBox.classList.remove('hidden');
+            toggleBtn.textContent = 'Switch to DOB Picker';
+            ageDisplay.innerHTML = '';
         } else {
+            memberMode = 'dob';
+            ageBox.classList.add('hidden');
+            dobBox.classList.remove('hidden');
+            toggleBtn.textContent = 'Switch to Age in Years';
+            ageDisplay.innerHTML = '';
+        }
+    });
+
+    dobInput.addEventListener('change', () => {
+        if (memberMode === 'dob') {
+            const ageObj = calculateAge(dobInput.value);
+            if (ageObj && !ageObj.error) {
+                ageDisplay.innerHTML = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold age-badge"><i class="fa-solid fa-cake-candles mr-1 text-sky-600"></i> Age: ${ageObj.text}</span>`;
+            } else {
+                ageDisplay.innerHTML = '';
+            }
+        }
+    });
+
+    directAgeInput.addEventListener('input', () => {
+        if (memberMode === 'age' && directAgeInput.value) {
+            ageDisplay.innerHTML = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold age-badge"><i class="fa-solid fa-user-check mr-1 text-sky-600"></i> Age: ${directAgeInput.value} Yrs</span>`;
+        } else if (memberMode === 'age') {
             ageDisplay.innerHTML = '';
         }
     });
@@ -281,15 +366,28 @@ function handleFormSubmit(e) {
     let membersListForModal = [];
 
     if (formCoverageType === 'individual') {
-        const indDob = document.getElementById('ind-dob')?.value;
-        if (!indDob) {
-            alert("Please select your Date of Birth.");
-            return;
+        let ageText = '';
+        let dobOrAgeVal = '';
+        if (indAgeMode === 'dob') {
+            const indDob = document.getElementById('ind-dob')?.value;
+            if (!indDob) {
+                alert("Please select your Date of Birth or switch to Direct Age entry.");
+                return;
+            }
+            const ageObj = calculateAge(indDob);
+            ageText = ageObj && !ageObj.error ? ageObj.text : 'Not calculated';
+            dobOrAgeVal = `DOB: ${indDob}`;
+        } else {
+            const directAge = document.getElementById('ind-direct-age')?.value;
+            if (!directAge || directAge < 1 || directAge > 100) {
+                alert("Please enter a valid Age between 1 and 100.");
+                return;
+            }
+            ageText = `${directAge} Years`;
+            dobOrAgeVal = `Age: ${directAge} Yrs`;
         }
-        const ageObj = calculateAge(indDob);
-        const ageText = ageObj && !ageObj.error ? ageObj.text : 'Not calculated';
-        membersSummaryText = `• Self (${fullName}): DOB: ${indDob} (Age: ${ageText})`;
-        membersListForModal.push({ name: fullName, relation: 'Self (Individual)', dob: indDob, age: ageText });
+        membersSummaryText = `• Self (${fullName}): ${dobOrAgeVal} (Age: ${ageText})`;
+        membersListForModal.push({ name: fullName, relation: 'Self (Individual)', dob: dobOrAgeVal, age: ageText });
     } else {
         // Family Mode
         const primaryDob = document.getElementById('primary-dob')?.value;
@@ -302,7 +400,7 @@ function handleFormSubmit(e) {
         const primaryAgeText = primaryAgeObj && !primaryAgeObj.error ? primaryAgeObj.text : 'N/A';
         
         membersSummaryText = `• ${fullName} (${primaryRelation}): DOB ${primaryDob} (Age: ${primaryAgeText})\n`;
-        membersListForModal.push({ name: fullName, relation: primaryRelation, dob: primaryDob, age: primaryAgeText });
+        membersListForModal.push({ name: fullName, relation: primaryRelation, dob: `DOB: ${primaryDob}`, age: primaryAgeText });
 
         const container = document.getElementById('family-members-container');
         if (container) {
@@ -310,12 +408,25 @@ function handleFormSubmit(e) {
             memberRows.forEach((row, idx) => {
                 const mName = row.querySelector('.member-name')?.value.trim() || `Member ${idx + 1}`;
                 const mRelation = row.querySelector('.member-relation')?.value || 'Family Member';
-                const mDob = row.querySelector('.member-dob')?.value;
-                const mAgeObj = calculateAge(mDob);
-                const mAgeText = mAgeObj && !mAgeObj.error ? mAgeObj.text : 'N/A';
+                const dobBox = row.querySelector('.member-dob-box');
+                const isDobMode = dobBox && !dobBox.classList.contains('hidden');
+
+                let mAgeText = 'N/A';
+                let mValText = 'N/A';
+
+                if (isDobMode) {
+                    const mDob = row.querySelector('.member-dob')?.value;
+                    const mAgeObj = calculateAge(mDob);
+                    mAgeText = mAgeObj && !mAgeObj.error ? mAgeObj.text : 'N/A';
+                    mValText = mDob ? `DOB: ${mDob}` : 'N/A';
+                } else {
+                    const mDirectAge = row.querySelector('.member-direct-age')?.value;
+                    mAgeText = mDirectAge ? `${mDirectAge} Years` : 'N/A';
+                    mValText = mDirectAge ? `Age: ${mDirectAge} Yrs` : 'N/A';
+                }
                 
-                membersSummaryText += `• ${mName} (${mRelation}): DOB ${mDob || 'N/A'} (Age: ${mAgeText})\n`;
-                membersListForModal.push({ name: mName, relation: mRelation, dob: mDob || 'N/A', age: mAgeText });
+                membersSummaryText += `• ${mName} (${mRelation}): ${mValText} (Age: ${mAgeText})\n`;
+                membersListForModal.push({ name: mName, relation: mRelation, dob: mValText, age: mAgeText });
             });
         }
     }
@@ -324,7 +435,7 @@ function handleFormSubmit(e) {
     const whatsappMessage = `🏥 *Health & Motor Insurance Quote Request*
 ----------------------------------------
 👥 *Advisor Team*: Policy Care Solutions (Sudeep S, Amrutha & Sathish Kumar A)
-🏢 *Agency*: Policy Care Solutions (Star Health, Care Health & Motor)
+🏢 *Agency*: Policy Care Solutions (Ottapalam & Palakkad Agents)
 
 📋 *Coverage Type*: ${formCoverageType.toUpperCase()}
 👨‍👩‍👧 *Persons Covered*:
@@ -361,6 +472,94 @@ Kindly provide best Star Health & Care Health policy options and premium quote d
         whatsappMessage
     });
 }
+
+// AI Smart Policy Recommendation Assistant Rule Engine
+window.runAiPolicyMatcher = function() {
+    const who = document.getElementById('ai-q-who')?.value;
+    const priority = document.getElementById('ai-q-priority')?.value;
+    const outputBox = document.getElementById('ai-recommendation-output');
+    const policiesList = window.healthPolicies || window.starPolicies;
+
+    if (!outputBox || !policiesList) return;
+
+    // Rule-based policy matching
+    let matchedPolicy = null;
+    let matchScore = 96;
+    let matchReason = '';
+
+    if (who === 'family_kids') {
+        if (priority === 'zero_copay') {
+            matchedPolicy = policiesList.find(p => p.id === 'star-comprehensive') || policiesList[0];
+            matchReason = "Offers 100% Zero Co-Pay across all network hospitals, full maternity & newborn cover, and 100% automatic sum insured restoration.";
+            matchScore = 98;
+        } else if (priority === 'high_sum') {
+            matchedPolicy = policiesList.find(p => p.id === 'care-advantage') || policiesList.find(p => p.id === 'care-supreme');
+            matchReason = "Provides massive ₹1 Crore sum insured cover with unlimited automatic restoration and global cashless network access.";
+            matchScore = 97;
+        } else {
+            matchedPolicy = policiesList.find(p => p.id === 'care-supreme') || policiesList[0];
+            matchReason = "Flexible family floater plan with Cumulative Bonus Super up to 500% increase and zero co-pay options.";
+            matchScore = 96;
+        }
+    } else if (who === 'young_adult') {
+        matchedPolicy = policiesList.find(p => p.id === 'young-star') || policiesList.find(p => p.id === 'care-supreme');
+        matchReason = "Designed specifically for young individuals aged 18-40 with locked low premiums, wellness reward discounts up to 20%, and instant auto restoration.";
+        matchScore = 99;
+    } else if (who === 'senior_parents') {
+        if (priority === 'quick_waiting') {
+            matchedPolicy = policiesList.find(p => p.id === 'care-freedom') || policiesList.find(p => p.id === 'care-senior');
+            matchReason = "Specialized senior plan with shortened 2-year waiting period for pre-existing illnesses like hypertension & diabetes.";
+            matchScore = 95;
+        } else {
+            matchedPolicy = policiesList.find(p => p.id === 'senior-red-carpet') || policiesList.find(p => p.id === 'care-senior');
+            matchReason = "No pre-policy medical test required for entry up to age 75 with coverage for pre-existing conditions after specified period.";
+            matchScore = 94;
+        }
+    } else if (who === 'pre_existing') {
+        matchedPolicy = policiesList.find(p => p.id === 'care-freedom') || policiesList.find(p => p.id === 'star-comprehensive');
+        matchReason = "Optimized for individuals with pre-existing medical conditions (Diabetes, BP, Thyroid) featuring shorter waiting windows and day-1 annual health checkups.";
+        matchScore = 96;
+    } else {
+        matchedPolicy = policiesList[0];
+        matchReason = "Top-tier comprehensive health insurance coverage for overall family medical safety.";
+        matchScore = 95;
+    }
+
+    const isStar = matchedPolicy.provider === 'Star Health';
+    const waMsg = encodeURIComponent(`Hello Policy Care Team (Ottapalam & Palakkad), the AI Assistant recommended the *${matchedPolicy.title}* (${matchedPolicy.provider}) policy for me. Please provide a quote.`);
+    const waUrl = `https://wa.me/919048360880?text=${waMsg}`;
+
+    outputBox.innerHTML = `
+        <div class="mt-6 p-6 rounded-2xl bg-slate-900 border border-white/20 text-white animate-fadeIn shadow-2xl">
+            <div class="flex items-center justify-between flex-wrap gap-2 mb-4 pb-3 border-b border-white/10">
+                <span class="text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full bg-amber-400 text-slate-950 flex items-center gap-1">
+                    <i class="fa-solid fa-sparkles"></i> AI Match Score: ${matchScore}% Best Fit
+                </span>
+                <span class="text-xs text-slate-400 font-medium">Insurer: <strong>${matchedPolicy.provider}</strong></span>
+            </div>
+
+            <h3 class="text-2xl font-extrabold text-white mb-2 font-heading">${matchedPolicy.title}</h3>
+            <p class="text-xs text-amber-300 leading-relaxed mb-4 font-medium"><i class="fa-solid fa-lightbulb text-amber-400 mr-1.5"></i> <strong>Why this plan fits you:</strong> ${matchReason}</p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs mb-4">
+                <div><span class="text-slate-400 block text-[10px] uppercase font-bold">Sum Insured</span><span class="font-extrabold text-teal-300 text-sm">${matchedPolicy.sumInsured}</span></div>
+                <div><span class="text-slate-400 block text-[10px] uppercase font-bold">Entry Age</span><span class="font-bold text-white">${matchedPolicy.entryAge}</span></div>
+                <div class="col-span-2 sm:col-span-1"><span class="text-slate-400 block text-[10px] uppercase font-bold">Local Hospitals</span><span class="font-bold text-sky-300">Valluvanad & PK Das</span></div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                <a href="${waUrl}" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs text-center flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Get Quote for ${matchedPolicy.title} on WhatsApp
+                </a>
+                <a href="#calculator" class="py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs text-center">
+                    Fill Calculator Form
+                </a>
+            </div>
+        </div>
+    `;
+
+    outputBox.classList.remove('hidden');
+};
 
 // Show Quote Confirmation Modal
 function showQuoteModal(data) {
