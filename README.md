@@ -6,33 +6,34 @@ Official website for **Policy Care Solutions**, an authorized **Star Health, Car
 
 ## 🌟 Key Features
 
-1. **Clean Single-Line Header Navigation**:
-   - Streamlined top desktop and mobile navigation (`Get Quote`, `Health Policies`, `Motor Cover`, `Local Network`, `Why Us`) ensuring zero line-wrapping or vertical stretching.
+1. **Clean Single-Line Header Navigation & Brand Integrity**:
+   - Site Name strictly maintained as **Policy Care Solutions**.
+   - Streamlined top desktop and mobile navigation (`Get Quote`, `Health Policies`, `Motor Cover`, `Our Team`, `Local Network`, `Why Us`) ensuring zero line-wrapping or vertical stretching.
 
-2. **Conversational AI Live Chat Assistant Widget**:
-   - Floating live chat drawer (`#ai-chat-drawer`) and fixed bottom bar with 1-click **Call Now**, **WhatsApp**, and **AI Live Support** buttons.
-   - Interactive human-like chat flow capturing visitor's **Name**, **Insurance Need** (Health/Motor), **WhatsApp Number**, and **Email**, then generating a pre-filled **"Connect Live on WhatsApp"** button.
+2. **Dedicated "Our Licensed Advisor Team" Section (`#team`)**:
+   - Showcases individual advisor profiles for **Sudeep S** (Senior Partner & Star Health Advisor), **Amrutha** (Client Relationship & Maternity Lead), and **Sathish Kumar A** (Cashless Claims & Motor Specialist).
 
-3. **Dual Age Input Mode (DOB or Age in Years)**:
+3. **Desktop & Mobile Responsive Floating Action UI**:
+   - **Desktop View**: Sleek, non-intrusive floating round `AI Live Support` bubble on the bottom right corner without obscuring the footer.
+   - **Mobile View**: Fixed bottom bar (`Call Advisor`, `AI Live Chat`, `WhatsApp`).
+   - Interactive human-like chat flow capturing visitor's **Name**, **Insurance Need** (Health/Motor), **WhatsApp Number**, and **Email**, generating a pre-filled **"Connect Live on WhatsApp"** button.
+
+4. **Dual Age Input Mode (DOB or Age in Years)**:
    - **Individual & Family Floater Modes**: Switch easily between Individual and Family coverage.
-   - **Flexible Input Choice**: Enter either exact **Date of Birth (DOB)** or **Age directly in Years** for applicant and family members.
-   - **Instant WhatsApp Link Generator**: Form submission automatically formats a detailed message directed to the advisor team at `+919048360880`.
+   - **Flexible Input Choice**: Enter either exact **Date of Birth (DOB)** or **Age directly in Years**.
 
-4. **Local SEO Engine for Ottapalam & Palakkad**:
+5. **Local SEO Engine for Ottapalam & Palakkad**:
    - Meta tags & JSON-LD `InsuranceAgency` schema targeting Ottapalam, Palakkad, Shornur, Cherpulassery, and Pattambi.
-   - Dedicated Local Hospital Network section featuring cashless tie-ups with *Valluvanad Hospital (Ottapalam)*, *PK Das Medical College (Vaniamkulam)*, *KIMS Al Shifa*, and *Crest Hospital (Palakkad)*.
-
-5. **Star Health & Care Health Policy Showcase**:
-   - Filter by **Insurer** (*All Insurers*, *Star Health*, *Care Health*) and **Category** (*Family Floater*, *Young Adults*, *Senior Citizens*, *Pre-Existing Cover*, *Women Care*).
+   - Cashless hospital network section showcasing *Valluvanad Hospital (Ottapalam)*, *PK Das Medical College (Vaniamkulam)*, *KIMS Al Shifa*, and *Crest Hospital (Palakkad)*.
 
 ---
 
-## 📞 Business Information Summary
+## 📞 Business Information & Credits
 
-- **Agency Name**: Policy Care Solutions
+- **Agency / Site Name**: Policy Care Solutions
+- **Designed & Developed By**: [Softinsan Technologies](https://www.softinsan.com)
 - **Target Local Service Areas**: Ottapalam, Palakkad, Shornur, Cherpulassery, Pattambi, Kerala
-- **Advisor Team**: Sudeep S • Amrutha • Sathish Kumar A
+- **Licensed Advisor Team**: Sudeep S • Amrutha • Sathish Kumar A
 - **Star Health Advisor Code**: `BA0000954420`
-- **Care Health & Motor Insurance**: Authorized Agency
 - **Phone / WhatsApp**: `+919048360880`
 - **Instagram**: [https://www.instagram.com/policycaresolutions](https://www.instagram.com/policycaresolutions)
