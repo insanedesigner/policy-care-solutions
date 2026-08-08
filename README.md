@@ -6,9 +6,9 @@ Official website for **Policy Care Solutions**, an authorized **Star Health, Car
 
 ## 🌟 Key Features
 
-1. **Clean Open Graph (OG), Favicon & WhatsApp Share Banner Card**:
-   - **Official Logo OG Share Banner Image (`images/og-share.png`)**: Minimal, elegant 1200x630 social preview card incorporating the official Policy Care Solutions logo, tagline *"Your Protection, Our Priority"*, and *"Serving India"*.
-   - **Clean OG & Twitter Meta Tags**: Configured `og:title`, `og:description`, `og:image`, `og:url`, `og:site_name`, `twitter:card`, and Apple Touch Favicon tags across all pages (`index.html` & `/getquote`).
+1. **Official 1200x630 Open Graph (OG), Favicon & WhatsApp Share Banner**:
+   - **Exact 1200 x 630 Pixels Standard OG Image (`images/og-share.png`)**: Built using official Open Graph 1200x630 specifications (1.91:1 ratio) featuring the official Policy Care Solutions logo, tagline *"Your Protection, Our Priority"*, and *"Serving India"*. Fits WhatsApp link preview aspect ratio perfectly without cropping.
+   - **Clean OG & Twitter Meta Tags**: Configured `og:title`, `og:description`, `og:image`, `og:image:width="1200"`, `og:image:height="630"`, `og:url`, `og:site_name`, `twitter:card`, and Apple Touch Favicon tags across all pages (`index.html` & `/getquote`).
 
 2. **100% Full-Screen Campaign Chat Landing Page (`https://www.policycaresolutions.com/getquote`)**:
    - **First-Visit Language Selection Popup Modal**: Asks visitors to choose their language instantly (🇬🇧 **English**, 🇮🇳 **മലയാളം**, 🇮🇳 **தமிழ்**, 🇮🇳 **हिंदी**, 🇮🇳 **ಕನ್ನಡ**).
