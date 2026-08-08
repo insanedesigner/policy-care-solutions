@@ -6,7 +6,7 @@ $folder = $PSScriptRoot
 Write-Host "====================================================" -ForegroundColor Cyan
 Write-Host " Policy Care Solutions - Local Web Server Running" -ForegroundColor Green
 Write-Host " Website URL: $url" -ForegroundColor Yellow
-Write-Host " Advisor: Sudeep S (Star Health & Care Health Partner)" -ForegroundColor White
+Write-Host " Advisors: Sudeep S, Amrutha & Sathish Kumar A (Policy Care Solutions)" -ForegroundColor White
 Write-Host " Press Ctrl+C in terminal to stop server" -ForegroundColor Gray
 Write-Host "====================================================" -ForegroundColor Cyan
 

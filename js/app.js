@@ -321,10 +321,10 @@ function handleFormSubmit(e) {
     }
 
     // Construct WhatsApp formatted string
-    const whatsappMessage = `🏥 *Health Insurance Quote Request*
+    const whatsappMessage = `🏥 *Health & Motor Insurance Quote Request*
 ----------------------------------------
-👤 *Advisor*: Sudeep S
-🏢 *Agency*: Policy Care Solutions (Star Health & Care Health)
+👥 *Advisor Team*: Policy Care Solutions (Sudeep S, Amrutha & Sathish Kumar A)
+🏢 *Agency*: Policy Care Solutions (Star Health, Care Health & Motor)
 
 📋 *Coverage Type*: ${formCoverageType.toUpperCase()}
 👨‍👩‍👧 *Persons Covered*:
@@ -384,7 +384,7 @@ function showQuoteModal(data) {
         <div class="space-y-3 text-sm">
             <div class="bg-sky-50 border border-sky-200 p-3 rounded-xl text-sky-900 text-xs">
                 <p class="font-bold"><i class="fa-solid fa-circle-check text-sky-600 mr-1"></i> Form Validated Successfully!</p>
-                <p class="mt-1 text-slate-600">Your custom WhatsApp quote message has been prepared for Advisor Sudeep S.</p>
+                <p class="mt-1 text-slate-600">Your custom WhatsApp quote message has been prepared for Policy Care Advisors (Sudeep S, Amrutha & Sathish Kumar A).</p>
             </div>
 
             <div>
@@ -516,7 +516,7 @@ function renderPolicies(legacyFilter = null) {
             </li>
         `).join('');
 
-        const quickMsg = encodeURIComponent(`Hello Sudeep S, I am interested in knowing more about the *${policy.title}* (${policy.provider}) policy for my family.`);
+        const quickMsg = encodeURIComponent(`Hello Policy Care Team, I am interested in knowing more about the *${policy.title}* (${policy.provider}) policy for my family.`);
 
         return `
             <div class="glass-card glass-card-hover p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
