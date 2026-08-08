@@ -6,20 +6,20 @@ Official website for **Policy Care Solutions**, an authorized **Star Health, Car
 
 ## 🌟 Key Features
 
-1. **Compact Single-Line Header Navigation with "More" Dropdown**:
+1. **Expanded Header "More" Dropdown Menu (`w-64 sm:w-72`)**:
    - Primary Header Links: `Get Quote`, `Health Policies`, `Our Team`.
-   - **More Dropdown**: Houses secondary items (`Motor Insurance`, `Local Network`, `Why Choose Us`, `@policycaresolutions`), guaranteeing single-line alignment on all display resolutions.
+   - **Expanded More Dropdown**: Houses `Motor Insurance`, `Local Network`, `Why Choose Us`, **Facebook Page**, **Google Maps Location**, and **Instagram Page** without any text wrapping.
 
-2. **Balanced Dual Floating Action Bar (Opposite Sides)**:
+2. **Official High-Quality Horizontal Brand Logo**:
+   - Updated `images/logo.png` with official high-resolution horizontal logo geometry.
+   - Preserved brand colors: **Deep Trust Blue (`#005696`)**, **Care Green (`#38a132`)**, and **Heart Warm Orange (`#f58220`)**.
+
+3. **Balanced Dual Floating Action Bar (Opposite Sides)**:
    - **Bottom-Left Floating Bar**: Instant **Call Advisor** (`+919048360880`) phone button & **WhatsApp** button.
    - **Bottom-Right Floating Bar**: Interactive **AI Live Support** chat bubble with live pulsing online indicator.
 
-3. **Section Padding & Visual Separation Fix**:
-   - Fixed closing section tags between `#motor` and `#benefits` (`py-20` spacing with crisp `border-t border-slate-800` dividers).
-
-4. **Official Brand Logo & Color Palette System**:
-   - Integrated official logo (`images/logo.png`) side-by-side with tagline *"Your Protection, Our Priority"*.
-   - Color palette matched strictly to logo shades: **Deep Trust Blue (`#005696`)**, **Care Green (`#38a132`)**, and **Heart Warm Orange (`#f58220`)**.
+4. **Section Padding & Visual Separation**:
+   - Clean section spacing (`py-20` with crisp `border-t border-slate-800` dividers) between `#motor` and `#benefits`.
 
 5. **Facebook & Google Maps Integration**:
    - Direct links to official [Facebook Page](https://www.facebook.com/policycaresolutions) and [Google Maps Location](https://share.google/KTswg5r1kxmwwjl30).
