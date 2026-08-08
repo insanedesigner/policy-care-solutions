@@ -865,3 +865,223 @@ function initSmoothScrolling() {
     });
 }
 
+// ----------------------------------------------------
+// CONVERSATIONAL AI LIVE CHAT ASSISTANT STATE MACHINE
+// ----------------------------------------------------
+let aiChatState = {
+    step: 0, // 0: ask name, 1: ask policy type, 2: ask phone, 3: ask email, 4: complete
+    userName: '',
+    policyType: '',
+    phone: '',
+    email: '',
+    initialized: false
+};
+
+// Toggle Floating Chat Drawer
+window.toggleAiChatWidget = function() {
+    const drawer = document.getElementById('ai-chat-drawer');
+    if (!drawer) return;
+
+    if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        drawer.classList.add('flex');
+        
+        if (!aiChatState.initialized) {
+            initAiChatConversation();
+        }
+    } else {
+        drawer.classList.add('hidden');
+        drawer.classList.remove('flex');
+    }
+};
+
+// Initialize Chat Sequence
+function initAiChatConversation() {
+    aiChatState.initialized = true;
+    aiChatState.step = 0;
+    const container = document.getElementById('chat-messages-container');
+    if (container) container.innerHTML = '';
+
+    appendBotChatMessage("Hi there! 👋 Welcome to Policy Care Solutions (Ottapalam & Palakkad).");
+    setTimeout(() => {
+        appendBotChatMessage("May I know your full name please so I can personalize your consultation?");
+    }, 600);
+}
+
+// Append Bot Message
+function appendBotChatMessage(text, quickOptions = null) {
+    const container = document.getElementById('chat-messages-container');
+    if (!container) return;
+
+    const msgDiv = document.createElement('div');
+    msgDiv.className = "flex gap-2 items-start animate-fadeIn";
+
+    let optionsHtml = '';
+    if (quickOptions && quickOptions.length > 0) {
+        optionsHtml = `
+            <div class="flex flex-wrap gap-1.5 mt-2">
+                ${quickOptions.map(opt => `
+                    <button type="button" onclick="selectQuickChatOption('${opt}')" class="px-3 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-600 hover:text-white text-sky-800 font-bold text-[11px] transition-all border border-sky-200">
+                        ${opt}
+                    </button>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    msgDiv.innerHTML = `
+        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-600 to-teal-600 text-white flex items-center justify-center text-xs font-black shrink-0">
+            <i class="fa-solid fa-headset"></i>
+        </div>
+        <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-slate-200 max-w-[85%] text-slate-800 text-xs">
+            <p class="leading-relaxed font-medium">${text}</p>
+            ${optionsHtml}
+        </div>
+    `;
+
+    container.appendChild(msgDiv);
+    container.scrollTop = container.scrollHeight;
+}
+
+// Append User Message
+function appendUserChatMessage(text) {
+    const container = document.getElementById('chat-messages-container');
+    if (!container) return;
+
+    const msgDiv = document.createElement('div');
+    msgDiv.className = "flex justify-end animate-fadeIn";
+    msgDiv.innerHTML = `
+        <div class="bg-sky-600 text-white p-3 rounded-2xl rounded-tr-none shadow-md max-w-[85%] text-xs font-medium">
+            <p class="leading-relaxed">${text}</p>
+        </div>
+    `;
+
+    container.appendChild(msgDiv);
+    container.scrollTop = container.scrollHeight;
+}
+
+// Quick Option Click Handler
+window.selectQuickChatOption = function(optionText) {
+    const input = document.getElementById('ai-chat-input');
+    if (input) {
+        input.value = optionText;
+        processAiChatStep(optionText);
+        input.value = '';
+    }
+};
+
+// Form Input Submit Handler
+window.handleAiChatSubmit = function(e) {
+    e.preventDefault();
+    const input = document.getElementById('ai-chat-input');
+    if (!input) return;
+    const text = input.value.trim();
+    if (!text) return;
+
+    processAiChatStep(text);
+    input.value = '';
+};
+
+// Process Conversational Steps
+function processAiChatStep(userText) {
+    appendUserChatMessage(userText);
+
+    setTimeout(() => {
+        if (aiChatState.step === 0) {
+            // STEP 0: Capture Name
+            aiChatState.userName = userText;
+            aiChatState.step = 1;
+            appendBotChatMessage(
+                `Nice to meet you, <strong>${aiChatState.userName}</strong>! 😊`,
+                null
+            );
+            setTimeout(() => {
+                appendBotChatMessage(
+                    `What type of insurance policy are you looking for today, <strong>${aiChatState.userName}</strong>?`,
+                    ['Health Insurance', 'Motor Insurance (Car/Bike)']
+                );
+            }, 600);
+
+        } else if (aiChatState.step === 1) {
+            // STEP 1: Capture Policy Type
+            aiChatState.policyType = userText;
+            aiChatState.step = 2;
+            appendBotChatMessage(
+                `Got it, <strong>${aiChatState.userName}</strong>! To connect you directly with our senior advisor team on WhatsApp, what is your 10-digit Mobile Phone Number?`
+            );
+
+        } else if (aiChatState.step === 2) {
+            // STEP 2: Capture Phone
+            if (!/^[6-9]\d{9}$/.test(userText.replace(/\s+/g, ''))) {
+                appendBotChatMessage(`Please enter a valid 10-digit Indian Mobile Number, <strong>${aiChatState.userName}</strong>.`);
+                return;
+            }
+            aiChatState.phone = userText.replace(/\s+/g, '');
+            aiChatState.step = 3;
+            appendBotChatMessage(
+                `Thank you, <strong>${aiChatState.userName}</strong>! Optionally, what is your Email ID? (Or click below to skip)`,
+                ['Skip Email']
+            );
+
+        } else if (aiChatState.step === 3) {
+            // STEP 3: Capture Email & Finalize
+            if (userText.toLowerCase() !== 'skip email' && userText.toLowerCase() !== 'skip') {
+                aiChatState.email = userText;
+            } else {
+                aiChatState.email = 'Not Provided';
+            }
+            aiChatState.step = 4;
+
+            const waPayload = `*LIVE AGENT CONSULTATION REQUEST*
+----------------------------------------
+*Name*: ${aiChatState.userName}
+*Interest*: ${aiChatState.policyType}
+*Phone*: +91 ${aiChatState.phone}
+*Email*: ${aiChatState.email}
+*Location*: Ottapalam & Palakkad
+
+Hello Sudeep S, Amrutha & Sathish Kumar A, my name is ${aiChatState.userName}. I would like live assistance for ${aiChatState.policyType}!`;
+
+            const encodedWa = encodeURIComponent(waPayload);
+            const waUrl = `https://wa.me/919048360880?text=${encodedWa}`;
+
+            appendBotChatMessage(`Awesome, <strong>${aiChatState.userName}</strong>! 🎉 I have prepared your live consultation profile for Policy Care Advisors (Sudeep S, Amrutha & Sathish Kumar A).`);
+            
+            setTimeout(() => {
+                appendBotChatMessage(`Click below to start your live WhatsApp chat now:`);
+                appendWhatsAppTransferCard(waUrl, aiChatState);
+            }, 600);
+        } else {
+            // Step 4+: Already completed
+            appendBotChatMessage(`You are all set, <strong>${aiChatState.userName}</strong>! Click the WhatsApp button above to chat live with our advisor team.`);
+        }
+    }, 400);
+}
+
+// Append WhatsApp Transfer Card inside Chat Drawer
+function appendWhatsAppTransferCard(waUrl, stateData) {
+    const container = document.getElementById('chat-messages-container');
+    if (!container) return;
+
+    const cardDiv = document.createElement('div');
+    cardDiv.className = "p-3.5 rounded-2xl bg-slate-900 text-white shadow-xl border border-white/20 animate-fadeIn space-y-2 mt-2";
+    cardDiv.innerHTML = `
+        <div class="flex items-center justify-between text-[11px] text-amber-300 font-bold border-b border-white/10 pb-1.5">
+            <span><i class="fa-solid fa-user-check mr-1"></i> Client Profile Verified</span>
+            <span class="text-emerald-400">Ready</span>
+        </div>
+        <div class="text-xs space-y-1 text-slate-200">
+            <p><strong>Name:</strong> ${stateData.userName}</p>
+            <p><strong>Interest:</strong> ${stateData.policyType}</p>
+            <p><strong>Mobile:</strong> +91 ${stateData.phone}</p>
+        </div>
+        <a href="${waUrl}" target="_blank" class="block w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs text-center shadow-lg shadow-emerald-500/25 transition-all flex items-center justify-center gap-2 mt-2">
+            <i class="fa-brands fa-whatsapp text-base"></i> Start Live WhatsApp Chat Now
+        </a>
+    `;
+
+    container.appendChild(cardDiv);
+    container.scrollTop = container.scrollHeight;
+}
+
+

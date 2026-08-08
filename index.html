@@ -109,14 +109,11 @@
             </a>
 
             <!-- Desktop Nav Links -->
-            <nav class="hidden lg:flex items-center gap-6 font-semibold text-xs uppercase tracking-wider text-slate-600">
+            <nav class="hidden lg:flex items-center gap-7 font-semibold text-xs uppercase tracking-wider text-slate-600">
                 <a href="#calculator" class="hover:text-sky-600 transition-colors">Get Quote</a>
                 <a href="#policies" class="hover:text-sky-600 transition-colors">Health Policies</a>
                 <a href="#motor" class="hover:text-sky-600 transition-colors flex items-center gap-1">
-                    <i class="fa-solid fa-car text-sky-500"></i> Motor Insurance
-                </a>
-                <a href="#ai-assistant" class="text-sky-700 font-bold hover:text-sky-900 transition-colors flex items-center gap-1 px-2.5 py-1 rounded-full bg-sky-50 border border-sky-200">
-                    <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i> AI Assistant
+                    <i class="fa-solid fa-car text-sky-500"></i> Motor Cover
                 </a>
                 <a href="#local-hospitals" class="hover:text-sky-600 transition-colors">Local Network</a>
                 <a href="#benefits" class="hover:text-sky-600 transition-colors">Why Us</a>
@@ -143,10 +140,7 @@
             <a href="#calculator" class="block py-2 text-sm font-semibold text-slate-700 hover:text-sky-600" onclick="toggleMobileMenu()">Calculate Health Quote</a>
             <a href="#policies" class="block py-2 text-sm font-semibold text-slate-700 hover:text-sky-600" onclick="toggleMobileMenu()">Health Policies</a>
             <a href="#motor" class="block py-2 text-sm font-semibold text-slate-700 hover:text-sky-600 flex items-center gap-2" onclick="toggleMobileMenu()">
-                <i class="fa-solid fa-car text-sky-500"></i> Motor Insurance (Car & Bike)
-            </a>
-            <a href="#ai-assistant" class="block py-2 text-sm font-semibold text-sky-700 flex items-center gap-2" onclick="toggleMobileMenu()">
-                <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i> AI Policy Assistant
+                <i class="fa-solid fa-car text-sky-500"></i> Motor Cover (Car & Bike)
             </a>
             <a href="#local-hospitals" class="block py-2 text-sm font-semibold text-slate-700 hover:text-sky-600" onclick="toggleMobileMenu()">Ottapalam & Palakkad Network</a>
             <a href="#benefits" class="block py-2 text-sm font-semibold text-slate-700 hover:text-sky-600" onclick="toggleMobileMenu()">Why Choose Us</a>
@@ -808,13 +802,57 @@
         </div>
     </footer>
 
-    <!-- STICKY BOTTOM ACTION BAR FOR MOBILE -->
-    <div id="sticky-bar" class="fixed bottom-0 left-0 right-0 z-50 p-3 bg-white/95 border-t border-slate-200/90 lg:hidden sticky-bottom-bar flex items-center gap-3">
-        <a href="tel:+919048360880" class="w-1/2 py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs text-center flex items-center justify-center gap-2 shadow-md">
-            <i class="fa-solid fa-phone text-sky-400"></i> Call Now
+    <!-- FLOATING CONVERSATIONAL AI LIVE CHAT DRAWER / MODAL -->
+    <div id="ai-chat-drawer" class="fixed bottom-20 right-4 sm:right-6 z-50 w-[90vw] max-w-sm sm:w-96 bg-white rounded-3xl shadow-2xl border border-slate-200 hidden flex-col overflow-hidden animate-fadeIn transition-all">
+        <!-- Chat Header -->
+        <div class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white p-4 flex items-center justify-between border-b border-white/10">
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-400 to-teal-500 flex items-center justify-center text-white font-black text-lg shadow-md">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 border-2 border-slate-900 rounded-full"></span>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-sm text-white">Policy Care AI Support</h4>
+                    <p class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online • Sudeep S, Amrutha & Sathish
+                    </p>
+                </div>
+            </div>
+            <button onclick="toggleAiChatWidget()" class="w-7 h-7 rounded-full bg-white/10 text-slate-300 hover:text-white flex items-center justify-center text-xs transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Chat Messages Scroll Container -->
+        <div id="chat-messages-container" class="p-4 space-y-3 overflow-y-auto h-72 text-xs bg-slate-50">
+            <!-- Dynamic Messages populated by JS -->
+        </div>
+
+        <!-- Chat Input Bar -->
+        <div class="p-3 bg-white border-t border-slate-200">
+            <form id="ai-chat-input-form" onsubmit="handleAiChatSubmit(event)" class="flex gap-2">
+                <input type="text" id="ai-chat-input" placeholder="Type your response..." class="flex-1 px-3.5 py-2.5 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-50" autocomplete="off" />
+                <button type="submit" class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs shadow-md transition-colors flex items-center justify-center">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- STICKY BOTTOM FLOATING ACTION BAR -->
+    <div id="sticky-bar" class="fixed bottom-0 left-0 right-0 z-40 p-2.5 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-2xl flex items-center justify-between gap-2 max-w-7xl mx-auto px-3 sm:px-6">
+        <a href="tel:+919048360880" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs text-center flex items-center justify-center gap-1.5 shadow-sm transition-colors">
+            <i class="fa-solid fa-phone text-sky-400"></i> Call <span class="hidden sm:inline">Advisor</span>
         </a>
-        <a href="https://wa.me/919048360880" target="_blank" class="w-1/2 py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs text-center flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 pulse-whatsapp">
-            <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
+        
+        <button onclick="toggleAiChatWidget()" class="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-extrabold text-xs text-center flex items-center justify-center gap-1.5 shadow-md transition-all">
+            <i class="fa-solid fa-comments text-amber-300"></i> AI Live Chat
+        </button>
+
+        <a href="https://wa.me/919048360880" target="_blank" class="flex-1 py-2.5 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs text-center flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-500/25 transition-colors">
+            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
         </a>
     </div>
 
