@@ -6,29 +6,27 @@ Official website for **Policy Care Solutions**, an authorized **Star Health, Car
 
 ## 🌟 Key Features
 
-1. **Light & Dark Theme Switcher (Light Theme Preferred First)**:
-   - **Light Theme Default**: Clean, elegant white & light slate palette across all pages.
-   - **1-Click Theme Switcher**: Header toggle button (`☀️` Light / `🌙` Dark) on both main site (`index.html`) and quote route (`/getquote`).
-   - **Persistent User Preference**: Theme state stored in `localStorage.getItem('pcs_theme')`.
+1. **Clean Open Graph (OG), Favicon & WhatsApp Share Banner Card**:
+   - **Official Logo OG Share Banner Image (`images/og-share.png`)**: Minimal, elegant 1200x630 social preview card incorporating the official Policy Care Solutions logo, tagline *"Your Protection, Our Priority"*, and *"Serving India"*.
+   - **Clean OG & Twitter Meta Tags**: Configured `og:title`, `og:description`, `og:image`, `og:url`, `og:site_name`, `twitter:card`, and Apple Touch Favicon tags across all pages (`index.html` & `/getquote`).
 
-2. **Dedicated Interactive Quote Route (`https://www.policycaresolutions.com/getquote`)**:
-   - **Human-like Conversational Agent**: Friendly, non-robotic flow acting as a Policy Care Advisor Desk.
-   - **3 Languages Supported**: **English**, **Malayalam (മലയാളം)**, and **Tamil (தமிழ்)**. Prompts, placeholders, buttons, and payloads adapt dynamically based on the customer's language choice.
+2. **100% Full-Screen Campaign Chat Landing Page (`https://www.policycaresolutions.com/getquote`)**:
+   - **First-Visit Language Selection Popup Modal**: Asks visitors to choose their language instantly (🇬🇧 **English**, 🇮🇳 **മലയാളം**, 🇮🇳 **தமிழ்**, 🇮🇳 **हिंदी**, 🇮🇳 **ಕನ್ನಡ**).
+   - **5 Regional Languages Supported**: All chat prompts, options, and helper messages speak natively in the selected language.
+   - **English-Only WhatsApp Output Guarantee**: Regardless of chat language, the final compiled WhatsApp lead payload sent to `+919048360880` is generated in **ENGLISH ONLY**.
+   - **Location Personalization**: Contextually references client location (e.g. Ottapalam, Palakkad, Shornur, Perinthalmanna) and highlights local network hospital tie-ups (Valluvanad, PK Das, KIMS Al Shifa, Crest Hospital).
    - **Country Code Dropdown for NRIs & Local Clients**: `+91 (India)`, `+971 (UAE)`, `+966 (Saudi Arabia)`, `+965 (Kuwait)`, `+968 (Oman)`, `+974 (Qatar)`, `+973 (Bahrain)`, `+1 (USA)`, `+44 (UK)`, `+65 (Singapore)`.
-   - **Lead Capture & Verification**: Collects Name, Phone Number, Email, Individual/Family Floater, Family Members with Dual Age Input (Age in Years or DOB), and Location (Pincode & City/District).
-   - **1-Click WhatsApp Lead Transfer**: Generates a pre-filled WhatsApp lead message to `+919048360880`.
 
-3. **Expanded Header "More" Dropdown Menu (`w-64 sm:w-72`)**:
+3. **Light & Dark Theme Switcher Fix (Light Mode Default)**:
+   - **Light Theme Default**: Clean, elegant white & light slate palette across all pages.
+   - **Theme Switcher Fix**: Global CSS rules and Tailwind `dark:` variants ensure 1-click theme switching transforms all cards, backgrounds, and headers on `index.html` and `/getquote`.
+
+4. **Campaign Banner Replacement for AI Policy Matcher**:
+   - Replaced AI Policy Matcher section with a high-converting **Interactive Quote Assistant Campaign Card** directing visitors directly to `/getquote`.
+
+5. **Expanded Header "More" Dropdown Menu (`w-64 sm:w-72`)**:
    - Primary Header Links: `Get Quote` (`/getquote`), `Health Policies`, `Our Team`.
    - **Expanded More Dropdown**: Houses `Motor Insurance`, `Local Network`, `Why Choose Us`, **Facebook Page**, **Google Maps Location**, and **Instagram Page**.
-
-4. **Official High-Quality Horizontal Brand Logo**:
-   - Updated `images/logo.png` with official high-resolution horizontal logo geometry.
-   - Preserved brand colors: **Deep Trust Blue (`#005696`)**, **Care Green (`#38a132`)**, and **Heart Warm Orange (`#f58220`)**.
-
-5. **Balanced Dual Floating Action Bar (Opposite Sides)**:
-   - **Bottom-Left Floating Bar**: Instant **Call Advisor** (`+919048360880`) phone button & **WhatsApp** button.
-   - **Bottom-Right Floating Bar**: Interactive **AI Live Support** chat bubble with live pulsing online indicator.
 
 ---
 
@@ -36,7 +34,7 @@ Official website for **Policy Care Solutions**, an authorized **Star Health, Car
 
 - **Agency / Site Name**: Policy Care Solutions
 - **Tagline**: *Your Protection, Our Priority*
-- **Interactive Quote Page**: [https://www.policycaresolutions.com/getquote](https://www.policycaresolutions.com/getquote)
+- **Interactive Campaign Quote Page**: [https://www.policycaresolutions.com/getquote](https://www.policycaresolutions.com/getquote)
 - **Designed & Developed By**: [Softinsan Technologies](https://www.softinsan.com)
 - **Target Local Service Areas**: Ottapalam, Palakkad, Shornur, Cherpulassery, Pattambi, Kerala
 - **Licensed Advisor Team**: Sudeep S • Amrutha • Sathish Kumar A
