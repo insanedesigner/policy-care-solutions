@@ -114,15 +114,32 @@
             </a>
 
             <!-- Desktop Nav Links -->
-            <nav class="hidden lg:flex items-center gap-6 font-semibold text-xs uppercase tracking-wider text-slate-600">
+            <nav class="hidden lg:flex items-center gap-7 font-semibold text-xs uppercase tracking-wider text-slate-600">
                 <a href="#calculator" class="hover:text-sky-600 transition-colors">Get Quote</a>
                 <a href="#policies" class="hover:text-sky-600 transition-colors">Health Policies</a>
-                <a href="#motor" class="hover:text-sky-600 transition-colors flex items-center gap-1">
-                    <i class="fa-solid fa-car text-sky-500"></i> Motor Cover
-                </a>
                 <a href="#team" class="hover:text-sky-600 transition-colors">Our Team</a>
-                <a href="#local-hospitals" class="hover:text-sky-600 transition-colors">Local Network</a>
-                <a href="#benefits" class="hover:text-sky-600 transition-colors">Why Us</a>
+                
+                <!-- More Dropdown Menu -->
+                <div class="relative">
+                    <button id="more-menu-btn" onclick="toggleMoreMenu(event)" class="hover:text-sky-600 transition-colors flex items-center gap-1.5 focus:outline-none uppercase font-bold text-slate-700">
+                        More <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+                    </button>
+                    <div id="more-menu-dropdown" class="hidden absolute top-full right-0 mt-3 w-52 bg-white rounded-2xl shadow-xl border border-slate-200 py-2.5 z-50 animate-fadeIn">
+                        <a href="#motor" class="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
+                            <i class="fa-solid fa-car text-sky-500 text-sm"></i> Motor Insurance
+                        </a>
+                        <a href="#local-hospitals" class="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
+                            <i class="fa-solid fa-hospital text-emerald-500 text-sm"></i> Local Network
+                        </a>
+                        <a href="#benefits" class="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
+                            <i class="fa-solid fa-shield-halved text-amber-500 text-sm"></i> Why Choose Us
+                        </a>
+                        <div class="border-t border-slate-100 my-1"></div>
+                        <a href="https://www.instagram.com/policycaresolutions" target="_blank" class="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-rose-50 hover:text-rose-600 transition-colors">
+                            <i class="fa-brands fa-instagram text-rose-500 text-sm"></i> @policycaresolutions
+                        </a>
+                    </div>
+                </div>
             </nav>
 
             <!-- Quick Call Header CTA -->
@@ -681,8 +698,10 @@
             </div>
 
         </div>
-    </    <!-- Why Choose Us & Key Benefits -->
-    <section id="benefits" class="py-16 bg-slate-900 text-white relative overflow-hidden">
+    </section>
+
+    <!-- Why Choose Us & Key Benefits -->
+    <section id="benefits" class="py-20 bg-slate-950 text-white relative overflow-hidden border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
             <div class="text-center max-w-2xl mx-auto mb-14">
@@ -913,24 +932,20 @@
         </div>
     </div>
 
-    <!-- STICKY BOTTOM ACTION BAR (MOBILE ONLY) -->
-    <div id="sticky-bar" class="fixed bottom-0 left-0 right-0 z-40 p-2.5 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-2xl flex lg:hidden items-center justify-between gap-2 max-w-7xl mx-auto px-3 sm:px-6">
-        <a href="tel:+919048360880" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs text-center flex items-center justify-center gap-1.5 shadow-sm transition-colors">
-            <i class="fa-solid fa-phone text-sky-400"></i> Call Advisor
+    <!-- DUAL FLOATING ACTION BUTTONS (LEFT: CALL & WHATSAPP, RIGHT: AI LIVE SUPPORT) -->
+    <!-- Opposite Side (Bottom-Left Action Bar) -->
+    <div class="fixed bottom-6 left-4 sm:left-6 z-40 flex items-center gap-2">
+        <a href="tel:+919048360880" class="w-11 h-11 rounded-full bg-slate-900 hover:bg-slate-800 text-white flex items-center justify-center shadow-2xl border border-slate-700/80 hover:scale-105 transition-all group" title="Call Advisor (+91 9048360880)">
+            <i class="fa-solid fa-phone text-sky-400 text-sm group-hover:rotate-12 transition-transform"></i>
         </a>
-        
-        <button onclick="toggleAiChatWidget()" class="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-extrabold text-xs text-center flex items-center justify-center gap-1.5 shadow-md transition-all">
-            <i class="fa-solid fa-comments text-amber-300"></i> AI Live Chat
-        </button>
-
-        <a href="https://wa.me/919048360880" target="_blank" class="flex-1 py-2.5 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs text-center flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-500/25 transition-colors">
-            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+        <a href="https://wa.me/919048360880" target="_blank" class="flex items-center gap-2 px-4 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs shadow-2xl hover:scale-105 transition-all pulse-whatsapp">
+            <i class="fa-brands fa-whatsapp text-base"></i> <span>WhatsApp</span>
         </a>
     </div>
 
-    <!-- DESKTOP FLOATING AI LIVE SUPPORT BUBBLE -->
-    <button onclick="toggleAiChatWidget()" class="hidden lg:flex fixed bottom-6 right-6 z-40 items-center gap-3 px-5 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs shadow-2xl border border-slate-700/80 hover:scale-105 transition-all group">
-        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-500 to-teal-500 flex items-center justify-center text-white text-xs">
+    <!-- Right Side (Bottom-Right AI Live Support Launcher) -->
+    <button onclick="toggleAiChatWidget()" class="fixed bottom-6 right-4 sm:right-6 z-40 flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs shadow-2xl border border-slate-700/80 hover:scale-105 transition-all group">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-500 via-teal-500 to-emerald-500 flex items-center justify-center text-white text-xs shadow-sm">
             <i class="fa-solid fa-comments text-amber-300"></i>
         </div>
         <span>AI Live Support</span>

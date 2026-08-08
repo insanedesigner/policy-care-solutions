@@ -1084,4 +1084,25 @@ function appendWhatsAppTransferCard(waUrl, stateData) {
     container.scrollTop = container.scrollHeight;
 }
 
+// Header More Dropdown Toggle
+window.toggleMoreMenu = function(e) {
+    if (e) e.stopPropagation();
+    const dropdown = document.getElementById('more-menu-dropdown');
+    if (dropdown) {
+        dropdown.classList.toggle('hidden');
+    }
+};
+
+// Close Dropdowns on Click Outside
+document.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('more-menu-dropdown');
+    const btn = document.getElementById('more-menu-btn');
+    if (dropdown && !dropdown.classList.contains('hidden')) {
+        if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+            dropdown.classList.add('hidden');
+        }
+    }
+});
+
+
 

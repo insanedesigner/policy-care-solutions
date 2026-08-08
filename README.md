@@ -6,24 +6,23 @@ Official website for **Policy Care Solutions**, an authorized **Star Health, Car
 
 ## 🌟 Key Features
 
-1. **Official Brand Logo & Color System Integration**:
+1. **Compact Single-Line Header Navigation with "More" Dropdown**:
+   - Primary Header Links: `Get Quote`, `Health Policies`, `Our Team`.
+   - **More Dropdown**: Houses secondary items (`Motor Insurance`, `Local Network`, `Why Choose Us`, `@policycaresolutions`), guaranteeing single-line alignment on all display resolutions.
+
+2. **Balanced Dual Floating Action Bar (Opposite Sides)**:
+   - **Bottom-Left Floating Bar**: Instant **Call Advisor** (`+919048360880`) phone button & **WhatsApp** button.
+   - **Bottom-Right Floating Bar**: Interactive **AI Live Support** chat bubble with live pulsing online indicator.
+
+3. **Section Padding & Visual Separation Fix**:
+   - Fixed closing section tags between `#motor` and `#benefits` (`py-20` spacing with crisp `border-t border-slate-800` dividers).
+
+4. **Official Brand Logo & Color Palette System**:
    - Integrated official logo (`images/logo.png`) side-by-side with tagline *"Your Protection, Our Priority"*.
    - Color palette matched strictly to logo shades: **Deep Trust Blue (`#005696`)**, **Care Green (`#38a132`)**, and **Heart Warm Orange (`#f58220`)**.
 
-2. **Facebook & Google Maps Integration**:
-   - Added direct links to official [Facebook Page](https://www.facebook.com/policycaresolutions) and [Google Maps Location](https://share.google/KTswg5r1kxmwwjl30).
-
-3. **Clean Single-Line Header Navigation & Brand Integrity**:
-   - Site Name strictly maintained as **Policy Care Solutions**.
-   - Streamlined top desktop and mobile navigation (`Get Quote`, `Health Policies`, `Motor Cover`, `Our Team`, `Local Network`, `Why Us`).
-
-4. **Dedicated "Our Licensed Advisor Team" Section (`#team`)**:
-   - Showcases individual advisor profiles for **Sudeep S** (Senior Partner & Star Health Advisor), **Amrutha** (Client Relationship & Maternity Lead), and **Sathish Kumar A** (Cashless Claims & Motor Specialist).
-
-5. **Desktop & Mobile Responsive Floating Action UI**:
-   - **Desktop View**: Sleek, non-intrusive floating round `AI Live Support` bubble on the bottom right corner without obscuring the footer.
-   - **Mobile View**: Fixed bottom bar (`Call Advisor`, `AI Live Chat`, `WhatsApp`).
-   - Interactive human-like chat flow capturing visitor's **Name**, **Insurance Need** (Health/Motor), **WhatsApp Number**, and **Email**, generating a pre-filled **"Connect Live on WhatsApp"** button.
+5. **Facebook & Google Maps Integration**:
+   - Direct links to official [Facebook Page](https://www.facebook.com/policycaresolutions) and [Google Maps Location](https://share.google/KTswg5r1kxmwwjl30).
 
 ---
 
