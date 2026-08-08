@@ -438,7 +438,7 @@ function handleFormSubmit(e) {
     // Construct WhatsApp formatted string with clean standard formatting
     const whatsappMessage = `*HEALTH & MOTOR INSURANCE QUOTE REQUEST*
 ----------------------------------------
-*Advisor Team*: Policy Care Solutions (Sudeep S, Amrutha & Sathish Kumar A)
+*Advisor Team*: Policy Care Solutions
 *Agency*: Policy Care Solutions (Ottapalam & Palakkad Agents)
 
 *Coverage Type*: ${formCoverageType.toUpperCase()}
@@ -587,7 +587,7 @@ function showQuoteModal(data) {
         <div class="space-y-3 text-sm">
             <div class="bg-sky-50 border border-sky-200 p-3 rounded-xl text-sky-900 text-xs">
                 <p class="font-bold"><i class="fa-solid fa-circle-check text-sky-600 mr-1"></i> Form Validated Successfully!</p>
-                <p class="mt-1 text-slate-600">Your custom WhatsApp quote message has been prepared for Policy Care Advisors (Sudeep S, Amrutha & Sathish Kumar A).</p>
+                <p class="mt-1 text-slate-600">Your custom WhatsApp quote message has been prepared for Policy Care Solutions.</p>
             </div>
 
             <div>
@@ -1040,12 +1040,12 @@ function processAiChatStep(userText) {
 *Email*: ${aiChatState.email}
 *Location*: Ottapalam & Palakkad
 
-Hello Sudeep S, Amrutha & Sathish Kumar A, my name is ${aiChatState.userName}. I would like live assistance for ${aiChatState.policyType}!`;
+Hello Policy Care Solutions, my name is ${aiChatState.userName}. I would like live assistance for ${aiChatState.policyType}!`;
 
             const encodedWa = encodeURIComponent(waPayload);
             const waUrl = `https://wa.me/919048360880?text=${encodedWa}`;
 
-            appendBotChatMessage(`Awesome, <strong>${aiChatState.userName}</strong>! 🎉 I have prepared your live consultation profile for Policy Care Advisors (Sudeep S, Amrutha & Sathish Kumar A).`);
+            appendBotChatMessage(`Awesome, <strong>${aiChatState.userName}</strong>! 🎉 I have prepared your live consultation profile for Policy Care Solutions.`);
             
             setTimeout(() => {
                 appendBotChatMessage(`Click below to start your live WhatsApp chat now:`);
