@@ -64,12 +64,20 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0284c7',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            900: '#0f172a',
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#005696', // Logo Deep Trust Blue
+                            600: '#005696',
+                            700: '#004073',
+                            900: '#0a192f',
+                        },
+                        care: {
+                            500: '#38a132', // Logo Care Green
+                            600: '#2e9e2b',
+                            700: '#248222',
+                        },
+                        heart: {
+                            500: '#f58220', // Logo Warm Orange
                         },
                         star: {
                             gold: '#f59e0b',
@@ -92,18 +100,15 @@
     <!-- Header Navigation -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-            <!-- Brand Logo & Partner Badge -->
-            <a href="#" class="flex items-center gap-3 group shrink-0">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-600 via-teal-600 to-sky-800 flex items-center justify-center text-white text-xl font-black shadow-md shadow-sky-600/20 group-hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-heart-pulse"></i>
-                </div>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-xl font-extrabold text-slate-900 font-heading tracking-tight">Policy Care Solutions</span>
-                        <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded-md border border-sky-200">Agency</span>
-                    </div>
-                    <span class="text-[11px] text-slate-500 font-medium block flex items-center gap-1">
+            <!-- Brand Logo & Tagline (Side-by-Side) -->
+            <a href="#" class="flex items-center gap-3.5 group shrink-0">
+                <img src="images/logo.png" alt="Policy Care Solutions" class="h-12 w-auto object-contain transition-transform group-hover:scale-105" />
+                <div class="hidden sm:block border-l border-slate-200 pl-3">
+                    <span class="text-xs text-slate-700 font-bold block flex items-center gap-1">
                         <i class="fa-solid fa-location-dot text-rose-500 text-[10px]"></i> Ottapalam & Palakkad Agents
+                    </span>
+                    <span class="text-[10px] text-emerald-600 font-extrabold block italic">
+                        Your Protection, Our Priority
                     </span>
                 </div>
             </a>
@@ -570,14 +575,15 @@
             </div>
 
             <!-- Regional Coverage Chips -->
-            <div class="flex flex-wrap justify-center gap-2 mb-10">
+            <div class="flex flex-wrap justify-center items-center gap-2 mb-10">
                 <span class="px-3.5 py-1.5 rounded-full bg-white text-slate-800 font-bold text-xs border border-slate-200 shadow-sm"><i class="fa-solid fa-location-pin text-sky-500 mr-1"></i> Ottapalam Town</span>
                 <span class="px-3.5 py-1.5 rounded-full bg-white text-slate-800 font-bold text-xs border border-slate-200 shadow-sm"><i class="fa-solid fa-location-pin text-sky-500 mr-1"></i> Palakkad City</span>
                 <span class="px-3.5 py-1.5 rounded-full bg-white text-slate-800 font-bold text-xs border border-slate-200 shadow-sm"><i class="fa-solid fa-location-pin text-sky-500 mr-1"></i> Shornur</span>
                 <span class="px-3.5 py-1.5 rounded-full bg-white text-slate-800 font-bold text-xs border border-slate-200 shadow-sm"><i class="fa-solid fa-location-pin text-sky-500 mr-1"></i> Cherpulassery</span>
                 <span class="px-3.5 py-1.5 rounded-full bg-white text-slate-800 font-bold text-xs border border-slate-200 shadow-sm"><i class="fa-solid fa-location-pin text-sky-500 mr-1"></i> Pattambi</span>
-                <span class="px-3.5 py-1.5 rounded-full bg-white text-slate-800 font-bold text-xs border border-slate-200 shadow-sm"><i class="fa-solid fa-location-pin text-sky-500 mr-1"></i> Mannarkkad</span>
-                <span class="px-3.5 py-1.5 rounded-full bg-white text-slate-800 font-bold text-xs border border-slate-200 shadow-sm"><i class="fa-solid fa-location-pin text-sky-500 mr-1"></i> Alathur & Chittur</span>
+                <a href="https://share.google/KTswg5r1kxmwwjl30" target="_blank" class="px-4 py-1.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-md transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-map-location-dot"></i> View on Google Maps
+                </a>
             </div>
 
             <!-- Local Network Hospital Cards -->
@@ -807,12 +813,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 
-                <div class="md:col-span-2 space-y-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-sky-600 flex items-center justify-center text-white text-xl font-bold">
-                            <i class="fa-solid fa-heart-pulse"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-white font-heading">Policy Care Solutions</h4>
+                <div class="md:col-span-2 space-y-4">
+                    <!-- Footer Logo (Side-by-Side) -->
+                    <div class="flex items-center gap-3 bg-white p-2.5 rounded-2xl w-fit shadow-md">
+                        <img src="images/logo.png" alt="Policy Care Solutions" class="h-12 w-auto object-contain" />
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed max-w-md">
                         Authorized agency for Star Health, Care Health & Motor Insurance, providing end-to-end policy selection, instant quotes, and 24/7 dedicated claim assistance across India.
@@ -820,6 +824,19 @@
                     <p class="text-xs text-slate-300 font-medium">
                         Advisor Team: <strong>Sudeep S</strong> • <strong>Amrutha</strong> • <strong>Sathish Kumar A</strong>
                     </p>
+
+                    <!-- Social Links: Facebook & Instagram -->
+                    <div class="flex items-center gap-3 pt-1">
+                        <a href="https://www.facebook.com/policycaresolutions" target="_blank" class="w-8 h-8 rounded-xl bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white flex items-center justify-center text-sm transition-all">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/policycaresolutions" target="_blank" class="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 hover:bg-rose-600 hover:text-white flex items-center justify-center text-sm transition-all">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://share.google/KTswg5r1kxmwwjl30" target="_blank" class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 hover:bg-emerald-600 hover:text-white flex items-center justify-center text-sm transition-all" title="Find us on Google Maps">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </a>
+                    </div>
                 </div>
 
                 <div>
@@ -829,6 +846,7 @@
                         <li><a href="#policies" class="hover:text-white transition-colors">Health Policies</a></li>
                         <li><a href="#motor" class="hover:text-white transition-colors">Motor Insurance</a></li>
                         <li><a href="#team" class="hover:text-white transition-colors">Our Advisor Team</a></li>
+                        <li><a href="#local-hospitals" class="hover:text-white transition-colors">Local Cashless Network</a></li>
                         <li><a href="#benefits" class="hover:text-white transition-colors">Why Choose Us</a></li>
                     </ul>
                 </div>
@@ -838,14 +856,15 @@
                     <ul class="space-y-2 text-xs">
                         <li><a href="tel:+919048360880" class="hover:text-white transition-colors flex items-center gap-2"><i class="fa-solid fa-phone text-sky-400"></i> +91 9048360880</a></li>
                         <li><a href="https://wa.me/919048360880" target="_blank" class="hover:text-white transition-colors flex items-center gap-2"><i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp +91 9048360880</a></li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-amber-400"></i> Ottapalam, Palakkad & Kerala Service</li>
+                        <li><a href="https://www.facebook.com/policycaresolutions" target="_blank" class="hover:text-white transition-colors flex items-center gap-2"><i class="fa-brands fa-facebook text-blue-400"></i> Facebook Page</a></li>
+                        <li><a href="https://share.google/KTswg5r1kxmwwjl30" target="_blank" class="hover:text-white transition-colors flex items-center gap-2"><i class="fa-solid fa-location-dot text-rose-500"></i> Google Maps Location</a></li>
                     </ul>
                 </div>
 
             </div>
 
             <div class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center text-[11px] text-slate-500 gap-4">
-                <p>© 2026 Policy Care Solutions. All rights reserved.</p>
+                <p>© 2026 Policy Care Solutions. All rights reserved. Your Protection, Our Priority.</p>
                 <div class="flex items-center gap-3">
                     <span class="bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-slate-400 text-xs">
                         Designed & Developed by <a href="https://www.softinsan.com" target="_blank" class="text-sky-400 font-bold hover:underline">Softinsan Technologies</a>
