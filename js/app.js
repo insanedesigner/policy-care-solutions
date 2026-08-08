@@ -377,6 +377,7 @@ function handleFormSubmit(e) {
             const ageObj = calculateAge(indDob);
             ageText = ageObj && !ageObj.error ? ageObj.text : 'Not calculated';
             dobOrAgeVal = `DOB: ${indDob}`;
+            membersSummaryText = `• Self (${fullName}): ${dobOrAgeVal} (Age: ${ageText})`;
         } else {
             const directAge = document.getElementById('ind-direct-age')?.value;
             if (!directAge || directAge < 1 || directAge > 100) {
@@ -384,9 +385,9 @@ function handleFormSubmit(e) {
                 return;
             }
             ageText = `${directAge} Years`;
-            dobOrAgeVal = `Age: ${directAge} Yrs`;
+            dobOrAgeVal = `Age: ${directAge} Years`;
+            membersSummaryText = `• Self (${fullName}): ${dobOrAgeVal}`;
         }
-        membersSummaryText = `• Self (${fullName}): ${dobOrAgeVal} (Age: ${ageText})`;
         membersListForModal.push({ name: fullName, relation: 'Self (Individual)', dob: dobOrAgeVal, age: ageText });
     } else {
         // Family Mode
@@ -399,7 +400,7 @@ function handleFormSubmit(e) {
         const primaryAgeObj = calculateAge(primaryDob);
         const primaryAgeText = primaryAgeObj && !primaryAgeObj.error ? primaryAgeObj.text : 'N/A';
         
-        membersSummaryText = `• ${fullName} (${primaryRelation}): DOB ${primaryDob} (Age: ${primaryAgeText})\n`;
+        membersSummaryText = `• ${fullName} (${primaryRelation}): DOB: ${primaryDob} (Age: ${primaryAgeText})\n`;
         membersListForModal.push({ name: fullName, relation: primaryRelation, dob: `DOB: ${primaryDob}`, age: primaryAgeText });
 
         const container = document.getElementById('family-members-container');
@@ -412,42 +413,45 @@ function handleFormSubmit(e) {
                 const isDobMode = dobBox && !dobBox.classList.contains('hidden');
 
                 let mAgeText = 'N/A';
-                let mValText = 'N/A';
+                let rowSummary = '';
 
                 if (isDobMode) {
                     const mDob = row.querySelector('.member-dob')?.value;
                     const mAgeObj = calculateAge(mDob);
                     mAgeText = mAgeObj && !mAgeObj.error ? mAgeObj.text : 'N/A';
-                    mValText = mDob ? `DOB: ${mDob}` : 'N/A';
+                    const mValText = mDob ? `DOB: ${mDob}` : 'N/A';
+                    rowSummary = `• ${mName} (${mRelation}): ${mValText} (Age: ${mAgeText})`;
+                    membersListForModal.push({ name: mName, relation: mRelation, dob: mValText, age: mAgeText });
                 } else {
                     const mDirectAge = row.querySelector('.member-direct-age')?.value;
                     mAgeText = mDirectAge ? `${mDirectAge} Years` : 'N/A';
-                    mValText = mDirectAge ? `Age: ${mDirectAge} Yrs` : 'N/A';
+                    const mValText = mDirectAge ? `Age: ${mDirectAge} Years` : 'N/A';
+                    rowSummary = `• ${mName} (${mRelation}): ${mValText}`;
+                    membersListForModal.push({ name: mName, relation: mRelation, dob: mValText, age: mAgeText });
                 }
                 
-                membersSummaryText += `• ${mName} (${mRelation}): ${mValText} (Age: ${mAgeText})\n`;
-                membersListForModal.push({ name: mName, relation: mRelation, dob: mValText, age: mAgeText });
+                membersSummaryText += `${rowSummary}\n`;
             });
         }
     }
 
-    // Construct WhatsApp formatted string
-    const whatsappMessage = `🏥 *Health & Motor Insurance Quote Request*
+    // Construct WhatsApp formatted string with clean standard formatting
+    const whatsappMessage = `*HEALTH & MOTOR INSURANCE QUOTE REQUEST*
 ----------------------------------------
-👥 *Advisor Team*: Policy Care Solutions (Sudeep S, Amrutha & Sathish Kumar A)
-🏢 *Agency*: Policy Care Solutions (Ottapalam & Palakkad Agents)
+*Advisor Team*: Policy Care Solutions (Sudeep S, Amrutha & Sathish Kumar A)
+*Agency*: Policy Care Solutions (Ottapalam & Palakkad Agents)
 
-📋 *Coverage Type*: ${formCoverageType.toUpperCase()}
-👨‍👩‍👧 *Persons Covered*:
+*Coverage Type*: ${formCoverageType.toUpperCase()}
+*Persons Covered*:
 ${membersSummaryText.trim()}
 
-📍 *Address Details*:
+*Address Details*:
 • State: ${state}
 • District: ${district}
 • City: ${city}
 • Pincode: ${pincode}
 
-📞 *Contact Details*:
+*Contact Details*:
 • Phone: +91 ${phone}
 • Email: ${email || 'Not Provided'}
 
