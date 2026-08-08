@@ -6,22 +6,27 @@ Official website for **Policy Care Solutions**, an authorized **Star Health, Car
 
 ## 🌟 Key Features
 
-1. **Dedicated Interactive Quote Route (`https://www.policycaresolutions.com/getquote`)**:
+1. **Light & Dark Theme Switcher (Light Theme Preferred First)**:
+   - **Light Theme Default**: Clean, elegant white & light slate palette across all pages.
+   - **1-Click Theme Switcher**: Header toggle button (`☀️` Light / `🌙` Dark) on both main site (`index.html`) and quote route (`/getquote`).
+   - **Persistent User Preference**: Theme state stored in `localStorage.getItem('pcs_theme')`.
+
+2. **Dedicated Interactive Quote Route (`https://www.policycaresolutions.com/getquote`)**:
    - **Human-like Conversational Agent**: Friendly, non-robotic flow acting as a Policy Care Advisor Desk.
    - **3 Languages Supported**: **English**, **Malayalam (മലയാളം)**, and **Tamil (தமிழ்)**. Prompts, placeholders, buttons, and payloads adapt dynamically based on the customer's language choice.
    - **Country Code Dropdown for NRIs & Local Clients**: `+91 (India)`, `+971 (UAE)`, `+966 (Saudi Arabia)`, `+965 (Kuwait)`, `+968 (Oman)`, `+974 (Qatar)`, `+973 (Bahrain)`, `+1 (USA)`, `+44 (UK)`, `+65 (Singapore)`.
    - **Lead Capture & Verification**: Collects Name, Phone Number, Email, Individual/Family Floater, Family Members with Dual Age Input (Age in Years or DOB), and Location (Pincode & City/District).
    - **1-Click WhatsApp Lead Transfer**: Generates a pre-filled WhatsApp lead message to `+919048360880`.
 
-2. **Expanded Header "More" Dropdown Menu (`w-64 sm:w-72`)**:
+3. **Expanded Header "More" Dropdown Menu (`w-64 sm:w-72`)**:
    - Primary Header Links: `Get Quote` (`/getquote`), `Health Policies`, `Our Team`.
    - **Expanded More Dropdown**: Houses `Motor Insurance`, `Local Network`, `Why Choose Us`, **Facebook Page**, **Google Maps Location**, and **Instagram Page**.
 
-3. **Official High-Quality Horizontal Brand Logo**:
+4. **Official High-Quality Horizontal Brand Logo**:
    - Updated `images/logo.png` with official high-resolution horizontal logo geometry.
    - Preserved brand colors: **Deep Trust Blue (`#005696`)**, **Care Green (`#38a132`)**, and **Heart Warm Orange (`#f58220`)**.
 
-4. **Balanced Dual Floating Action Bar (Opposite Sides)**:
+5. **Balanced Dual Floating Action Bar (Opposite Sides)**:
    - **Bottom-Left Floating Bar**: Instant **Call Advisor** (`+919048360880`) phone button & **WhatsApp** button.
    - **Bottom-Right Floating Bar**: Interactive **AI Live Support** chat bubble with live pulsing online indicator.
 

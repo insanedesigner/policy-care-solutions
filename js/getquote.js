@@ -3,7 +3,31 @@
  * Support for English, Malayalam (മലയാളം), and Tamil (தமிழ்)
  */
 
+// Theme Toggle System (Default: Light Theme)
+function initTheme() {
+    const theme = localStorage.getItem('pcs_theme') || 'light';
+    applyTheme(theme);
+}
+
+function applyTheme(theme) {
+    const icon = document.getElementById('theme-toggle-icon');
+    if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        if (icon) icon.className = 'fa-solid fa-moon text-sky-400 text-sm';
+    } else {
+        document.documentElement.classList.remove('dark');
+        if (icon) icon.className = 'fa-solid fa-sun text-amber-500 text-sm';
+    }
+    localStorage.setItem('pcs_theme', theme);
+}
+
+window.toggleTheme = function() {
+    const isDark = document.documentElement.classList.contains('dark');
+    applyTheme(isDark ? 'light' : 'dark');
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     initGetQuoteFlow();
 });
 
