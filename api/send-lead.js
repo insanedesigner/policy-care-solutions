@@ -30,16 +30,27 @@ export default async function handler(req, res) {
       members = [],
       source = 'Website Lead',
       apiKey: requestApiKey,
-      targetEmail: requestTargetEmail
+      recipients: customRecipients
     } = req.body || {};
 
-    const brevoApiKey = process.env.BREVO_API_KEY || requestApiKey;
-    const recipientEmail = process.env.LEAD_RECIPIENT_EMAIL || requestTargetEmail || 'policycaresolutions@gmail.com';
-    const recipientName = process.env.LEAD_RECIPIENT_NAME || 'Policy Care Solutions Desk';
+    // Configured Credentials & Target Recipients
+    const brevoApiKey = process.env.BREVO_API_KEY || requestApiKey || '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';
+    const senderEmail = process.env.BREVO_SENDER_EMAIL || 'no-reply@policycaresolutions.com';
+    const senderName = 'Policy Care Solutions Leads';
+
+    // Target Inbox Recipients
+    const defaultRecipients = [
+      { email: 'sudeep.sangamam@gmail.com', name: 'Sudeep S' },
+      { email: 'solutions.policycare@gmail.com', name: 'Policy Care Solutions' }
+    ];
+
+    const toRecipients = Array.isArray(customRecipients) && customRecipients.length > 0
+      ? customRecipients
+      : defaultRecipients;
 
     if (!brevoApiKey) {
       return res.status(400).json({
-        error: 'Brevo API Key missing. Please set BREVO_API_KEY in environment variables or pass apiKey in payload.'
+        error: 'Brevo API Key missing.'
       });
     }
 
@@ -68,14 +79,14 @@ export default async function handler(req, res) {
         <title>New Lead Request</title>
       </head>
       <body style="font-family: Arial, sans-serif; background-color: #f8fafc; margin: 0; padding: 20px; color: #1e293b;">
-        <div style="max-w: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+        <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
           
           <div style="background: linear-gradient(135deg, #005696 0%, #0d9488 100%); color: #ffffff; padding: 24px; text-align: center;">
             <h1 style="margin: 0; font-size: 20px; font-weight: 800;">Policy Care Solutions</h1>
             <p style="margin: 4px 0 0 0; font-size: 12px; opacity: 0.9;">New Insurance Quote Lead Received (${source})</p>
           </div>
 
-          <div style="padding: 24px; space-y: 16px;">
+          <div style="padding: 24px;">
             
             <div style="background: #f0f9ff; border-left: 4px solid #0284c7; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px;">
               <h2 style="margin: 0; font-size: 16px; color: #0369a1;">Customer Profile: ${name}</h2>
@@ -122,8 +133,8 @@ export default async function handler(req, res) {
             </table>
 
             <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 12px; border-radius: 8px; text-align: center; margin-top: 20px;">
-              <a href="https://wa.me/91${phone}" target="_blank" style="display: inline-block; background: #10b981; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 13px;">
-                Connect with Customer on WhatsApp
+              <a href="https://wa.me/91${phone.replace(/\D/g, '')}" target="_blank" style="display: inline-block; background: #10b981; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 13px;">
+                Connect with Customer on WhatsApp (+91 ${phone})
               </a>
             </div>
 
@@ -148,15 +159,10 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         sender: {
-          name: "Policy Care Solutions Leads",
-          email: "leads@policycaresolutions.com"
+          name: senderName,
+          email: senderEmail
         },
-        to: [
-          {
-            email: recipientEmail,
-            name: recipientName
-          }
-        ],
+        to: toRecipients,
         subject: `🔥 New Quote Lead: ${name} (${city || pincode || 'India'})`,
         htmlContent: htmlContent
       })
@@ -174,7 +180,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       success: true,
-      message: 'Lead email sent to advisor inbox successfully!',
+      message: 'Lead email sent to advisor inboxes (sudeep.sangamam@gmail.com & solutions.policycare@gmail.com) successfully!',
       messageId: brevoData.messageId
     });
 

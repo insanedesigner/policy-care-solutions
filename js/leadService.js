@@ -3,18 +3,21 @@
  */
 
 window.leadService = {
-    // Get stored Brevo config
+    // Brevo Configuration Credentials
+    defaultApiKey: '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',
+    defaultSenderEmail: 'no-reply@policycaresolutions.com',
+    defaultRecipients: [
+        { email: 'sudeep.sangamam@gmail.com', name: 'Sudeep S' },
+        { email: 'solutions.policycare@gmail.com', name: 'Policy Care Solutions' }
+    ],
+
+    // Get stored or default Brevo config
     getConfig: function() {
         return {
-            apiKey: localStorage.getItem('pcs_brevo_api_key') || '',
-            targetEmail: localStorage.getItem('pcs_lead_target_email') || 'policycaresolutions@gmail.com'
+            apiKey: localStorage.getItem('pcs_brevo_api_key') || this.defaultApiKey,
+            senderEmail: localStorage.getItem('pcs_brevo_sender_email') || this.defaultSenderEmail,
+            recipients: this.defaultRecipients
         };
-    },
-
-    // Save Brevo config locally
-    saveConfig: function(apiKey, targetEmail) {
-        if (apiKey) localStorage.setItem('pcs_brevo_api_key', apiKey.trim());
-        if (targetEmail) localStorage.setItem('pcs_lead_target_email', targetEmail.trim());
     },
 
     // Dispatch lead email asynchronously without blocking the user UI
@@ -23,7 +26,8 @@ window.leadService = {
         const payload = {
             ...leadData,
             apiKey: config.apiKey,
-            targetEmail: config.targetEmail
+            senderEmail: config.senderEmail,
+            recipients: config.recipients
         };
 
         console.log("🚀 Dispatching Lead Email via Brevo Service...", payload);
@@ -38,16 +42,17 @@ window.leadService = {
 
             if (apiRes.ok) {
                 const data = await apiRes.json();
-                console.log("✅ Lead Email sent via serverless API:", data);
+                console.log("✅ Lead Email sent via serverless API to sudeep.sangamam@gmail.com & solutions.policycare@gmail.com:", data);
                 return { success: true, method: 'serverless', data };
             }
         } catch (err) {
-            console.warn("Serverless /api/send-lead not reachable, trying direct Brevo client fallback...", err);
+            console.warn("Serverless /api/send-lead not reachable, executing direct Brevo client API dispatch...", err);
         }
 
-        // 2. Direct Brevo API client fallback (if API key is saved locally)
+        // 2. Direct Brevo API client dispatch
         if (config.apiKey) {
             try {
+                const cleanPhone = (leadData.phone || '').replace(/\D/g, '');
                 const membersHtml = Array.isArray(leadData.members) && leadData.members.length > 0
                     ? leadData.members.map((m, idx) => `
                         <tr>
@@ -81,7 +86,7 @@ window.leadService = {
                                 <tbody>${membersHtml}</tbody>
                             </table>
                             <div style="margin-top: 20px; text-align: center;">
-                                <a href="https://wa.me/91${leadData.phone}" target="_blank" style="background: #10b981; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
+                                <a href="https://wa.me/91${cleanPhone}" target="_blank" style="background: #10b981; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">
                                     Connect on WhatsApp (+91 ${leadData.phone})
                                 </a>
                             </div>
@@ -97,22 +102,25 @@ window.leadService = {
                         'content-type': 'application/json'
                     },
                     body: JSON.stringify({
-                        sender: { name: "Policy Care Leads", email: "leads@policycaresolutions.com" },
-                        to: [{ email: config.targetEmail, name: "Policy Care Desk" }],
+                        sender: { name: "Policy Care Solutions Leads", email: config.senderEmail },
+                        to: config.recipients,
                         subject: `🔥 New Quote Lead: ${leadData.name} (+91 ${leadData.phone})`,
                         htmlContent: htmlContent
                     })
                 });
 
                 if (brevoRes.ok) {
-                    console.log("✅ Direct Brevo API Lead Email delivered!");
+                    console.log("✅ Direct Brevo API Lead Email delivered to sudeep.sangamam@gmail.com & solutions.policycare@gmail.com!");
                     return { success: true, method: 'direct_brevo' };
+                } else {
+                    const errData = await brevoRes.json();
+                    console.error("Direct Brevo Response Error:", errData);
                 }
             } catch (directErr) {
-                console.error("Direct Brevo API Error:", directErr);
+                console.error("Direct Brevo API Exception:", directErr);
             }
         }
 
-        return { success: false, message: 'Serverless API or Brevo key not active' };
+        return { success: false, message: 'Lead dispatch failed' };
     }
 };
