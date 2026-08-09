@@ -46,6 +46,9 @@ const quoteState = {
 const i18n = {
     en: {
         welcomeMsg: "Hello! Welcome to <strong>Policy Care Solutions</strong>. I am your dedicated insurance advisor. Let's find your ideal health & motor protection plan!",
+        confirmLangQuestion: "Hello! Welcome to <strong>Policy Care Solutions</strong>. I am your dedicated insurance advisor. Shall we continue in <strong>English</strong>?",
+        confirmLangYes: "Yes, Continue in English",
+        changeLangBtn: "Change Language",
         askName: "Great! First, may I know your <strong>Full Name</strong>?",
         namePlaceholder: "Enter your full name...",
         askPhone: "Nice to meet you, <strong>{name}</strong>! What is your <strong>Contact Number</strong>? (Select your country code if NRI)",
@@ -79,6 +82,9 @@ const i18n = {
     },
     ml: {
         welcomeMsg: "നമസ്കാരം! <strong>പോളിസി കെയർ സൊല്യൂഷൻസിലേക്ക്</strong> സ്വാഗതം. നിങ്ങളുടെ കുടുംബത്തിനായുള്ള മികച്ച ഇൻഷുറൻസ് പ്ലാൻ കണ്ടെത്താൻ ഞാൻ സഹായിക്കാം!",
+        confirmLangQuestion: "നമസ്കാരം! <strong>പോളിസി കെയർ സൊല്യൂഷൻസിലേക്ക്</strong> സ്വാഗതം. നമുക്ക് <strong>മലയാളത്തിൽ</strong> തുടരാമോ?",
+        confirmLangYes: "അതെ, മലയാളത്തിൽ തുടരുക",
+        changeLangBtn: "ഭാഷ മാറ്റുക",
         askName: "വളരെ സന്തോഷം! ആദ്യം, നിങ്ങളുടെ <strong>പൂർണ്ണമായ പേര്</strong> എന്താണ്?",
         namePlaceholder: "നിങ്ങളുടെ പേര് നൽകുക...",
         askPhone: "കണ്ടുമുട്ടിയതിൽ സന്തോഷം, <strong>{name}</strong>! നിങ്ങളുടെ <strong>മൊബൈൽ നമ്പർ</strong> എന്താണ്?",
@@ -112,6 +118,9 @@ const i18n = {
     },
     ta: {
         welcomeMsg: "வணக்கம்! <strong>பாலிசி கேர் சொல்யூஷன்ஸுக்கு</strong> வரவேற்கிறோம். உங்கள் குடும்பத்திற்கான சிறந்த பாலிசியைத் தேர்ந்தெடுக்க நான் உதவுகிறேன்!",
+        confirmLangQuestion: "வணக்கம்! <strong>பாலிசி கேர் சொல்யூஷன்ஸுக்கு</strong> வரவேற்கிறோம். <strong>தமிழில்</strong> தொடரலாமா?",
+        confirmLangYes: "ஆம், தமிழில் தொடரவும்",
+        changeLangBtn: "மொழியை மாற்றவும்",
         askName: "மிக்க மகிழ்ச்சி! முதலில் உங்கள் <strong>முழு பெயர்</strong> என்ன?",
         namePlaceholder: "உங்கள் பெயரை உள்ளிடவும்...",
         askPhone: "உங்களைச் சந்தித்ததில் மகிழ்ச்சி, <strong>{name}</strong>! உங்கள் <strong>மொபைல் எண்</strong> என்ன?",
@@ -145,6 +154,9 @@ const i18n = {
     },
     te: {
         welcomeMsg: "నమస్కారం! <strong>పాలసీ కేర్ సొల్యూషన్స్ (Policy Care Solutions)</strong> కి స్వాగతం. మీ కుటుంబానికి సరిపోయే ఇన్సూరెన్స్ ప్లాన్ ఎంచుకోవడానికి నేను సహాయం చేస్తాను!",
+        confirmLangQuestion: "నమస్కారం! <strong>పాలసీ కేర్ సొల్యూషన్స్</strong>కి స్వాగతం. మనం <strong>తెలుగులో</strong> కొనసాగుదామా?",
+        confirmLangYes: "అవును, తెలుగులో కొనసాగించండి",
+        changeLangBtn: "భాష మార్చండి",
         askName: "చాలా సంతోషం! ముందుగా మీ <strong>పూర్తి పేరు</strong> తెలుసుకోవచ్చా?",
         namePlaceholder: "మీ పేరును ఇక్కడ ఎంటర్ చేయండి...",
         askPhone: "మిమ్మల్ని కలవడం సంతోషంగా ఉంది, <strong>{name}</strong>! మీ <strong>మొబైల్ నంబర్</strong> ఏమిటి?",
@@ -178,6 +190,9 @@ const i18n = {
     },
     hi: {
         welcomeMsg: "नमस्ते! <strong>पॉलिसी केयर सॉल्यूशंस</strong> में आपका स्वागत है। मैं आपकी स्वास्थ्य सुरक्षा के लिए सही पॉलिसी चुनने में सहायता करूँगा!",
+        confirmLangQuestion: "नमस्ते! <strong>पॉलिसी केयर सॉल्यूशंस</strong> में आपका स्वागत है। क्या हम <strong>हिंदी</strong> में जारी रखें?",
+        confirmLangYes: "हाँ, हिंदी में जारी रखें",
+        changeLangBtn: "भाषा बदलें",
         askName: "बहुत बढ़िया! सबसे पहले, क्या मैं आपका <strong>पूरा नाम</strong> जान सकता हूँ?",
         namePlaceholder: "अपना नाम दर्ज करें...",
         askPhone: "आपसे मिलकर खुशी हुई, <strong>{name}</strong>! आपका <strong>मोबाइल नंबर</strong> क्या है?",
@@ -211,6 +226,9 @@ const i18n = {
     },
     kn: {
         welcomeMsg: "ನಮಸ್ಕಾರ! <strong>ಪಾಲಿಸಿ ಕೇರ್ ಸೊಲ್ಯೂಷನ್ಸ್</strong> ಗೆ ಸುಸ್ವಾಗತ. ನಿಮ್ಮ ಕುಟುಂಬದ ಪಾಲಿಸಿ ಆಯ್ಕೆಗೆ ನಾನು ಸಹಾಯ ಮಾಡುತ್ತೇನೆ!",
+        confirmLangQuestion: "ನಮಸ್ಕಾರ! <strong>ಪಾಲಿಸಿ ಕೇರ್ ಸೊಲ್ಯೂಷನ್ಸ್</strong>ಗೆ ಸುಸ್ವಾಗತ. ನಾವು <strong>ಕನ್ನಡದಲ್ಲಿ</strong> ಮುಂದುವರಿಯೋಣವೇ?",
+        confirmLangYes: "ಹೌದು, ಕನ್ನಡದಲ್ಲಿ ಮುಂದುವರಿಯಿರಿ",
+        changeLangBtn: "ಭಾಷೆಯನ್ನು ಬದಲಾಯಿಸಿ",
         askName: "ತುಂಬಾ ಸಂತೋಷ! ಮೊದಲಿಗೆ ನಿಮ್ಮ <strong>ಪೂರ್ಣ ಹೆಸರು</strong> ತಿಳಿಸುವಿರಾ?",
         namePlaceholder: "ನಿಮ್ಮ ಹೆಸರು ನಮೂದಿಸಿ...",
         askPhone: "ನಿಮ್ಮನ್ನು ಭೇಟಿಯಾಗಿದ್ದಕ್ಕೆ ಸಂತೋಷ, <strong>{name}</strong>! ನಿಮ್ಮ <strong>ಮೊಬೈಲ್ ಸಂಖ್ಯೆ</strong> ಏನು?",
@@ -261,6 +279,7 @@ const countryCodes = [
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    initGetQuoteFlow();
     checkFirstVisitModal();
 });
 
@@ -312,7 +331,7 @@ function updateLangBadge() {
         else if (quoteState.lang === 'ta') badge.innerText = 'தமிழ்';
         else if (quoteState.lang === 'te') badge.innerText = 'తెలుగు';
         else if (quoteState.lang === 'hi') badge.innerText = 'हिंदी';
-        else if (quoteState.lang === 'kn') badge.innerText = '<ctrl42>ಕನ್ನಡ';
+        else if (quoteState.lang === 'kn') badge.innerText = 'ಕನ್ನಡ';
         else badge.innerText = 'English';
     }
 }
@@ -353,12 +372,94 @@ function appendUserMessage(textContent) {
     container.scrollTop = container.scrollHeight;
 }
 
-// STEP 1: Welcome & Ask Name
+// STEP 1: Language Confirmation Question & Option Buttons
 function renderStep1Welcome() {
     quoteState.step = 1;
-    appendBotMessage(t('welcomeMsg'));
-    renderStep2Name();
+    appendBotMessage(t('confirmLangQuestion'));
+    renderStep1LanguageOptions();
 }
+
+function renderStep1LanguageOptions() {
+    const inputArea = document.getElementById('quote-input-container');
+    if (!inputArea) return;
+
+    inputArea.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 animate-fadeIn">
+            <button onclick="confirmPreferredLanguage()" class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-500 hover:to-teal-500 text-white border border-sky-400/30 text-left transition-all shadow-md group flex items-center justify-between">
+                <div class="font-extrabold text-xs sm:text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check text-emerald-300"></i> ${t('confirmLangYes')}
+                </div>
+                <i class="fa-solid fa-arrow-right text-xs opacity-75 group-hover:translate-x-1 transition-transform"></i>
+            </button>
+            <button onclick="showLanguageSelectorOptions()" class="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-white border border-slate-300 dark:border-slate-700 text-left transition-all shadow-sm group flex items-center justify-between">
+                <div class="font-extrabold text-xs sm:text-sm flex items-center gap-2 text-slate-700 dark:text-slate-200">
+                    <i class="fa-solid fa-globe text-sky-500"></i> ${t('changeLangBtn')}
+                </div>
+                <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+            </button>
+        </div>
+    `;
+}
+
+window.confirmPreferredLanguage = function() {
+    appendUserMessage(t('confirmLangYes'));
+    renderStep2Name();
+};
+
+window.showLanguageSelectorOptions = function() {
+    const inputArea = document.getElementById('quote-input-container');
+    if (!inputArea) return;
+
+    const languages = [
+        { code: 'en', label: 'English', sub: 'Continue in English' },
+        { code: 'ml', label: 'മലയാളം', sub: 'മലയാളത്തിൽ തുടരുക' },
+        { code: 'ta', label: 'தமிழ்', sub: 'தமிழில் தொடரவும்' },
+        { code: 'te', label: 'తెలుగు', sub: 'తెలుగులో కొనసాగించండి' },
+        { code: 'hi', label: 'हिंदी', sub: 'हिंदी में जारी रखें' },
+        { code: 'kn', label: 'ಕನ್ನಡ', sub: 'ಕನ್ನಡದಲ್ಲಿ ಮುಂದುವರಿಯಿರಿ' }
+    ];
+
+    const langBtns = languages.map(l => `
+        <button onclick="selectLanguageOption('${l.code}')" class="p-3 rounded-xl ${quoteState.lang === l.code ? 'bg-sky-600 text-white border-sky-500 font-black shadow-md' : 'bg-white dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700'} border text-left transition-all shadow-sm flex flex-col gap-0.5">
+            <span class="font-extrabold text-xs flex items-center justify-between">
+                ${l.label} ${quoteState.lang === l.code ? '<i class="fa-solid fa-check text-[10px]"></i>' : ''}
+            </span>
+            <span class="text-[10px] ${quoteState.lang === l.code ? 'text-sky-100' : 'text-slate-500 dark:text-slate-400'}">${l.sub}</span>
+        </button>
+    `).join('');
+
+    inputArea.innerHTML = `
+        <div class="space-y-2 animate-fadeIn">
+            <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 flex items-center justify-between pb-1">
+                <span>Choose Preferred Language:</span>
+                <button onclick="renderStep1LanguageOptions()" class="text-sky-600 dark:text-sky-400 hover:underline text-[10px] font-semibold">Cancel</button>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                ${langBtns}
+            </div>
+        </div>
+    `;
+};
+
+window.selectLanguageOption = function(langCode) {
+    quoteState.lang = langCode;
+    updateLangBadge();
+
+    const langNames = {
+        en: 'English',
+        ml: 'മലയാളം (Malayalam)',
+        ta: 'தமிழ் (Tamil)',
+        te: 'తెలుగు (Telugu)',
+        hi: 'हिंदी (Hindi)',
+        kn: 'ಕನ್ನಡ (Kannada)'
+    };
+
+    appendUserMessage(langNames[langCode] || langCode);
+
+    setTimeout(() => {
+        renderStep2Name();
+    }, 300);
+};
 
 // STEP 2: Name Input
 function renderStep2Name() {
