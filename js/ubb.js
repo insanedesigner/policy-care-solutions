@@ -339,6 +339,7 @@ window.setLanguage = function(langCode) {
         ubbState.lang = langCode;
     }
     localStorage.setItem('pcs_ubb_lang', ubbState.lang);
+    document.documentElement.setAttribute('lang', ubbState.lang);
     updateLangUI();
     renderContent();
 };

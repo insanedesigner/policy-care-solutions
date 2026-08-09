@@ -19,9 +19,19 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Malayalam Font Support */
+/* Malayalam Font Support & Weight Standardization (Always weight 400 for Malayalam) */
 [lang="ml"], .font-ml, :lang(ml) {
     font-family: 'Noto Sans Malayalam', 'Plus Jakarta Sans', sans-serif;
+    font-weight: 400 !important;
+}
+
+html[lang="ml"], 
+html[lang="ml"] body, 
+html[lang="ml"] h1, html[lang="ml"] h2, html[lang="ml"] h3, html[lang="ml"] h4, html[lang="ml"] h5, html[lang="ml"] h6, 
+html[lang="ml"] p, html[lang="ml"] span, html[lang="ml"] div, html[lang="ml"] button, html[lang="ml"] a, html[lang="ml"] li,
+html[lang="ml"] strong, html[lang="ml"] b, html[lang="ml"] label {
+    font-family: 'Noto Sans Malayalam', 'Plus Jakarta Sans', sans-serif;
+    font-weight: 400 !important;
 }
 
 .dark body {

@@ -443,6 +443,7 @@ window.showLanguageSelectorOptions = function() {
 
 window.selectLanguageOption = function(langCode) {
     quoteState.lang = langCode;
+    document.documentElement.setAttribute('lang', langCode);
     updateLangBadge();
 
     const langNames = {
