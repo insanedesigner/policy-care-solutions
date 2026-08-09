@@ -76,6 +76,11 @@
     }
     </script>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- Theme Pre-Check Script (Light Theme Default) -->
     <script>
         if (localStorage.getItem('pcs_theme') === 'dark') {
@@ -92,6 +97,10 @@
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', '"Noto Sans Malayalam"', 'sans-serif'],
+                        heading: ['Outfit', '"Noto Sans Malayalam"', 'sans-serif']
+                    },
                     colors: {
                         brand: {
                             50: '#f0f7ff',
@@ -144,48 +153,52 @@
             </a>
 
             <!-- Desktop Nav Links -->
-            <nav class="hidden lg:flex items-center gap-7 font-semibold text-xs uppercase tracking-wider text-slate-600">
-                <a href="getquote.html" class="hover:text-sky-600 transition-colors text-sky-700 font-extrabold flex items-center gap-1">
+            <nav class="hidden lg:flex items-center gap-5 xl:gap-7 font-extrabold text-xs uppercase tracking-wider text-slate-600 shrink-0">
+                <a href="getquote.html" class="hover:text-sky-600 transition-colors text-sky-700 font-extrabold flex items-center gap-1.5 whitespace-nowrap shrink-0">
                     <i class="fa-solid fa-calculator text-sky-600"></i> Get Quote
                 </a>
-                <a href="ubb.html" class="hover:text-amber-600 transition-colors text-amber-600 font-extrabold flex items-center gap-1">
+                <a href="ubb.html" class="hover:text-amber-600 transition-colors text-amber-600 font-extrabold flex items-center gap-1.5 whitespace-nowrap shrink-0">
                     <i class="fa-solid fa-book-open text-amber-500"></i> UBB Guide
                 </a>
-                <a href="#policies" class="hover:text-sky-600 transition-colors">Health Policies</a>
-                <a href="#team" class="hover:text-sky-600 transition-colors">Our Team</a>
+                <a href="#policies" class="hover:text-sky-600 transition-colors whitespace-nowrap shrink-0">
+                    Health Policies
+                </a>
                 
                 <!-- More Dropdown Menu -->
-                <div class="relative">
-                    <button id="more-menu-btn" onclick="toggleMoreMenu(event)" class="hover:text-sky-600 transition-colors flex items-center gap-1.5 focus:outline-none uppercase font-bold text-slate-700">
+                <div class="relative shrink-0">
+                    <button id="more-menu-btn" onclick="toggleMoreMenu(event)" class="hover:text-sky-600 transition-colors flex items-center gap-1.5 focus:outline-none uppercase font-extrabold text-slate-700 whitespace-nowrap">
                         More <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
                     </button>
                     <div id="more-menu-dropdown" class="hidden absolute top-full right-0 mt-3 w-64 sm:w-72 bg-white rounded-2xl shadow-2xl border border-slate-200 py-3 z-50 animate-fadeIn">
-                        <a href="ubb.html" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-amber-900 bg-amber-50/70 hover:bg-amber-100 transition-colors">
+                        <a href="#team" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors whitespace-nowrap">
+                            <i class="fa-solid fa-users-gear text-sky-600 text-sm w-4"></i> Our Advisor Team
+                        </a>
+                        <a href="ubb.html" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-amber-900 bg-amber-50/70 hover:bg-amber-100 transition-colors whitespace-nowrap">
                             <i class="fa-solid fa-book-open text-amber-600 text-sm w-4"></i> UBB Health Insurance Guide
                         </a>
-                        <a href="getquote.html" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-sky-900 bg-sky-50/70 hover:bg-sky-100 transition-colors">
+                        <a href="getquote.html" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-sky-900 bg-sky-50/70 hover:bg-sky-100 transition-colors whitespace-nowrap">
                             <i class="fa-solid fa-headset text-sky-600 text-sm w-4"></i> AI Quote Assistant Bot
                         </a>
                         <div class="border-t border-slate-100 my-1"></div>
-                        <a href="#motor" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
+                        <a href="#motor" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors whitespace-nowrap">
                             <i class="fa-solid fa-car text-sky-500 text-sm w-4"></i> Motor Insurance
                         </a>
-                        <a href="#local-hospitals" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
-                            <i class="fa-solid fa-hospital text-emerald-500 text-sm w-4"></i> Local Network
+                        <a href="#local-hospitals" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors whitespace-nowrap">
+                            <i class="fa-solid fa-hospital text-emerald-500 text-sm w-4"></i> Local Cashless Network
                         </a>
-                        <a href="#benefits" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors">
+                        <a href="#benefits" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition-colors whitespace-nowrap">
                             <i class="fa-solid fa-shield-halved text-amber-500 text-sm w-4"></i> Why Choose Us
                         </a>
                         
                         <div class="border-t border-slate-100 my-1.5"></div>
                         
-                        <a href="https://www.facebook.com/policycaresolutions" target="_blank" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <a href="https://www.facebook.com/policycaresolutions" target="_blank" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors whitespace-nowrap">
                             <i class="fa-brands fa-facebook text-blue-600 text-sm w-4"></i> Facebook Page
                         </a>
-                        <a href="https://share.google/KTswg5r1kxmwwjl30" target="_blank" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-colors">
+                        <a href="https://share.google/KTswg5r1kxmwwjl30" target="_blank" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 transition-colors whitespace-nowrap">
                             <i class="fa-solid fa-map-location-dot text-emerald-600 text-sm w-4"></i> Google Maps Location
                         </a>
-                        <a href="https://www.instagram.com/policycaresolutions" target="_blank" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-rose-50 hover:text-rose-600 transition-colors">
+                        <a href="https://www.instagram.com/policycaresolutions" target="_blank" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-rose-50 hover:text-rose-600 transition-colors whitespace-nowrap">
                             <i class="fa-brands fa-instagram text-rose-500 text-sm w-4"></i> @policycaresolutions
                         </a>
                     </div>
