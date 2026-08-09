@@ -4,9 +4,10 @@
  * 
  * Secure Serverless Backend API Route (Zero secrets stored in git/client code)
  * Environment Variables used from Vercel:
- * - BREVO_API_KEY (Required)
- * - LEAD_RECIPIENT_EMAIL (Optional: supports comma-separated emails, e.g. "sudeep.sangamam@gmail.com, solutions.policycare@gmail.com")
- * - BREVO_SENDER_EMAIL (Optional: defaults to "no-reply@policycaresolutions.com")
+ * - BREVO_API_KEY (Required: Brevo SMTP API Key)
+ * - LEAD_RECIPIENT_EMAIL (Primary inbox: e.g. "sudeep.sangamam@gmail.com" or comma-separated "sudeep.sangamam@gmail.com, solutions.policycare@gmail.com")
+ * - LEAD_CC_EMAIL (Optional CC inbox: e.g. "solutions.policycare@gmail.com")
+ * - BREVO_SENDER_EMAIL (Optional sender address: defaults to "no-reply@policycaresolutions.com")
  */
 
 export default async function handler(req, res) {
@@ -53,7 +54,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required lead fields (name, phone).' });
     }
 
-    // 2. Parse Recipients: Handles single or comma-separated emails in LEAD_RECIPIENT_EMAIL
+    // 2. Parse Primary (TO) Recipients
     let toRecipients = [];
     const envEmails = process.env.LEAD_RECIPIENT_EMAIL;
 
@@ -62,20 +63,36 @@ export default async function handler(req, res) {
       if (emailList.length > 0) {
         toRecipients = emailList.map(e => ({
           email: e,
-          name: e.includes('sudeep') ? 'Sudeep S' : 'Policy Care Desk'
+          name: e.includes('sudeep') ? 'Sudeep S' : 'Policy Care Solutions'
         }));
       }
     }
 
-    // Fallback default to both advisor inboxes if not specified
+    // Default primary TO recipient if not provided
     if (toRecipients.length === 0) {
       toRecipients = [
-        { email: 'sudeep.sangamam@gmail.com', name: 'Sudeep S' },
-        { email: 'solutions.policycare@gmail.com', name: 'Policy Care Solutions' }
+        { email: 'sudeep.sangamam@gmail.com', name: 'Sudeep S' }
       ];
     }
 
-    // 3. Format covered family members table
+    // 3. Parse CC Recipients
+    let ccRecipients = [];
+    const envCc = process.env.LEAD_CC_EMAIL;
+
+    if (envCc && envCc.trim()) {
+      const ccList = envCc.split(/[,;]/).map(e => e.trim()).filter(e => e.length > 0 && e.includes('@'));
+      ccRecipients = ccList.map(e => ({
+        email: e,
+        name: 'Policy Care Solutions Desk'
+      }));
+    } else if (toRecipients.length === 1 && toRecipients[0].email === 'sudeep.sangamam@gmail.com') {
+      // Auto fallback CC to ensure second inbox always gets notified
+      ccRecipients = [
+        { email: 'solutions.policycare@gmail.com', name: 'Policy Care Solutions Desk' }
+      ];
+    }
+
+    // 4. Format covered family members table
     const membersHtml = Array.isArray(members) && members.length > 0
       ? members.map((m, idx) => `
           <tr style="border-bottom: 1px solid #e2e8f0;">
@@ -87,7 +104,7 @@ export default async function handler(req, res) {
         `).join('')
       : `<tr><td colspan="4" style="padding: 8px 12px; color: #64748b;">Primary Applicant Only</td></tr>`;
 
-    // 4. Construct Email HTML Template
+    // 5. Construct Email HTML Template
     const cleanPhone = String(phone).replace(/\D/g, '');
     const htmlContent = `
       <!DOCTYPE html>
@@ -101,7 +118,7 @@ export default async function handler(req, res) {
           
           <div style="background: linear-gradient(135deg, #005696 0%, #0d9488 100%); color: #ffffff; padding: 24px; text-align: center;">
             <h1 style="margin: 0; font-size: 20px; font-weight: 800;">Policy Care Solutions</h1>
-            <p style="margin: 4px 0 0 0; font-size: 12px; opacity: 0.9;">New Insurance Quote Lead Received (${source})</p>
+            <p style="margin: 4px 0 0 0; font-size: 12px; opacity: 0.9;">New Insurance Lead Received (${source})</p>
           </div>
 
           <div style="padding: 24px;">
@@ -167,7 +184,22 @@ export default async function handler(req, res) {
       </html>
     `;
 
-    // 5. Send via Brevo Transactional Email API v3
+    // 6. Build Brevo API Body
+    const brevoPayload = {
+      sender: {
+        name: senderName,
+        email: senderEmail
+      },
+      to: toRecipients,
+      subject: `🔥 New Lead: ${name} (${city || pincode || 'India'})`,
+      htmlContent: htmlContent
+    };
+
+    if (ccRecipients.length > 0) {
+      brevoPayload.cc = ccRecipients;
+    }
+
+    // 7. Send via Brevo Transactional Email API v3
     const brevoResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
@@ -175,15 +207,7 @@ export default async function handler(req, res) {
         'api-key': brevoApiKey,
         'content-type': 'application/json'
       },
-      body: JSON.stringify({
-        sender: {
-          name: senderName,
-          email: senderEmail
-        },
-        to: toRecipients,
-        subject: `🔥 New Quote Lead: ${name} (${city || pincode || 'India'})`,
-        htmlContent: htmlContent
-      })
+      body: JSON.stringify(brevoPayload)
     });
 
     const brevoData = await brevoResponse.json();
@@ -199,7 +223,8 @@ export default async function handler(req, res) {
     return res.status(200).json({
       success: true,
       message: 'Lead email sent to advisor inboxes successfully!',
-      recipients: toRecipients.map(r => r.email),
+      to: toRecipients.map(r => r.email),
+      cc: ccRecipients.map(r => r.email),
       messageId: brevoData.messageId
     });
 

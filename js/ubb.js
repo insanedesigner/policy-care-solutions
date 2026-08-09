@@ -173,7 +173,7 @@ const ubbI18n = {
         closingDesc: "ഒരു പോളിസി വാങ്ങുന്നതിന് മുമ്പ് അതിലെ പ്രധാന നിബന്ധനകൾ വായിക്കാൻ ഒരു മണിക്കൂർ ചെലവഴിച്ചാൽ, ഭാവിയിൽ ലക്ഷക്കണക്കിന് രൂപയുടെ നഷ്ടം ഒഴിവാക്കാൻ കഴിയും.",
         ctaTitle: "നിങ്ങളുടെ കുടുംബത്തിനായി മികച്ച ഇൻഷുറൻസ് പ്ലാൻ ഉടൻ കണ്ടെത്തൂ!",
         ctaWaBtn: "വാട്സ്ആപ്പിൽ വിവരങ്ങൾ നേടുക",
-        ctaAiBotBtn: "AI Quote Assistant ആരംഭിക്ക്",
+        ctaAiBotBtn: "ക്വോട്ട് നേടുക (Get Quote)",
         callAdvisorBtn: "അഡ്വൈസറുമായി സംസാരിക്കുക (+91 9048360880)"
     },
 
@@ -316,7 +316,7 @@ const ubbI18n = {
         closingDesc: "Spending one hour reading policy terms before buying can save lakhs of rupees during unexpected medical emergencies.",
         ctaTitle: "Get Your Ideal Family Health & Motor Quote Today!",
         ctaWaBtn: "Get Official Quote on WhatsApp",
-        ctaAiBotBtn: "Start AI Quote Assistant",
+        ctaAiBotBtn: "Get Instant Quote",
         callAdvisorBtn: "Call Advisor Desk (+91 9048360880)"
     }
 };

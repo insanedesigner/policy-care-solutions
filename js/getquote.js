@@ -804,7 +804,7 @@ Hello Policy Care Solutions, my name is ${quoteState.name}. I submitted my quote
                 pincode: quoteState.pincode,
                 city: quoteState.city,
                 members: quoteState.members,
-                source: 'Get Quote AI Assistant'
+                source: 'Get Quote Assistant'
             });
         }
 

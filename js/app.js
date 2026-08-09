@@ -546,14 +546,14 @@ window.runAiPolicyMatcher = function() {
     }
 
     const isStar = matchedPolicy.provider === 'Star Health';
-    const waMsg = encodeURIComponent(`Hello Policy Care Team (Ottapalam & Palakkad), the AI Assistant recommended the *${matchedPolicy.title}* (${matchedPolicy.provider}) policy for me. Please provide a quote.`);
+    const waMsg = encodeURIComponent(`Hello Policy Care Team (Ottapalam & Palakkad), I am interested in the recommended *${matchedPolicy.title}* (${matchedPolicy.provider}) policy. Please provide a quote.`);
     const waUrl = `https://wa.me/919048360880?text=${waMsg}`;
 
     outputBox.innerHTML = `
         <div class="mt-6 p-6 rounded-2xl bg-slate-900 border border-white/20 text-white animate-fadeIn shadow-2xl">
             <div class="flex items-center justify-between flex-wrap gap-2 mb-4 pb-3 border-b border-white/10">
                 <span class="text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full bg-amber-400 text-slate-950 flex items-center gap-1">
-                    <i class="fa-solid fa-sparkles"></i> AI Match Score: ${matchScore}% Best Fit
+                    <i class="fa-solid fa-star text-slate-950"></i> Match Score: ${matchScore}% Best Fit
                 </span>
                 <span class="text-xs text-slate-400 font-medium">Insurer: <strong>${matchedPolicy.provider}</strong></span>
             </div>
@@ -1047,6 +1047,18 @@ function processAiChatStep(userText) {
                 aiChatState.email = 'Not Provided';
             }
             aiChatState.step = 4;
+
+            // Dispatch Live Support lead email as backup to advisor inboxes in background
+            if (window.leadService) {
+                window.leadService.sendLeadEmail({
+                    name: aiChatState.userName,
+                    phone: aiChatState.phone,
+                    email: aiChatState.email !== 'Not Provided' ? aiChatState.email : '',
+                    coverageType: aiChatState.policyType || 'Live Consultation Request',
+                    city: 'Ottapalam / Palakkad',
+                    source: 'Live Support Desk'
+                });
+            }
 
             const waPayload = `*LIVE AGENT CONSULTATION REQUEST*
 ----------------------------------------
