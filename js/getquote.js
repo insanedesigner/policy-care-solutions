@@ -793,6 +793,20 @@ Hello Policy Care Solutions, my name is ${quoteState.name}. I submitted my quote
         const encodedWa = encodeURIComponent(waPayload);
         const waUrl = `https://wa.me/919048360880?text=${encodedWa}`;
 
+        // Trigger Brevo API Lead Email Dispatch in background
+        if (window.leadService) {
+            window.leadService.sendLeadEmail({
+                name: quoteState.name,
+                phone: `${quoteState.countryCode} ${quoteState.phone}`,
+                email: quoteState.email,
+                coverageType: quoteState.coverageType,
+                pincode: quoteState.pincode,
+                city: quoteState.city,
+                members: quoteState.members,
+                source: 'Get Quote AI Assistant'
+            });
+        }
+
         const inputArea = document.getElementById('quote-input-container');
         inputArea.innerHTML = `
             <div class="p-4 bg-white dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-md">

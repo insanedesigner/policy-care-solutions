@@ -461,6 +461,22 @@ Kindly provide best Star Health & Care Health policy options and premium quote d
     const targetWhatsAppNum = "919048360880";
     const waUrl = `https://wa.me/${targetWhatsAppNum}?text=${encodedMessage}`;
 
+    // Trigger Brevo API Lead Email Dispatch in background
+    if (window.leadService) {
+        window.leadService.sendLeadEmail({
+            name: fullName,
+            phone: phone,
+            email: email,
+            coverageType: formCoverageType,
+            state: state,
+            district: district,
+            city: city,
+            pincode: pincode,
+            members: membersListForModal,
+            source: 'Homepage Quote Calculator'
+        });
+    }
+
     // Show Confirmation Modal
     showQuoteModal({
         fullName,
