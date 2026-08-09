@@ -186,3 +186,16 @@ h1, h2, h3, h4, .font-heading {
 .pulse-whatsapp {
     animation: pulseGlow 2s infinite;
 }
+
+/* iOS Mobile Viewport & Touch Scrolling Enhancements */
+.chat-scroll-touch {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .h-ios-screen {
+        height: 100dvh;
+        min-height: -webkit-fill-available;
+    }
+}

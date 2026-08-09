@@ -627,42 +627,112 @@ window.selectCoverage = function(type) {
             { relation: 'Spouse', mode: 'age', age: 32, dob: '' }
         ];
         renderStep6Members();
+        // Automatically open the Family Members Modal Popup so user can comfortably add/edit members without scrolling issues
+        setTimeout(() => {
+            openFamilyModal();
+        }, 400);
     }
 };
 
-// STEP 6: Members & Ages / DOB (Enhanced with Relation Dropdown and Bigger Heights)
+// STEP 6: Members & Ages / DOB (Enhanced with Dedicated Modal Popup)
 function renderStep6Members() {
     quoteState.step = 6;
     setTimeout(() => {
         appendBotMessage(t('askMembers'));
-        renderMembersInputForm();
+        renderMembersSummaryCard();
     }, 300);
 }
 
-function renderMembersInputForm() {
+function renderMembersSummaryCard() {
     const inputArea = document.getElementById('quote-input-container');
+    if (!inputArea) return;
 
-    const rowsHtml = quoteState.members.map((m, index) => {
+    const chipsHtml = quoteState.members.map(m => {
+        const valStr = m.mode === 'dob' && m.dob ? m.dob : `${m.age} Yrs`;
         return `
-            <div class="p-3.5 sm:p-4 bg-white dark:bg-slate-800/90 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3 shadow-sm">
-                
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 text-sky-800 dark:text-sky-200 font-bold text-xs shadow-sm">
+                <i class="fa-solid fa-user text-[10px] text-sky-500"></i>
+                <span>${getRelationDisplay(m.relation)}:</span>
+                <span class="text-sky-600 dark:text-sky-400 font-extrabold">${valStr}</span>
+            </span>
+        `;
+    }).join('');
+
+    inputArea.innerHTML = `
+        <div class="space-y-2.5 animate-fadeIn">
+            <!-- Members Chips Card (Compact so it never gets hidden below screen) -->
+            <div class="p-3 bg-white dark:bg-slate-800/95 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-2">
+                <div class="flex items-center justify-between text-xs font-black uppercase tracking-wider text-slate-600 dark:text-slate-300">
+                    <span class="flex items-center gap-1.5 text-sky-600 dark:text-sky-400">
+                        <i class="fa-solid fa-people-roof"></i> ${quoteState.members.length} Member(s) Added
+                    </span>
+                    <button type="button" onclick="openFamilyModal()" class="text-sky-600 hover:text-sky-700 dark:text-sky-400 text-xs font-bold flex items-center gap-1 hover:underline">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </button>
+                </div>
+                <div class="flex flex-wrap gap-1.5 max-h-20 overflow-y-auto chat-scroll-touch">
+                    ${chipsHtml}
+                </div>
+            </div>
+
+            <!-- Action Buttons: Open Modal / Continue -->
+            <div class="flex flex-col sm:flex-row gap-2">
+                <button type="button" onclick="openFamilyModal()" class="w-full sm:flex-1 h-12 py-2.5 px-4 rounded-xl bg-sky-50 dark:bg-sky-950/50 hover:bg-sky-100 dark:hover:bg-sky-900/50 border border-sky-300 dark:border-sky-700 text-sky-700 dark:text-sky-300 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-sm">
+                    <i class="fa-solid fa-user-plus text-sky-500"></i>
+                    <span>${quoteState.coverageType === 'individual' ? 'Change Age / Details' : '+ Add / Edit Family Members'}</span>
+                </button>
+                <button type="button" onclick="submitMembersStep()" class="w-full sm:flex-1 h-12 py-2.5 px-6 rounded-2xl bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-500 hover:to-teal-500 text-white font-black text-xs sm:text-sm shadow-xl flex items-center justify-center gap-2 transition-all">
+                    <span>${t('nextBtn')}</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Modal Popup Management Functions
+window.openFamilyModal = function() {
+    const modal = document.getElementById('family-members-modal');
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    renderModalMembersList();
+};
+
+window.closeFamilyModal = function() {
+    const modal = document.getElementById('family-members-modal');
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+};
+
+window.saveAndCloseFamilyModal = function() {
+    closeFamilyModal();
+    renderMembersSummaryCard();
+};
+
+window.renderModalMembersList = function() {
+    const listContainer = document.getElementById('modal-members-list');
+    if (!listContainer) return;
+
+    const cardsHtml = quoteState.members.map((m, index) => {
+        return `
+            <div class="p-3.5 sm:p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3 shadow-sm">
                 <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-700/60 pb-2">
                     <span class="text-xs font-black uppercase tracking-wider text-sky-600 dark:text-sky-400 flex items-center gap-1.5">
-                        <i class="fa-solid fa-user-shield text-sm"></i> Member #${index + 1}
+                        <i class="fa-solid fa-user-shield"></i> Member #${index + 1}
                     </span>
                     ${quoteState.members.length > 1 ? `
-                        <button type="button" onclick="removeMember(${index})" class="text-rose-500 hover:text-rose-600 text-xs px-2.5 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/40 font-bold transition-colors flex items-center gap-1">
+                        <button type="button" onclick="removeMemberInModal(${index})" class="text-rose-500 hover:text-rose-600 text-xs px-2.5 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/40 font-bold transition-colors flex items-center gap-1">
                             <i class="fa-solid fa-trash-can"></i> <span class="hidden sm:inline">Remove</span>
                         </button>
                     ` : ''}
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
-                    
-                    <!-- Relation Dropdown (Bigger height: h-12) -->
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 items-center">
+                    <!-- Relation Select -->
                     <div class="sm:col-span-5">
                         <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">Relationship</label>
-                        <select onchange="updateMemberRelation(${index}, this.value)" class="w-full h-12 px-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm">
+                        <select onchange="updateMemberRelation(${index}, this.value)" class="w-full h-11 px-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-xs focus:ring-2 focus:ring-sky-500 shadow-sm">
                             ${relationOptions.map(rel => `
                                 <option value="${rel.key}" ${m.relation.toLowerCase() === rel.key.toLowerCase() ? 'selected' : ''}>
                                     ${rel.labels[quoteState.lang] || rel.labels.en}
@@ -671,56 +741,68 @@ function renderMembersInputForm() {
                         </select>
                     </div>
 
-                    <!-- Format Select (Age vs DOB) (Bigger height: h-12) -->
+                    <!-- Format Select (Age vs DOB) -->
                     <div class="sm:col-span-3">
                         <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">Format</label>
-                        <select onchange="updateMemberMode(${index}, this.value)" class="w-full h-12 px-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-semibold text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm">
+                        <select onchange="updateMemberModeInModal(${index}, this.value)" class="w-full h-11 px-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-semibold text-xs focus:ring-2 focus:ring-sky-500 shadow-sm">
                             <option value="age" ${m.mode === 'age' ? 'selected' : ''}>${t('modeAge')}</option>
                             <option value="dob" ${m.mode === 'dob' ? 'selected' : ''}>${t('modeDob')}</option>
                         </select>
                     </div>
 
-                    <!-- Value Input (Age / DOB) (Bigger height: h-12) -->
+                    <!-- Value Input (Age / DOB) -->
                     <div class="sm:col-span-4">
                         <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">${m.mode === 'dob' ? 'Date of Birth' : 'Age in Years'}</label>
                         ${m.mode === 'age' 
-                            ? `<input type="number" min="0" max="100" value="${m.age}" onchange="updateMemberAge(${index}, this.value)" class="w-full h-12 px-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" placeholder="e.g. 35" />`
-                            : `<input type="date" value="${m.dob}" onchange="updateMemberDob(${index}, this.value)" class="w-full h-12 px-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" />`
+                            ? `<input type="number" min="0" max="100" value="${m.age}" onchange="updateMemberAge(${index}, this.value)" class="w-full h-11 px-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-sky-500 shadow-sm" placeholder="e.g. 35" />`
+                            : `<input type="date" value="${m.dob}" onchange="updateMemberDob(${index}, this.value)" class="w-full h-11 px-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-xs focus:ring-2 focus:ring-sky-500 shadow-sm" />`
                         }
                     </div>
-
                 </div>
             </div>
         `;
     }).join('');
 
-    inputArea.innerHTML = `
-        <div class="space-y-3">
-            <div class="max-h-72 overflow-y-auto space-y-3 pr-1">
-                ${rowsHtml}
-            </div>
-            <div class="flex flex-col sm:flex-row gap-2.5 pt-1">
-                <button type="button" onclick="addFamilyMember()" class="w-full sm:flex-1 h-12 py-3 px-4 rounded-2xl bg-sky-50 dark:bg-sky-950/50 hover:bg-sky-100 dark:hover:bg-sky-900/50 border-2 border-dashed border-sky-300 dark:border-sky-700 text-sky-700 dark:text-sky-300 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-sm">
-                    <i class="fa-solid fa-user-plus"></i> ${t('addMemberBtn')}
-                </button>
-                <button type="button" onclick="submitMembersStep()" class="w-full sm:flex-1 h-12 py-3 px-6 rounded-2xl bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-500 hover:to-teal-500 text-white font-black text-xs sm:text-sm shadow-xl flex items-center justify-center gap-2 transition-all">
-                    <span>${t('nextBtn')}</span> <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
-        </div>
-    `;
-}
+    listContainer.innerHTML = cardsHtml;
+};
+
+window.addFamilyMemberInModal = function() {
+    const defaultSeq = ['Spouse', 'Son', 'Daughter', 'Father', 'Mother', 'Father-in-law', 'Mother-in-law', 'Other'];
+    let nextRel = 'Other';
+    for (const rel of defaultSeq) {
+        if (!quoteState.members.some(m => m.relation.toLowerCase() === rel.toLowerCase())) {
+            nextRel = rel;
+            break;
+        }
+    }
+    const defaultAge = nextRel === 'Spouse' ? 32 : (nextRel === 'Father' || nextRel === 'Mother' ? 60 : 10);
+    quoteState.members.push({ relation: nextRel, mode: 'age', age: defaultAge, dob: '' });
+    renderModalMembersList();
+
+    // Scroll modal to newly added card
+    const listContainer = document.getElementById('modal-members-list');
+    if (listContainer) {
+        setTimeout(() => {
+            listContainer.scrollTo({ top: listContainer.scrollHeight, behavior: 'smooth' });
+        }, 50);
+    }
+};
+
+window.removeMemberInModal = function(idx) {
+    quoteState.members.splice(idx, 1);
+    renderModalMembersList();
+};
+
+window.updateMemberModeInModal = function(idx, mode) {
+    if (quoteState.members[idx]) {
+        quoteState.members[idx].mode = mode;
+        renderModalMembersList();
+    }
+};
 
 window.updateMemberRelation = function(idx, val) {
     if (quoteState.members[idx]) {
         quoteState.members[idx].relation = val;
-    }
-};
-
-window.updateMemberMode = function(idx, mode) {
-    if (quoteState.members[idx]) {
-        quoteState.members[idx].mode = mode;
-        renderMembersInputForm();
     }
 };
 
@@ -734,25 +816,6 @@ window.updateMemberDob = function(idx, val) {
     if (quoteState.members[idx]) {
         quoteState.members[idx].dob = val;
     }
-};
-
-window.removeMember = function(idx) {
-    quoteState.members.splice(idx, 1);
-    renderMembersInputForm();
-};
-
-window.addFamilyMember = function() {
-    const defaultSeq = ['Spouse', 'Son', 'Daughter', 'Father', 'Mother', 'Father-in-law', 'Mother-in-law', 'Other'];
-    let nextRel = 'Other';
-    for (const rel of defaultSeq) {
-        if (!quoteState.members.some(m => m.relation.toLowerCase() === rel.toLowerCase())) {
-            nextRel = rel;
-            break;
-        }
-    }
-    const defaultAge = nextRel === 'Spouse' ? 32 : (nextRel === 'Father' || nextRel === 'Mother' ? 60 : 10);
-    quoteState.members.push({ relation: nextRel, mode: 'age', age: defaultAge, dob: '' });
-    renderMembersInputForm();
 };
 
 window.submitMembersStep = function() {
@@ -885,3 +948,12 @@ Hello Policy Care Solutions, my name is ${quoteState.name}. I submitted my quote
         `;
     }, 400);
 }
+
+// Mobile Viewport Keyboard Scroll Listener for iOS & Android
+document.addEventListener('focusin', (e) => {
+    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) {
+        setTimeout(() => {
+            e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 280);
+    }
+});
