@@ -95,7 +95,7 @@ const i18n = {
         askCoverage: "വളരെ നല്ലത് <strong>{name}</strong>! ഇൻഷുറൻസ് നോക്കുന്നത് <strong>നിങ്ങൾക്ക് മാത്രമാണോ (Individual)</strong> അതോ <strong>കുടുംബത്തിനാണോ (Family Floater)</strong>?",
         covIndividual: "ഇൻഡിവിജ്വൽ പോളിസി (എനിക്ക് മാത്രം)",
         covFamily: "ഫാമിലി ഫ്ലോട്ടർ (എനിക്ക്, പങ്കാളി, മക്കൾ, മാതാപിതാക്കൾ)",
-        askMembers: "പോളിസിയിൽ ഉൾപ്പെടുത്തേണ്ട കുടുംബാംഗങ്ങളുടെ പ്രായം അല്ലെങ്കിൽ ജനനത്തീയതി നൽകുക:",
+        askMembers: "പോളിസിയിൽ ഉൾപ്പെടുത്തേണ്ട കുടുംബാംഗങ്ങളുടെ വയസ്സ് അല്ലെങ്കിൽ ജനനത്തീയതി നൽകുക:",
         addMemberBtn: "+ അംഗത്തെ ചേർക്കുക",
         askPincode: "മനസ്സിലായി, <strong>{name}</strong>! നിങ്ങളുടെ <strong>6 അക്ക പിൻകോഡ്</strong> നൽകുക:",
         pincodePlaceholder: "6 അക്ക പിൻകോഡ്...",
@@ -107,8 +107,8 @@ const i18n = {
         nextBtn: "തുടരുക",
         backBtn: "പിന്നോട്ട്",
         verifiedTitle: "ക്വോട്ട് വിവരങ്ങൾ തയ്യാറാണ്",
-        modeAge: "പ്രായം നൽകുക (വർഷം)",
-        modeDob: "ജനനത്തീയതി തിരഞ്ഞെടുക്കുക",
+        modeAge: "വയസ്സ് (Age)",
+        modeDob: "ജനനത്തീയതി (DOB)",
         self: "സ്വയം",
         spouse: "ഭർത്താവ് / ഭാര്യ",
         child1: "ആദ്യത്തെ കുട്ടി",
@@ -731,7 +731,7 @@ window.renderModalMembersList = function() {
                 <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5 items-center">
                     <!-- Relation Select -->
                     <div class="sm:col-span-5">
-                        <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">Relationship</label>
+                        <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">${quoteState.lang === 'ml' ? 'കുടുംബബന്ധം (Relation)' : 'Relationship'}</label>
                         <select onchange="updateMemberRelation(${index}, this.value)" class="w-full h-11 px-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-xs focus:ring-2 focus:ring-sky-500 shadow-sm">
                             ${relationOptions.map(rel => `
                                 <option value="${rel.key}" ${m.relation.toLowerCase() === rel.key.toLowerCase() ? 'selected' : ''}>
@@ -743,7 +743,7 @@ window.renderModalMembersList = function() {
 
                     <!-- Format Select (Age vs DOB) -->
                     <div class="sm:col-span-3">
-                        <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">Format</label>
+                        <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">${quoteState.lang === 'ml' ? 'രീതി (Format)' : 'Format'}</label>
                         <select onchange="updateMemberModeInModal(${index}, this.value)" class="w-full h-11 px-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-semibold text-xs focus:ring-2 focus:ring-sky-500 shadow-sm">
                             <option value="age" ${m.mode === 'age' ? 'selected' : ''}>${t('modeAge')}</option>
                             <option value="dob" ${m.mode === 'dob' ? 'selected' : ''}>${t('modeDob')}</option>
@@ -752,9 +752,9 @@ window.renderModalMembersList = function() {
 
                     <!-- Value Input (Age / DOB) -->
                     <div class="sm:col-span-4">
-                        <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">${m.mode === 'dob' ? 'Date of Birth' : 'Age in Years'}</label>
+                        <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">${m.mode === 'dob' ? (quoteState.lang === 'ml' ? 'ജനനത്തീയതി (DOB)' : 'Date of Birth') : (quoteState.lang === 'ml' ? 'വയസ്സ് (Vayas)' : 'Age (Years)')}</label>
                         ${m.mode === 'age' 
-                            ? `<input type="number" min="0" max="100" value="${m.age}" onchange="updateMemberAge(${index}, this.value)" class="w-full h-11 px-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-sky-500 shadow-sm" placeholder="e.g. 35" />`
+                            ? `<input type="number" min="0" max="100" value="${m.age}" onchange="updateMemberAge(${index}, this.value)" class="w-full h-11 px-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-sky-500 shadow-sm" placeholder="${quoteState.lang === 'ml' ? 'ഉദാ: 35' : 'e.g. 35'}" />`
                             : `<input type="date" value="${m.dob}" onchange="updateMemberDob(${index}, this.value)" class="w-full h-11 px-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-xs focus:ring-2 focus:ring-sky-500 shadow-sm" />`
                         }
                     </div>
