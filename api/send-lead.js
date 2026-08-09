@@ -1,13 +1,19 @@
 /**
  * Serverless Function: Brevo Transactional Email Lead Dispatcher for Policy Care Solutions
  * Path: /api/send-lead
+ * 
+ * Secure Serverless Backend API Route (Zero secrets stored in git/client code)
+ * Environment Variables used from Vercel:
+ * - BREVO_API_KEY (Required)
+ * - LEAD_RECIPIENT_EMAIL (Optional: supports comma-separated emails, e.g. "sudeep.sangamam@gmail.com, solutions.policycare@gmail.com")
+ * - BREVO_SENDER_EMAIL (Optional: defaults to "no-reply@policycaresolutions.com")
  */
 
 export default async function handler(req, res) {
   // CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -28,29 +34,18 @@ export default async function handler(req, res) {
       city,
       pincode,
       members = [],
-      source = 'Website Lead',
-      apiKey: requestApiKey,
-      recipients: customRecipients
+      source = 'Website Lead'
     } = req.body || {};
 
-    // Configured Credentials & Target Recipients
-    const brevoApiKey = process.env.BREVO_API_KEY || requestApiKey || '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';
+    // 1. Read API Key strictly from Vercel Serverless environment variable
+    const brevoApiKey = process.env.BREVO_API_KEY;
     const senderEmail = process.env.BREVO_SENDER_EMAIL || 'no-reply@policycaresolutions.com';
     const senderName = 'Policy Care Solutions Leads';
 
-    // Target Inbox Recipients
-    const defaultRecipients = [
-      { email: 'sudeep.sangamam@gmail.com', name: 'Sudeep S' },
-      { email: 'solutions.policycare@gmail.com', name: 'Policy Care Solutions' }
-    ];
-
-    const toRecipients = Array.isArray(customRecipients) && customRecipients.length > 0
-      ? customRecipients
-      : defaultRecipients;
-
     if (!brevoApiKey) {
-      return res.status(400).json({
-        error: 'Brevo API Key missing.'
+      console.error('Missing BREVO_API_KEY in Vercel Environment Variables');
+      return res.status(500).json({
+        error: 'BREVO_API_KEY is not configured in Vercel Environment Variables.'
       });
     }
 
@@ -58,7 +53,29 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required lead fields (name, phone).' });
     }
 
-    // Format covered members table
+    // 2. Parse Recipients: Handles single or comma-separated emails in LEAD_RECIPIENT_EMAIL
+    let toRecipients = [];
+    const envEmails = process.env.LEAD_RECIPIENT_EMAIL;
+
+    if (envEmails && envEmails.trim()) {
+      const emailList = envEmails.split(/[,;]/).map(e => e.trim()).filter(e => e.length > 0 && e.includes('@'));
+      if (emailList.length > 0) {
+        toRecipients = emailList.map(e => ({
+          email: e,
+          name: e.includes('sudeep') ? 'Sudeep S' : 'Policy Care Desk'
+        }));
+      }
+    }
+
+    // Fallback default to both advisor inboxes if not specified
+    if (toRecipients.length === 0) {
+      toRecipients = [
+        { email: 'sudeep.sangamam@gmail.com', name: 'Sudeep S' },
+        { email: 'solutions.policycare@gmail.com', name: 'Policy Care Solutions' }
+      ];
+    }
+
+    // 3. Format covered family members table
     const membersHtml = Array.isArray(members) && members.length > 0
       ? members.map((m, idx) => `
           <tr style="border-bottom: 1px solid #e2e8f0;">
@@ -70,7 +87,8 @@ export default async function handler(req, res) {
         `).join('')
       : `<tr><td colspan="4" style="padding: 8px 12px; color: #64748b;">Primary Applicant Only</td></tr>`;
 
-    // Construct Email HTML Template
+    // 4. Construct Email HTML Template
+    const cleanPhone = String(phone).replace(/\D/g, '');
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -90,7 +108,7 @@ export default async function handler(req, res) {
             
             <div style="background: #f0f9ff; border-left: 4px solid #0284c7; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px;">
               <h2 style="margin: 0; font-size: 16px; color: #0369a1;">Customer Profile: ${name}</h2>
-              <p style="margin: 4px 0 0 0; font-size: 13px; color: #0284c7; font-weight: bold;">Phone: <a href="tel:${phone}" style="color: #0284c7; text-decoration: none;">+91 ${phone}</a></p>
+              <p style="margin: 4px 0 0 0; font-size: 13px; color: #0284c7; font-weight: bold;">Phone: <a href="tel:${cleanPhone}" style="color: #0284c7; text-decoration: none;">+91 ${cleanPhone}</a></p>
             </div>
 
             <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 20px;">
@@ -100,7 +118,7 @@ export default async function handler(req, res) {
               </tr>
               <tr>
                 <td style="padding: 6px 0; color: #64748b;">Mobile Phone:</td>
-                <td style="padding: 6px 0; font-weight: bold; color: #0f172a;">+91 ${phone}</td>
+                <td style="padding: 6px 0; font-weight: bold; color: #0f172a;">+91 ${cleanPhone}</td>
               </tr>
               <tr>
                 <td style="padding: 6px 0; color: #64748b;">Email Address:</td>
@@ -133,8 +151,8 @@ export default async function handler(req, res) {
             </table>
 
             <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 12px; border-radius: 8px; text-align: center; margin-top: 20px;">
-              <a href="https://wa.me/91${phone.replace(/\D/g, '')}" target="_blank" style="display: inline-block; background: #10b981; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 13px;">
-                Connect with Customer on WhatsApp (+91 ${phone})
+              <a href="https://wa.me/91${cleanPhone}" target="_blank" style="display: inline-block; background: #10b981; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 13px;">
+                Connect with Customer on WhatsApp (+91 ${cleanPhone})
               </a>
             </div>
 
@@ -149,7 +167,7 @@ export default async function handler(req, res) {
       </html>
     `;
 
-    // Call Brevo API v3
+    // 5. Send via Brevo Transactional Email API v3
     const brevoResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
@@ -171,7 +189,7 @@ export default async function handler(req, res) {
     const brevoData = await brevoResponse.json();
 
     if (!brevoResponse.ok) {
-      console.error('Brevo API Error:', brevoData);
+      console.error('Brevo API Error Response:', brevoData);
       return res.status(brevoResponse.status).json({
         error: 'Brevo API returned error',
         details: brevoData
@@ -180,12 +198,13 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       success: true,
-      message: 'Lead email sent to advisor inboxes (sudeep.sangamam@gmail.com & solutions.policycare@gmail.com) successfully!',
+      message: 'Lead email sent to advisor inboxes successfully!',
+      recipients: toRecipients.map(r => r.email),
       messageId: brevoData.messageId
     });
 
   } catch (error) {
-    console.error('Send Lead Exception:', error);
+    console.error('Send Lead Serverless Exception:', error);
     return res.status(500).json({ error: 'Internal Server Error', message: error.message });
   }
 }
