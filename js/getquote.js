@@ -462,6 +462,26 @@ window.selectLanguageOption = function(langCode) {
     }, 300);
 };
 
+// Localized Relation Options for Family Floater
+const relationOptions = [
+    { key: 'Self', labels: { en: 'Self (Primary Insured)', ml: 'സ്വയം (Self)', ta: 'நான் (Self)', te: 'నేను (Self)', hi: 'स्वयं (Self)', kn: 'ಸ್ವಯಂ (Self)' } },
+    { key: 'Spouse', labels: { en: 'Spouse (Wife / Husband)', ml: 'ഭർത്താവ് / ഭാര്യ (Spouse)', ta: 'துணைவர் (Spouse)', te: 'భాగస్వామి (Spouse)', hi: 'पति / पत्नी (Spouse)', kn: 'ಸಂಗಾತಿ (Spouse)' } },
+    { key: 'Son', labels: { en: 'Son', ml: 'മകൻ (Son)', ta: 'மகன் (Son)', te: 'కుమారుడు (Son)', hi: 'बेटा (Son)', kn: 'ಮಗ (Son)' } },
+    { key: 'Daughter', labels: { en: 'Daughter', ml: 'മകൾ (Daughter)', ta: 'மகள் (Daughter)', te: 'కుమార్తె (Daughter)', hi: 'बेटी (Daughter)', kn: 'ಮಗಳು (Daughter)' } },
+    { key: 'Father', labels: { en: 'Father', ml: 'അച്ഛൻ (Father)', ta: 'தந்தை (Father)', te: 'తండ్రి (Father)', hi: 'पिता (Father)', kn: 'ತಂದೆ (Father)' } },
+    { key: 'Mother', labels: { en: 'Mother', ml: 'അമ്മ (Mother)', ta: 'தாய் (Mother)', te: 'తల్లి (Mother)', hi: 'माता (Mother)', kn: 'ತಾಯಿ (Mother)' } },
+    { key: 'Father-in-law', labels: { en: 'Father-in-law', ml: 'ഭാര്യാപിതാവ് / ഭർത്താവിന്റെ പിതാവ്', ta: 'மாமனார் (Father-in-law)', te: 'మామగారు (Father-in-law)', hi: 'ससुर (Father-in-law)', kn: 'ಮಾವ (Father-in-law)' } },
+    { key: 'Mother-in-law', labels: { en: 'Mother-in-law', ml: 'ഭാര്യാമാതാവ് / ഭർത്താവിന്റെ മാതാവ്', ta: 'மாமியார் (Mother-in-law)', te: 'అత్తగారు (Mother-in-law)', hi: 'सास (Mother-in-law)', kn: 'ಅತ್ತೆ (Mother-in-law)' } },
+    { key: 'Other', labels: { en: 'Other Dependent', ml: 'മറ്റ് ആശ്രിതർ (Other)', ta: 'மற்றவர் (Other)', te: 'ఇతర సభ్యులు (Other)', hi: 'अन्य सदस्य (Other)', kn: 'ಇತರರು (Other)' } }
+];
+
+function getRelationDisplay(relKey) {
+    const opt = relationOptions.find(o => o.key.toLowerCase() === (relKey || '').toLowerCase());
+    if (opt && opt.labels[quoteState.lang]) return opt.labels[quoteState.lang];
+    if (opt) return opt.labels.en;
+    return relKey;
+}
+
 // STEP 2: Name Input
 function renderStep2Name() {
     quoteState.step = 2;
@@ -470,13 +490,13 @@ function renderStep2Name() {
         const inputArea = document.getElementById('quote-input-container');
         inputArea.innerHTML = `
             <form onsubmit="handleNameSubmit(event)" class="flex gap-2">
-                <input type="text" id="input-name" placeholder="${t('namePlaceholder')}" required class="flex-1 px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" autocomplete="name" />
-                <button type="submit" class="px-5 py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-xs shadow-md transition-colors">
-                    ${t('nextBtn')} <i class="fa-solid fa-arrow-right ml-1"></i>
+                <input type="text" id="input-name" placeholder="${t('namePlaceholder')}" required class="flex-1 h-13 px-4 py-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-semibold text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" autocomplete="name" />
+                <button type="submit" class="px-5 sm:px-6 h-13 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-black text-xs sm:text-sm shadow-md transition-colors flex items-center justify-center gap-1.5">
+                    <span>${t('nextBtn')}</span> <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </form>
         `;
-        document.getElementById('input-name')?.focus();
+        // No automatic focus() call to prevent auto keypad pop-up on mobile
     }, 300);
 }
 
@@ -503,17 +523,17 @@ function renderStep3Phone() {
         inputArea.innerHTML = `
             <form onsubmit="handlePhoneSubmit(event)" class="space-y-3">
                 <div class="flex gap-2">
-                    <select id="input-country-code" class="w-36 px-3 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 font-semibold shadow-sm">
+                    <select id="input-country-code" class="w-36 h-13 px-3 py-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 font-bold shadow-sm">
                         ${optionsHtml}
                     </select>
-                    <input type="tel" id="input-phone" placeholder="${t('phonePlaceholder')}" required class="flex-1 px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" autocomplete="tel" />
+                    <input type="tel" id="input-phone" placeholder="${t('phonePlaceholder')}" required class="flex-1 h-13 px-4 py-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-semibold text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" autocomplete="tel" />
                 </div>
-                <button type="submit" class="w-full py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-xs shadow-md transition-colors">
-                    ${t('nextBtn')} <i class="fa-solid fa-arrow-right ml-1"></i>
+                <button type="submit" class="w-full h-12 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-black text-xs sm:text-sm shadow-md transition-colors flex items-center justify-center gap-1.5">
+                    <span>${t('nextBtn')}</span> <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </form>
         `;
-        document.getElementById('input-phone')?.focus();
+        // No automatic focus() call to prevent auto keypad pop-up
     }, 300);
 }
 
@@ -540,9 +560,9 @@ function renderStep4Email() {
         inputArea.innerHTML = `
             <form onsubmit="handleEmailSubmit(event)" class="space-y-2">
                 <div class="flex gap-2">
-                    <input type="email" id="input-email" placeholder="${t('emailPlaceholder')}" class="flex-1 px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" autocomplete="email" />
-                    <button type="submit" class="px-5 py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-xs shadow-md transition-colors">
-                        ${t('nextBtn')} <i class="fa-solid fa-arrow-right ml-1"></i>
+                    <input type="email" id="input-email" placeholder="${t('emailPlaceholder')}" class="flex-1 h-13 px-4 py-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-semibold text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" autocomplete="email" />
+                    <button type="submit" class="px-5 sm:px-6 h-13 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-black text-xs sm:text-sm shadow-md transition-colors flex items-center justify-center gap-1.5">
+                        <span>${t('nextBtn')}</span> <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
                 <button type="button" onclick="skipEmail()" class="text-xs text-slate-500 dark:text-slate-400 hover:underline block mx-auto pt-1 font-semibold">
@@ -550,7 +570,7 @@ function renderStep4Email() {
                 </button>
             </form>
         `;
-        document.getElementById('input-email')?.focus();
+        // No automatic focus() call
     }, 300);
 }
 
@@ -577,13 +597,13 @@ function renderStep5Coverage() {
         const inputArea = document.getElementById('quote-input-container');
         inputArea.innerHTML = `
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <button onclick="selectCoverage('individual')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-sky-950 border border-slate-300 dark:border-slate-700 hover:border-sky-500 text-left transition-all group shadow-sm">
+                <button onclick="selectCoverage('individual')" class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-sky-950 border border-slate-300 dark:border-slate-700 hover:border-sky-500 text-left transition-all group shadow-sm">
                     <div class="w-10 h-10 rounded-xl bg-sky-100 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center text-lg mb-2 font-black">
                         <i class="fa-solid fa-user"></i>
                     </div>
                     <div class="font-extrabold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-sky-600">${t('covIndividual')}</div>
                 </button>
-                <button onclick="selectCoverage('family')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-teal-950 border border-slate-300 dark:border-slate-700 hover:border-teal-500 text-left transition-all group shadow-sm">
+                <button onclick="selectCoverage('family')" class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-teal-950 border border-slate-300 dark:border-slate-700 hover:border-teal-500 text-left transition-all group shadow-sm">
                     <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-500/20 text-teal-600 dark:text-teal-400 flex items-center justify-center text-lg mb-2 font-black">
                         <i class="fa-solid fa-people-roof"></i>
                     </div>
@@ -598,19 +618,19 @@ window.selectCoverage = function(type) {
     quoteState.coverageType = type;
     if (type === 'individual') {
         appendUserMessage(t('covIndividual'));
-        quoteState.members = [{ relation: t('self'), mode: 'age', age: 30, dob: '' }];
+        quoteState.members = [{ relation: 'Self', mode: 'age', age: 30, dob: '' }];
         renderStep6Members();
     } else {
         appendUserMessage(t('covFamily'));
         quoteState.members = [
-            { relation: t('self'), mode: 'age', age: 35, dob: '' },
-            { relation: t('spouse'), mode: 'age', age: 32, dob: '' }
+            { relation: 'Self', mode: 'age', age: 35, dob: '' },
+            { relation: 'Spouse', mode: 'age', age: 32, dob: '' }
         ];
         renderStep6Members();
     }
 };
 
-// STEP 6: Members & Ages / DOB
+// STEP 6: Members & Ages / DOB (Enhanced with Relation Dropdown and Bigger Heights)
 function renderStep6Members() {
     quoteState.step = 6;
     setTimeout(() => {
@@ -624,26 +644,51 @@ function renderMembersInputForm() {
 
     const rowsHtml = quoteState.members.map((m, index) => {
         return `
-            <div class="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 shadow-sm">
-                <div class="flex items-center justify-between">
-                    <span class="font-bold text-xs text-sky-600 dark:text-sky-400 flex items-center gap-1.5">
-                        <i class="fa-solid fa-user-tag"></i> ${m.relation}
+            <div class="p-3.5 sm:p-4 bg-white dark:bg-slate-800/90 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3 shadow-sm">
+                
+                <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-700/60 pb-2">
+                    <span class="text-xs font-black uppercase tracking-wider text-sky-600 dark:text-sky-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-user-shield text-sm"></i> Member #${index + 1}
                     </span>
-                    ${quoteState.members.length > 1 ? `<button type="button" onclick="removeMember(${index})" class="text-rose-500 hover:text-rose-600 text-xs"><i class="fa-solid fa-trash"></i></button>` : ''}
+                    ${quoteState.members.length > 1 ? `
+                        <button type="button" onclick="removeMember(${index})" class="text-rose-500 hover:text-rose-600 text-xs px-2.5 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/40 font-bold transition-colors flex items-center gap-1">
+                            <i class="fa-solid fa-trash-can"></i> <span class="hidden sm:inline">Remove</span>
+                        </button>
+                    ` : ''}
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <div>
-                        <select onchange="updateMemberMode(${index}, this.value)" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-[11px]">
+
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                    
+                    <!-- Relation Dropdown (Bigger height: h-12) -->
+                    <div class="sm:col-span-5">
+                        <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">Relationship</label>
+                        <select onchange="updateMemberRelation(${index}, this.value)" class="w-full h-12 px-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm">
+                            ${relationOptions.map(rel => `
+                                <option value="${rel.key}" ${m.relation.toLowerCase() === rel.key.toLowerCase() ? 'selected' : ''}>
+                                    ${rel.labels[quoteState.lang] || rel.labels.en}
+                                </option>
+                            `).join('')}
+                        </select>
+                    </div>
+
+                    <!-- Format Select (Age vs DOB) (Bigger height: h-12) -->
+                    <div class="sm:col-span-3">
+                        <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">Format</label>
+                        <select onchange="updateMemberMode(${index}, this.value)" class="w-full h-12 px-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-semibold text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm">
                             <option value="age" ${m.mode === 'age' ? 'selected' : ''}>${t('modeAge')}</option>
                             <option value="dob" ${m.mode === 'dob' ? 'selected' : ''}>${t('modeDob')}</option>
                         </select>
                     </div>
-                    <div>
+
+                    <!-- Value Input (Age / DOB) (Bigger height: h-12) -->
+                    <div class="sm:col-span-4">
+                        <label class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-1">${m.mode === 'dob' ? 'Date of Birth' : 'Age in Years'}</label>
                         ${m.mode === 'age' 
-                            ? `<input type="number" min="0" max="100" value="${m.age}" onchange="updateMemberAge(${index}, this.value)" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-[11px]" placeholder="Age in Years" />`
-                            : `<input type="date" value="${m.dob}" onchange="updateMemberDob(${index}, this.value)" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-[11px]" />`
+                            ? `<input type="number" min="0" max="100" value="${m.age}" onchange="updateMemberAge(${index}, this.value)" class="w-full h-12 px-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" placeholder="e.g. 35" />`
+                            : `<input type="date" value="${m.dob}" onchange="updateMemberDob(${index}, this.value)" class="w-full h-12 px-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" />`
                         }
                     </div>
+
                 </div>
             </div>
         `;
@@ -651,20 +696,26 @@ function renderMembersInputForm() {
 
     inputArea.innerHTML = `
         <div class="space-y-3">
-            <div class="max-h-48 overflow-y-auto space-y-2 pr-1">
+            <div class="max-h-72 overflow-y-auto space-y-3 pr-1">
                 ${rowsHtml}
             </div>
-            <div class="flex gap-2">
-                <button type="button" onclick="addFamilyMember()" class="flex-1 py-2.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-100 border border-slate-300 dark:border-slate-700 text-sky-600 dark:text-sky-400 font-bold text-xs shadow-sm">
-                    ${t('addMemberBtn')}
+            <div class="flex flex-col sm:flex-row gap-2.5 pt-1">
+                <button type="button" onclick="addFamilyMember()" class="w-full sm:flex-1 h-12 py-3 px-4 rounded-2xl bg-sky-50 dark:bg-sky-950/50 hover:bg-sky-100 dark:hover:bg-sky-900/50 border-2 border-dashed border-sky-300 dark:border-sky-700 text-sky-700 dark:text-sky-300 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-sm">
+                    <i class="fa-solid fa-user-plus"></i> ${t('addMemberBtn')}
                 </button>
-                <button type="button" onclick="submitMembersStep()" class="flex-1 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-xs shadow-md">
-                    ${t('nextBtn')} <i class="fa-solid fa-arrow-right ml-1"></i>
+                <button type="button" onclick="submitMembersStep()" class="w-full sm:flex-1 h-12 py-3 px-6 rounded-2xl bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-500 hover:to-teal-500 text-white font-black text-xs sm:text-sm shadow-xl flex items-center justify-center gap-2 transition-all">
+                    <span>${t('nextBtn')}</span> <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
         </div>
     `;
 }
+
+window.updateMemberRelation = function(idx, val) {
+    if (quoteState.members[idx]) {
+        quoteState.members[idx].relation = val;
+    }
+};
 
 window.updateMemberMode = function(idx, mode) {
     if (quoteState.members[idx]) {
@@ -691,14 +742,21 @@ window.removeMember = function(idx) {
 };
 
 window.addFamilyMember = function() {
-    const relations = [t('child1'), t('child2'), t('father'), t('mother')];
-    const nextRel = relations[quoteState.members.length - 1] || `Member ${quoteState.members.length + 1}`;
-    quoteState.members.push({ relation: nextRel, mode: 'age', age: 10, dob: '' });
+    const defaultSeq = ['Spouse', 'Son', 'Daughter', 'Father', 'Mother', 'Father-in-law', 'Mother-in-law', 'Other'];
+    let nextRel = 'Other';
+    for (const rel of defaultSeq) {
+        if (!quoteState.members.some(m => m.relation.toLowerCase() === rel.toLowerCase())) {
+            nextRel = rel;
+            break;
+        }
+    }
+    const defaultAge = nextRel === 'Spouse' ? 32 : (nextRel === 'Father' || nextRel === 'Mother' ? 60 : 10);
+    quoteState.members.push({ relation: nextRel, mode: 'age', age: defaultAge, dob: '' });
     renderMembersInputForm();
 };
 
 window.submitMembersStep = function() {
-    const summary = quoteState.members.map(m => `${m.relation}: ${m.mode === 'dob' && m.dob ? m.dob : m.age + ' Yrs'}`).join(', ');
+    const summary = quoteState.members.map(m => `${getRelationDisplay(m.relation)}: ${m.mode === 'dob' && m.dob ? m.dob : m.age + ' Yrs'}`).join(', ');
     appendUserMessage(summary);
     renderStep7Pincode();
 };
@@ -712,13 +770,13 @@ function renderStep7Pincode() {
         const inputArea = document.getElementById('quote-input-container');
         inputArea.innerHTML = `
             <form onsubmit="handlePincodeSubmit(event)" class="flex gap-2">
-                <input type="text" id="input-pincode" placeholder="${t('pincodePlaceholder')}" maxlength="6" required class="flex-1 px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" />
-                <button type="submit" class="px-5 py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-xs shadow-md transition-colors">
-                    ${t('nextBtn')} <i class="fa-solid fa-arrow-right ml-1"></i>
+                <input type="text" id="input-pincode" placeholder="${t('pincodePlaceholder')}" maxlength="6" required class="flex-1 h-13 px-4 py-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-semibold text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" />
+                <button type="submit" class="px-5 sm:px-6 h-13 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-black text-xs sm:text-sm shadow-md transition-colors flex items-center justify-center gap-1.5">
+                    <span>${t('nextBtn')}</span> <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </form>
         `;
-        document.getElementById('input-pincode')?.focus();
+        // No automatic focus() call
     }, 300);
 }
 
@@ -741,13 +799,13 @@ function renderStep7City() {
         const inputArea = document.getElementById('quote-input-container');
         inputArea.innerHTML = `
             <form onsubmit="handleCitySubmit(event)" class="flex gap-2">
-                <input type="text" id="input-city" placeholder="${t('cityPlaceholder')}" required class="flex-1 px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" />
-                <button type="submit" class="px-5 py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-xs shadow-md transition-colors">
-                    ${t('nextBtn')} <i class="fa-solid fa-arrow-right ml-1"></i>
+                <input type="text" id="input-city" placeholder="${t('cityPlaceholder')}" required class="flex-1 h-13 px-4 py-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-semibold text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm" />
+                <button type="submit" class="px-5 sm:px-6 h-13 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-black text-xs sm:text-sm shadow-md transition-colors flex items-center justify-center gap-1.5">
+                    <span>${t('nextBtn')}</span> <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </form>
         `;
-        document.getElementById('input-city')?.focus();
+        // No automatic focus() call
     }, 300);
 }
 
